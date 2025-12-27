@@ -8,8 +8,8 @@
 html,body{margin:0;height:100%;font-family:Comic Sans MS,Arial}
 body{background:#FFD90F}
 .hero{position:fixed;inset:0;background:url('hero.svg') center/cover no-repeat;transition:transform .1s}
-.container{position:relative;z-index:1;text-align:center;padding:20px}
-.bowl{display:inline-block;margin:10px;padding:10px;border:4px solid #000;background:#FFEE58}
+.ui{position:relative;z-index:1;text-align:center;padding-top:20px}
+.bowl{display:inline-block;margin:10px;padding:10px;border:4px solid #000;background:#FFEE58;border-radius:12px}
 .dog{width:80px}
 button{margin:4px;padding:6px 10px;font-weight:bold}
 </style>
@@ -17,7 +17,7 @@ button{margin:4px;padding:6px 10px;font-weight:bold}
 <body>
 <div class="hero" id="hero"></div>
 
-<div class="container">
+<div class="ui">
   <h1 data-i18n="title">give-me.org</h1>
 
   <select onchange="setLang(this.value)">
@@ -27,11 +27,11 @@ button{margin:4px;padding:6px 10px;font-weight:bold}
     <option value="fr">FR</option>
   </select>
 
-  <div class="bowl" data-id="urlaub">
+  <div class="bowl">
     <h3 data-i18n="urlaub">Urlaub</h3>
-    <img class="dog" id="dog-urlaub" src="dog-sad.svg">
-    <div id="count-urlaub">0</div>
-    <button onclick="donate('urlaub')">💰 Coin</button>
+    <img class="dog" id="dog" src="dog-sad.svg">
+    <div id="count">0</div>
+    <button onclick="donate()">💰 Coin</button>
   </div>
 </div>
 
@@ -52,12 +52,11 @@ function setLang(l){
  });
 }
 
-function donate(id){
- const cKey='count_'+id;
- let c=parseInt(localStorage.getItem(cKey)||0)+1;
- localStorage.setItem(cKey,c);
- document.getElementById('count-'+id).textContent=c;
- document.getElementById('dog-'+id).src='dog-happy.svg';
+function donate(){
+ let c=parseInt(localStorage.getItem('count')||0)+1;
+ localStorage.setItem('count',c);
+ document.getElementById('count').textContent=c;
+ document.getElementById('dog').src='dog-happy.svg';
  document.getElementById('coinSound').play();
  document.getElementById('dogSound').play();
 }
@@ -67,7 +66,7 @@ document.addEventListener('mousemove',e=>{
  hero.style.transform=`translate(${(e.clientX/window.innerWidth-.5)*10}px,${(e.clientY/window.innerHeight-.5)*10}px) scale(1.05)`;
 });
 
-document.getElementById('count-urlaub').textContent=localStorage.getItem('count_urlaub')||0;
+document.getElementById('count').textContent=localStorage.getItem('count')||0;
 </script>
 </body>
 </html>
