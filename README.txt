@@ -1,0 +1,1 @@
+Für GitHub Pages oder Apache: alle Dateien hochladen.
