@@ -1,0 +1,1 @@
+FERTIGE VERSION: Alle Dateien ins GitHub-Repo laden. Settings → Pages → main / root.
