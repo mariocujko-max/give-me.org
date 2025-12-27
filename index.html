@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>give-me.org</title>
+<style>
+html,body{margin:0;width:100%;height:100%;font-family:Arial}
+body{background:url('landing.png') center/cover no-repeat fixed}
+.overlay{
+  position:fixed;bottom:20px;left:50%;transform:translateX(-50%);
+  background:#FFD90F;border:4px solid #000;border-radius:20px;
+  padding:16px;text-align:center;max-width:96vw
+}
+.qrs{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.qrs img{width:120px;height:120px;border:4px solid #000;background:#fff;cursor:pointer}
+.dogs img{width:90px}
+button,select{padding:6px 10px;font-weight:bold;border:3px solid #000;border-radius:12px}
+.hint{animation:pulse 1.5s infinite;font-size:14px}
+@keyframes pulse{0%{opacity:1}50%{opacity:.4}100%{opacity:1}}
+.disclaimer{font-size:11px;margin-top:8px;opacity:.7}
+</style>
+</head>
+<body>
+
+<div class="overlay">
+  <h1 id="title">give-me.org</h1>
+  <p id="desc">Das ist ein Experiment – schenk mir Coins</p>
+
+  <select onchange="setLang(this.value)">
+    <option value="de">DE</option>
+    <option value="en">EN</option>
+    <option value="es">ES</option>
+    <option value="it">IT</option>
+    <option value="ja">JP</option>
+    <option value="zh">CN</option>
+  </select>
+
+  <div class="dogs">
+    <img id="dog" src="dog-sad.png">
+  </div>
+
+  <p>💰 Spenden: <span id="count">0</span></p>
+  <div class="hint">⬇️ QR scannen ⬇️</div>
+
+  <div class="qrs">
+    <div><strong>BTC</strong><br><img src="btc-qr.png" onclick="donate()"></div>
+    <div><strong>ETH</strong><br><img src="eth-qr.png" onclick="donate()"></div>
+    <div><strong>SOL</strong><br><img src="sol-qr.png" onclick="donate()"></div>
+  </div>
+
+  <div class="disclaimer">
+    Satire-Projekt · Keine Anlageberatung · Spenden freiwillig · Keine Gegenleistung
+  </div>
+</div>
+
+<audio id="sound" src="beep.wav"></audio>
+
+<script>
+let count = Number(localStorage.getItem('count')||0);
+countEl=document.getElementById('count');countEl.innerText=count;
+
+const texts={
+ de:{t:'give-me.org',d:'Das ist ein Experiment – schenk mir Coins'},
+ en:{t:'give-me.org',d:'This is an experiment – give me coins'},
+ es:{t:'give-me.org',d:'Esto es un experimento – dona monedas'},
+ it:{t:'give-me.org',d:'Questo è un esperimento – dona monete'},
+ ja:{t:'give-me.org',d:'これは実験です。コインをください'},
+ zh:{t:'give-me.org',d:'这是一个实验，欢迎捐赠'}
+};
+function setLang(l){title.innerText=texts[l].t;desc.innerText=texts[l].d}
+
+function donate(){
+  count++;
+  localStorage.setItem('count',count);
+  countEl.innerText=count;
+  document.getElementById('sound').play();
+  document.getElementById('dog').src='dog-happy.png';
+}
+</script>
+
+</body>
+</html>
