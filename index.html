@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>give-me.org</title>
+<style>
+html,body{
+  margin:0;
+  width:100%;
+  height:100%;
+}
+body{
+  background:url('landing.png') center/cover no-repeat fixed;
+  font-family:Arial, sans-serif;
+}
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.15);
+}
+.enter{
+  position:fixed;
+  bottom:30px;
+  left:50%;
+  transform:translateX(-50%);
+  background:#FFD90F;
+  border:4px solid #000;
+  border-radius:20px;
+  padding:18px 26px;
+  font-size:20px;
+  font-weight:bold;
+  cursor:pointer;
+}
+</style>
+</head>
+<body>
+<div class="overlay"></div>
+
+<button class="enter" onclick="alert('Weiter zur Spenden-Seite (nächster Schritt)')">
+➡️ Enter
+</button>
+
+</body>
+</html>
