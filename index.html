@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>give-me.org</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #0e0e0e;
+    color: #eee;
+    text-align: center;
+}
+
+header {
+    padding: 40px 20px;
+    background: #000;
+}
+
+header h1 {
+    font-size: 42px;
+    margin: 0;
+    letter-spacing: 3px;
+}
+
+header p {
+    color: #aaa;
+    margin-top: 10px;
+    font-size: 18px;
+}
+
+main {
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+}
+
+.story {
+    margin-top: 30px;
+    background: #151515;
+    padding: 25px;
+    border-radius: 12px;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+.donation {
+    margin-top: 40px;
+    background: #111;
+    padding: 30px;
+    border-radius: 14px;
+}
+
+.address {
+    margin-top: 15px;
+    font-size: 16px;
+    word-break: break-all;
+    color: #f5c542;
+}
+
+.qr img {
+    width: 240px;
+    margin-top: 25px;
+    background: white;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.button {
+    display: inline-block;
+    margin-top: 25px;
+    padding: 14px 26px;
+    background: #f5c542;
+    color: black;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 30px;
+}
+
+footer {
+    margin-top: 50px;
+    padding: 25px;
+    background: #000;
+    color: #777;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>give-me.org</h1>
+    <p>Bitcoin donations for me and my dogs</p>
+</header>
+
+<main>
+
+<section class="story">
+    <p><strong>The big dog thinks:</strong><br>
+    “Why don’t you finally go to work?”</p>
+
+    <p><strong>The small dog says:</strong><br>
+    “I am so hungry.”</p>
+
+    <p><strong>The man:</strong><br>
+    “I will never go to work.”</p>
+</section>
+
+<section class="donation">
+    <h2>Bitcoin Donation</h2>
+
+    <p>
+        If you want to do something good,<br>
+        donate for me and my dogs.
+    </p>
+
+    <div class="address">
+        bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed
+    </div>
+
+    <div class="qr">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed">
+    </div>
+
+    <a class="button" href="bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed">
+        Donate Bitcoin
+    </a>
+</section>
+
+</main>
+
+<footer>
+    © give-me.org
+</footer>
+
+</body>
+</html>
