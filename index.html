@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>give-me.org</title>
 
 <style>
@@ -17,69 +17,81 @@ html, body {
   background: #FFD90F;
 }
 
-/* HERO = GANZE SEITE */
-#hero {
+/* COMIC BACKGROUND */
+.hero {
   position: fixed;
   inset: 0;
-  background: url("hero.svg") center center / cover no-repeat;
+  background: url("./hero.svg") center center / cover no-repeat;
   z-index: 0;
-  transition: transform 0.15s ease-out;
+  transition: transform 0.1s linear;
 }
 
-/* UI OBEN */
-#ui {
+/* UI LAYER */
+.ui {
   position: relative;
   z-index: 2;
   width: 100%;
   height: 100%;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 }
 
-/* CARD */
+/* PHONE CARD */
 .card {
-  background: #FFEE58;
+  background: #FFF36A;
   border: 6px solid #000;
-  border-radius: 18px;
-  padding: 20px 26px;
+  border-radius: 24px;
+  padding: 20px;
+  width: 260px;
   text-align: center;
-  box-shadow: 10px 10px 0 #000;
+  box-shadow: 12px 12px 0 #000;
 }
 
-/* BUTTON */
+h1 {
+  margin: 0 0 10px;
+}
+
 button {
-  background: #F44336;
+  margin-top: 12px;
+  padding: 10px 16px;
+  font-size: 16px;
+  font-weight: bold;
+  background: #FF4D4D;
   border: 4px solid #000;
   border-radius: 12px;
-  padding: 10px 18px;
-  font-size: 18px;
-  font-weight: bold;
   cursor: pointer;
 }
 
-/* DOG */
-.dog {
+img {
   width: 90px;
-  margin: 10px auto;
+  margin: 10px 0;
 }
 </style>
 </head>
 
 <body>
 
-<!-- HINTERGRUND -->
-<div id="hero"></div>
+<!-- BACKGROUND -->
+<div class="hero" id="hero"></div>
 
 <!-- UI -->
-<div id="ui">
+<div class="ui">
   <div class="card">
     <h1>give-me.org</h1>
-    <p>🐶 Urlaub</p>
 
-    <img id="dog" class="dog" src="dog-sad.svg" alt="Hund">
+    <select>
+      <option>DE</option>
+      <option>EN</option>
+      <option>ES</option>
+      <option>FR</option>
+    </select>
 
-    <div id="count">0</div>
+    <h3>🐕 Urlaub</h3>
+
+    <img id="dog" src="dog-sad.svg" alt="Hund">
+
+    <div id="count">61</div>
 
     <button onclick="donate()">💰 Coin</button>
   </div>
@@ -97,20 +109,19 @@ document.addEventListener("mousemove", e => {
   hero.style.transform = `translate(${x}px, ${y}px) scale(1.05)`;
 });
 
-/* DONATE */
+/* COIN */
 function donate() {
-  let c = Number(localStorage.getItem("count") || 0) + 1;
+  const countEl = document.getElementById("count");
+  const dog = document.getElementById("dog");
+  let c = Number(localStorage.getItem("count") || countEl.innerText);
+  c++;
   localStorage.setItem("count", c);
-  document.getElementById("count").innerText = c;
+  countEl.innerText = c;
 
-  document.getElementById("dog").src = "dog-happy.svg";
+  dog.src = "dog-happy.svg";
   document.getElementById("coinSound").play();
   document.getElementById("dogSound").play();
 }
-
-/* LOAD COUNT */
-document.getElementById("count").innerText =
-  localStorage.getItem("count") || 0;
 </script>
 
 </body>
