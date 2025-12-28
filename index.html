@@ -21,12 +21,16 @@ main {
     padding: 20px;
 }
 
-/* IMAGE – ABSOLUT SICHER */
+/* IMAGE – METHODE A (LÄNGER / HÖHER) */
 .main-image {
     display: block;
     width: 100%;
     max-width: 1400px;
-    height: auto;
+
+    /* entscheidend für „länger wirken“ */
+    min-height: 80vh;        /* fast Bildschirmhöhe */
+    object-fit: cover;      /* füllt Höhe sauber */
+
     margin: 40px auto;
     border-radius: 20px;
     box-shadow: 0 30px 70px rgba(0,0,0,0.85);
@@ -148,9 +152,9 @@ main {
 
 <main>
 
-<!-- IMAGE -->
+<!-- IMAGE (CACHE-BYPASS + METHODE A) -->
 <img
-  src="./comic.png?v=1"
+  src="./comic.png?v=2"
   alt="Man with dogs on couch"
   class="main-image"
 >
