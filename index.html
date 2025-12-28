@@ -20,7 +20,7 @@ main {
     padding: 20px;
 }
 
-/* MAIN IMAGE (LONG / SCROLLABLE) */
+/* MAIN IMAGE */
 .main-image {
     display: block;
     width: 100%;
@@ -32,25 +32,33 @@ main {
     box-shadow: 0 30px 70px rgba(0,0,0,0.85);
 }
 
-/* STORY */
+/* GALLERY */
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin: 60px auto;
+}
+
+.gallery figure {
+    margin: 0;
+    text-align: center;
+}
+
+.gallery img {
+    width: 100%;
+    border-radius: 16px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.7);
+}
+
+/* STORY TEXT */
 .story {
     background: #161616;
     padding: 40px;
     border-radius: 20px;
     font-size: 22px;
-    line-height: 1.8;
     text-align: center;
-    margin-bottom: 50px;
-    opacity: 0;
-    transform: translateY(10px);
-    animation: fadeIn 1.2s ease forwards;
-}
-
-@keyframes fadeIn {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    margin: 50px 0;
 }
 
 /* DONATION */
@@ -59,39 +67,11 @@ main {
     padding: 50px 30px;
     border-radius: 24px;
     text-align: center;
-    margin-bottom: 40px;
 }
 
-.donation h2 {
-    font-size: 34px;
-    margin-top: 0;
-}
-
-.donation p {
-    font-size: 18px;
-    color: #ccc;
-}
-
-.address {
-    margin-top: 25px;
-    font-size: 17px;
-    word-break: break-all;
-    color: #f5c542;
-}
-
-/* QR */
-.qr img {
-    width: 260px;
-    margin-top: 30px;
-    background: #fff;
-    padding: 14px;
-    border-radius: 14px;
-}
-
-/* BUTTON */
 .button {
     display: inline-block;
-    margin-top: 40px;
+    margin-top: 30px;
     padding: 22px 48px;
     background: linear-gradient(135deg, #f5c542, #ffe27a);
     color: #000;
@@ -99,50 +79,27 @@ main {
     font-weight: bold;
     text-decoration: none;
     border-radius: 60px;
-    box-shadow: 0 0 35px rgba(245,197,66,0.6);
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-.button:hover {
-    transform: scale(1.04);
-    box-shadow: 0 0 45px rgba(245,197,66,0.9);
+/* FADE-IN ANIMATION */
+.fade {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1s ease, transform 1s ease;
 }
 
-.button:active {
-    transform: scale(0.97);
-}
-
-/* THANK YOU */
-.thankyou {
-    margin-top: 35px;
-    padding: 24px;
-    background: #141414;
-    border-radius: 16px;
-    font-size: 16px;
-    color: #ccc;
-    display: none;
-    animation: fadeIn 1s ease forwards;
-}
-
-/* LEGAL */
-.legal {
-    font-size: 14px;
-    color: #777;
-    text-align: center;
-    margin: 50px 20px 30px;
+.fade.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* MOBILE */
-@media (max-width: 700px) {
+@media (max-width: 800px) {
+    .gallery {
+        grid-template-columns: 1fr;
+    }
     .story {
         font-size: 19px;
-        padding: 26px;
-    }
-    .donation h2 {
-        font-size: 26px;
-    }
-    .qr img {
-        width: 220px;
     }
 }
 </style>
@@ -152,67 +109,51 @@ main {
 
 <main>
 
-<!-- MAIN IMAGE -->
-<img
-  src="./comic.png?v=3"
-  alt="Man with dogs on couch"
-  class="main-image"
->
+<!-- COMIC IMAGE -->
+<img src="comic.png?v=5" class="main-image fade">
+
+<!-- STORY IMAGES -->
+<section class="gallery">
+    <figure class="fade">
+        <img src="story1.png" alt="Story 1">
+    </figure>
+
+    <figure class="fade">
+        <img src="story2.png" alt="Story 2">
+    </figure>
+
+    <figure class="fade">
+        <img src="story3.png" alt="Story 3">
+    </figure>
+</section>
 
 <!-- STORY TEXT -->
-<section class="story">
+<section class="story fade">
     <strong>While excuses rest on the couch, the dogs pay the price.</strong>
 </section>
 
 <!-- DONATION -->
-<section class="donation">
-    <h2>Support the dogs</h2>
-
-    <p>
-        Food. Care. Dignity.<br>
-        Nothing more. Nothing less.
-    </p>
-
-    <div class="address">
-        bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed
-    </div>
-
-    <div class="qr">
-        <img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed"
-             alt="Bitcoin QR Code">
-    </div>
-
+<section class="donation fade">
+    <p>Bitcoin donation</p>
     <a class="button"
-       href="bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed"
-       onclick="showThanks()">
+       href="bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed">
        Donate to help the dogs
     </a>
-
-    <div class="thankyou" id="thankyou">
-        <p><strong>Thank you.</strong></p>
-        <p>
-            Your help means food, care, and dignity.<br>
-            The dogs cannot say it — but it matters.
-        </p>
-    </div>
 </section>
-
-<!-- LEGAL -->
-<div class="legal">
-    This is a private donation page.<br>
-    Donations are voluntary and non-refundable.<br>
-    No goods, services, or rewards are provided in return.<br>
-    No cookies, tracking, or analytics are used.
-</div>
 
 </main>
 
 <script>
-function showThanks() {
-    setTimeout(function () {
-        document.getElementById("thankyou").style.display = "block";
-    }, 600);
-}
+/* FADE-IN ON SCROLL */
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+        }
+    });
+}, { threshold: 0.2 });
+
+document.querySelectorAll(".fade").forEach(el => observer.observe(el));
 </script>
 
 </body>
