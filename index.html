@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>give-me.org</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body{margin:0;font-family:Arial;background:#0a0a0a;color:#eee}
+main{max-width:1200px;margin:auto;padding:20px}
+.main-image{display:block;width:100%;max-width:1400px;min-height:80vh;object-fit:cover;margin:40px auto;border-radius:20px;box-shadow:0 30px 70px rgba(0,0,0,.85)}
+.story{text-align:center;font-size:22px;margin:40px 0}
+.donation{text-align:center;background:#101010;padding:40px;border-radius:20px}
+.button{display:inline-block;margin-top:30px;padding:18px 40px;background:linear-gradient(135deg,#f5c542,#ffe27a);color:#000;font-weight:bold;text-decoration:none;border-radius:50px}
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin:60px auto}
+.gallery img{width:100%;border-radius:16px;cursor:pointer}
+.gallery figcaption{text-align:center;color:#bbb;margin-top:8px}
+@media(max-width:800px){.gallery{grid-template-columns:1fr}}
+#lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.9);justify-content:center;align-items:center;z-index:999}
+#lightbox img{max-width:90%;max-height:90%}
+</style>
+</head>
+<body>
+<main>
+
+<img src="comic.png" class="main-image">
+
+<div class="story"><strong>While excuses rest on the couch, the dogs pay the price.</strong></div>
+
+<div class="donation">
+<p>Donate Bitcoin</p>
+<a class="button" href="#">Donate</a>
+</div>
+
+<section class="gallery">
+<figure><img src="story1.png" onclick="openLightbox(this)"><figcaption>The beginning.</figcaption></figure>
+<figure><img src="story2.png" onclick="openLightbox(this)"><figcaption>The illusion.</figcaption></figure>
+<figure><img src="story3.png" onclick="openLightbox(this)"><figcaption>The result.</figcaption></figure>
+</section>
+
+</main>
+
+<div id="lightbox" onclick="this.style.display='none'"><img id="lb"></div>
+
+<script>
+function openLightbox(img){
+document.getElementById('lb').src=img.src;
+document.getElementById('lightbox').style.display='flex';
+}
+</script>
+
+</body>
+</html>
