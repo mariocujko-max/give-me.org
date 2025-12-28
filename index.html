@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>give-me.org</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #0b0b0b;
+    color: #eee;
+}
+
+header {
+    text-align: center;
+    padding: 50px 20px 30px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 44px;
+    letter-spacing: 2px;
+}
+
+main {
+    max-width: 1100px;
+    margin: auto;
+    padding: 20px;
+}
+
+/* IMAGE FIX */
+.hero {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.hero img {
+    width: 100%;
+    max-width: 1100px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    border-radius: 18px;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.8);
+}
+
+/* TEXT */
+.story {
+    background: #161616;
+    padding: 40px;
+    border-radius: 18px;
+    font-size: 22px;
+    line-height: 1.8;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.story p {
+    margin: 22px 0;
+}
+
+/* DONATION */
+.donation {
+    background: #101010;
+    padding: 45px 30px;
+    border-radius: 20px;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.donation h2 {
+    font-size: 32px;
+    margin-top: 0;
+}
+
+.address {
+    margin-top: 20px;
+    font-size: 17px;
+    word-break: break-all;
+    color: #f5c542;
+}
+
+.qr img {
+    width: 260px;
+    margin-top: 30px;
+    background: #fff;
+    padding: 14px;
+    border-radius: 14px;
+}
+
+.button {
+    display: inline-block;
+    margin-top: 35px;
+    padding: 20px 42px;
+    background: linear-gradient(135deg, #f5c542, #ffe27a);
+    color: #000;
+    font-size: 22px;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 50px;
+    box-shadow: 0 0 30px rgba(245,197,66,0.7);
+}
+
+/* MOBILE */
+@media (max-width: 700px) {
+    header h1 {
+        font-size: 34px;
+    }
+    .story {
+        font-size: 19px;
+        padding: 26px;
+    }
+    .donation h2 {
+        font-size: 26px;
+    }
+    .qr img {
+        width: 220px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>give-me.org</h1>
+</header>
+
+<main>
+
+<section class="hero">
+    <img src="comic.png" alt="Man with dogs on couch">
+</section>
+
+<section class="story">
+    <p><strong>The big dog thinks:</strong><br>
+    Why don’t you finally go to work?</p>
+
+    <p><strong>The small dog says:</strong><br>
+    I am so hungry.</p>
+
+    <p><strong>The man:</strong><br>
+    I will never go to work.</p>
+
+    <p><em>They depend on him. They pay the price.</em></p>
+</section>
+
+<section class="donation">
+    <h2>Help the dogs</h2>
+
+    <p>
+        This page exists for one reason only:<br>
+        Food, care, and safety for the dogs.
+    </p>
+
+    <div class="address">
+        bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed
+    </div>
+
+    <div class="qr">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed">
+    </div>
+
+    <a class="button" href="bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed">
+        Donate Bitcoin
+    </a>
+</section>
+
+</main>
+
+</body>
+</html>
