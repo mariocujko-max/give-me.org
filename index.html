@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,53 +10,53 @@
 body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
-    background: #0b0b0b;
+    background: #0a0a0a;
     color: #eee;
 }
 
 header {
     text-align: center;
-    padding: 50px 20px 30px;
+    padding: 60px 20px 30px;
 }
 
 header h1 {
     margin: 0;
-    font-size: 44px;
+    font-size: 48px;
     letter-spacing: 2px;
 }
 
+header p {
+    margin-top: 10px;
+    color: #aaa;
+    font-size: 18px;
+}
+
 main {
-    max-width: 1100px;
+    max-width: 1200px;
     margin: auto;
     padding: 20px;
 }
 
-/* IMAGE FIX */
-.hero {
-    width: 100%;
-    text-align: center;
-    margin-bottom: 40px;
-}
-
-.hero img {
-    width: 100%;
-    max-width: 1100px;
-    height: auto;
+/* IMAGE – BULLETPROOF */
+.main-image {
     display: block;
-    margin: 0 auto;
-    border-radius: 18px;
-    box-shadow: 0 25px 60px rgba(0,0,0,0.8);
+    width: 100%;
+    max-width: 1200px;
+    height: auto;
+    margin: 40px auto;
+    border-radius: 20px;
+    box-shadow: 0 30px 70px rgba(0,0,0,0.85);
 }
 
-/* TEXT */
+/* STORY */
 .story {
     background: #161616;
     padding: 40px;
-    border-radius: 18px;
+    border-radius: 20px;
     font-size: 22px;
     line-height: 1.8;
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 50px;
 }
 
 .story p {
@@ -65,19 +66,24 @@ main {
 /* DONATION */
 .donation {
     background: #101010;
-    padding: 45px 30px;
-    border-radius: 20px;
+    padding: 50px 30px;
+    border-radius: 24px;
     text-align: center;
-    margin-bottom: 50px;
+    margin-bottom: 60px;
 }
 
 .donation h2 {
-    font-size: 32px;
+    font-size: 34px;
     margin-top: 0;
 }
 
+.donation p {
+    font-size: 18px;
+    color: #ccc;
+}
+
 .address {
-    margin-top: 20px;
+    margin-top: 25px;
     font-size: 17px;
     word-break: break-all;
     color: #f5c542;
@@ -91,23 +97,28 @@ main {
     border-radius: 14px;
 }
 
+/* BUTTON */
 .button {
     display: inline-block;
-    margin-top: 35px;
-    padding: 20px 42px;
+    margin-top: 40px;
+    padding: 22px 48px;
     background: linear-gradient(135deg, #f5c542, #ffe27a);
     color: #000;
     font-size: 22px;
     font-weight: bold;
     text-decoration: none;
-    border-radius: 50px;
-    box-shadow: 0 0 30px rgba(245,197,66,0.7);
+    border-radius: 60px;
+    box-shadow: 0 0 35px rgba(245,197,66,0.7);
+}
+
+.button:hover {
+    transform: scale(1.05);
 }
 
 /* MOBILE */
 @media (max-width: 700px) {
     header h1 {
-        font-size: 34px;
+        font-size: 36px;
     }
     .story {
         font-size: 19px;
@@ -127,44 +138,33 @@ main {
 
 <header>
     <h1>give-me.org</h1>
+    <p>Help the dogs. Not the excuses.</p>
 </header>
 
 <main>
 
-<img
-  src="comic.png"
-  alt="Man with dogs on couch"
-  style="
-    display:block;
-    width:100%;
-    max-width:1200px;
-    height:auto;
-    margin:40px auto;
-    border-radius:18px;
-    box-shadow:0 25px 60px rgba(0,0,0,0.8);
-  "
->
-
+<!-- IMAGE (ALWAYS VISIBLE) -->
+<img src="comic.png" alt="Man with dogs on couch" class="main-image">
 
 <section class="story">
+    <p><strong>The man says:</strong><br>
+    “I will never go to work.”</p>
+
     <p><strong>The big dog thinks:</strong><br>
-    Why don’t you finally go to work?</p>
+    “Please go work.”</p>
 
-    <p><strong>The small dog says:</strong><br>
-    I am so hungry.</p>
+    <p><strong>The small dog thinks:</strong><br>
+    “We have so much hunger…”</p>
 
-    <p><strong>The man:</strong><br>
-    I will never go to work.</p>
-
-    <p><em>They depend on him. They pay the price.</em></p>
+    <p><em>The dogs didn’t choose this life.</em></p>
 </section>
 
 <section class="donation">
     <h2>Help the dogs</h2>
 
     <p>
-        This page exists for one reason only:<br>
-        Food, care, and safety for the dogs.
+        This is about food, care and dignity.<br>
+        Nothing more. Nothing less.
     </p>
 
     <div class="address">
