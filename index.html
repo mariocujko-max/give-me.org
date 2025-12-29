@@ -1,12 +1,18 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 
 <title>give-me.org – Support dogs in need</title>
-<meta name="description" content="give-me.org is a private donation page supporting dogs in need. Food, care and dignity.">
+<meta name="description" content="Private donation page supporting dogs in need. Food, care and dignity. No tracking, no cookies.">
+<meta name="robots" content="index, follow">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- SECURITY -->
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="X-Frame-Options" content="DENY">
+<meta http-equiv="Referrer-Policy" content="no-referrer">
+
 <link rel="icon" href="/favicon.png">
 
 <style>
@@ -22,9 +28,8 @@ main{
     padding:20px;
 }
 
-/* HERO IMAGE – STABLE */
+/* HERO */
 .hero{
-    width:100%;
     max-width:1400px;
     margin:40px auto;
 }
@@ -63,10 +68,10 @@ section{
     margin:20px 0;
 }
 .qr img{
-    width:240px;
+    width:220px;
     background:#fff;
-    padding:14px;
-    border-radius:14px;
+    padding:12px;
+    border-radius:12px;
 }
 .button{
     display:inline-block;
@@ -78,16 +83,13 @@ section{
     border-radius:50px;
     text-decoration:none;
 }
-.thankyou{
-    display:none;
-    margin-top:20px;
-}
+.thankyou{display:none;margin-top:20px}
 
 /* COUNTER */
 .counter{
-    font-size:36px;
+    font-size:32px;
     color:#f5c542;
-    margin-top:30px;
+    margin-top:26px;
 }
 
 /* SLIDESHOW */
@@ -111,9 +113,7 @@ section{
 
 /* MOBILE */
 @media(max-width:800px){
-    .gallery{
-        grid-template-columns:1fr;
-    }
+    .gallery{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -122,9 +122,9 @@ section{
 
 <main>
 
-<!-- HERO IMAGE -->
+<!-- HERO -->
 <div class="hero">
-    <img src="comic.png" alt="Dogs together">
+    <img src="comic.png" alt="Dogs together" loading="eager">
 </div>
 
 <!-- STORY -->
@@ -134,9 +134,9 @@ section{
 
 <!-- STORY IMAGES -->
 <section class="gallery">
-    <img src="story1.png" alt="">
-    <img src="story2.png" alt="">
-    <img src="story3.png" alt="">
+    <img src="story1.png" loading="lazy" alt="">
+    <img src="story2.png" loading="lazy" alt="">
+    <img src="story3.png" loading="lazy" alt="">
 </section>
 
 <!-- DONATION -->
@@ -149,7 +149,7 @@ bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed
 </div>
 
 <div class="qr">
-<img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed">
+<img src="https://api.qrserver.com/v1/create-qr-code/?size=260x260&data=bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed" loading="lazy">
 </div>
 
 <a class="button" onclick="showThanks()">Donate</a>
@@ -167,9 +167,9 @@ bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed
 <section>
 <h3>Because love keeps going</h3>
 
-<div class="slide active"><img src="park.png"></div>
-<div class="slide"><img src="welpenkorb.png"></div>
-<div class="slide"><img src="urlaub.png"></div>
+<div class="slide active"><img src="park.png" loading="lazy"></div>
+<div class="slide"><img src="welpenkorb.png" loading="lazy"></div>
+<div class="slide"><img src="urlaub.png" loading="lazy"></div>
 </section>
 
 <!-- ADOPT A NAME -->
@@ -192,6 +192,7 @@ bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed
 var disqus_config=function(){
 this.page.url=window.location.href;
 this.page.identifier="give-me-org-memorial";
+this.page.disable_ads=true;
 };
 (function(){
 var d=document,s=d.createElement('script');
@@ -216,7 +217,7 @@ setInterval(()=>{
     slides[i].classList.remove("active");
     i=(i+1)%slides.length;
     slides[i].classList.add("active");
-},4000);
+},4500);
 </script>
 
 </body>
