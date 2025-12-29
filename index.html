@@ -2,16 +2,24 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>give-me.org – DEBUG</title>
+
+<title>give-me.org – Support dogs in need</title>
+<meta name="description" content="Private donation page supporting dogs in need. Food, care and dignity.">
+<meta name="robots" content="index, follow">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- SECURITY -->
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="X-Frame-Options" content="DENY">
+<meta http-equiv="Referrer-Policy" content="no-referrer">
+
+<link rel="icon" href="/favicon.png">
+
 <style>
-/* ===== DEBUG RESET ===== */
 * {
     box-sizing: border-box;
 }
 
-/* ===== DEBUG BODY ===== */
 body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
@@ -20,61 +28,86 @@ body {
     line-height: 1.5;
 }
 
-/* ===== DEBUG CONTAINER ===== */
 main {
     max-width: 1200px;
-    margin: 0 auto;
+    margin: auto;
     padding: 20px;
-    outline: 3px dashed #444; /* DEBUG */
 }
 
-/* ===== DEBUG HERO ===== */
+/* ===== HERO (FIREFOX FIX) ===== */
 .hero {
-    width: 100%;
     max-width: 1400px;
     margin: 40px auto;
-    outline: 3px solid red; /* DEBUG */
+    aspect-ratio: 16 / 9;     /* 🔑 FIX */
     overflow: hidden;
+    border-radius: 20px;
 }
 
 .hero img {
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
     display: block;
-    outline: 3px solid orange; /* DEBUG */
 }
 
-/* ===== DEBUG SECTIONS ===== */
+/* ===== SECTIONS ===== */
 section {
     background: #121212;
     padding: 40px;
-    margin-top: 60px;
     border-radius: 24px;
+    margin-top: 60px;
     text-align: center;
-    outline: 3px solid yellow; /* DEBUG */
 }
 
-/* ===== DEBUG GALLERY ===== */
+/* ===== GALLERY ===== */
 .gallery {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 24px;
     margin-top: 30px;
-    outline: 3px solid cyan; /* DEBUG */
 }
 
 .gallery img {
     width: 100%;
-    height: auto;
     display: block;
-    outline: 3px solid lime; /* DEBUG */
+    border-radius: 18px;
 }
 
-/* ===== DEBUG SLIDESHOW ===== */
+/* ===== DONATION ===== */
+.address {
+    color: #f5c542;
+    word-break: break-all;
+    margin: 20px 0;
+}
+
+.qr img {
+    width: 220px;
+    background: #fff;
+    padding: 12px;
+    border-radius: 12px;
+}
+
+.button {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 18px 42px;
+    background: linear-gradient(135deg, #f5c542, #ffe27a);
+    color: #000;
+    font-size: 20px;
+    border-radius: 50px;
+    text-decoration: none;
+}
+
+.thankyou {
+    display: none;
+    margin-top: 20px;
+}
+
+/* ===== SLIDESHOW (50% + FIX) ===== */
 .slideshow {
-    max-width: 600px;
+    max-width: 600px;          /* ~50% */
     margin: 0 auto;
-    outline: 3px solid magenta; /* DEBUG */
+    aspect-ratio: 4 / 3;       /* 🔑 FIX */
     overflow: hidden;
 }
 
@@ -88,17 +121,17 @@ section {
 
 .slide img {
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
     display: block;
-    outline: 3px solid pink; /* DEBUG */
+    border-radius: 18px;
 }
 
-/* ===== DEBUG LIST ===== */
+/* ===== LIST ===== */
 .list {
     max-width: 500px;
     margin: 30px auto;
     text-align: left;
-    outline: 3px solid #888; /* DEBUG */
 }
 
 .list li {
@@ -106,10 +139,13 @@ section {
     border-bottom: 1px solid #333;
 }
 
-/* ===== MOBILE DEBUG ===== */
+/* ===== MOBILE ===== */
 @media (max-width: 800px) {
     .gallery {
         grid-template-columns: 1fr;
+    }
+    .slideshow {
+        max-width: 100%;
     }
 }
 </style>
@@ -121,52 +157,99 @@ section {
 
 <!-- HERO -->
 <div class="hero">
-    <img src="comic.png" alt="DEBUG hero image">
+    <img src="comic.png" alt="Dogs together" loading="eager" decoding="async">
 </div>
 
 <!-- STORY -->
 <section>
-    <strong>DEBUG: Story section</strong>
+    <strong>While excuses rest on the couch, the dogs pay the price.</strong>
 </section>
 
-<!-- GALLERY -->
+<!-- STORY IMAGES -->
 <section class="gallery">
-    <img src="story1.png" alt="debug image 1">
-    <img src="story2.png" alt="debug image 2">
-    <img src="story3.png" alt="debug image 3">
+    <img src="story1.png" loading="lazy" decoding="async" alt="">
+    <img src="story2.png" loading="lazy" decoding="async" alt="">
+    <img src="story3.png" loading="lazy" decoding="async" alt="">
+</section>
+
+<!-- DONATION -->
+<section>
+    <h2>Support the dogs</h2>
+    <p>Food. Care. Dignity.</p>
+
+    <div class="address">
+        bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed
+    </div>
+
+    <div class="qr">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=260x260&data=bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed"
+             loading="lazy" decoding="async">
+    </div>
+
+    <a class="button" onclick="showThanks()">Donate</a>
+
+    <div class="thankyou" id="thankyou">
+        <strong>Thank you.</strong><br>Your help truly matters.
+    </div>
 </section>
 
 <!-- SLIDESHOW -->
 <section>
-    <h3>DEBUG: Slideshow</h3>
+    <h3>Because love keeps going</h3>
+
     <div class="slideshow">
-        <div class="slide active"><img src="park.png"></div>
-        <div class="slide"><img src="welpenkorb.png"></div>
-        <div class="slide"><img src="urlaub.png"></div>
+        <div class="slide active"><img src="park.png" loading="lazy" decoding="async"></div>
+        <div class="slide"><img src="welpenkorb.png" loading="lazy" decoding="async"></div>
+        <div class="slide"><img src="urlaub.png" loading="lazy" decoding="async"></div>
     </div>
 </section>
 
-<!-- LIST -->
+<!-- ADOPT A NAME -->
 <section>
-    <h3>DEBUG: Adopt a name</h3>
+    <h3>🐕 Adopt a name</h3>
     <ul class="list">
         <li>🐾 Luna</li>
         <li>🐾 Max</li>
         <li>🐾 Bella</li>
     </ul>
+    <p>Add your name in the comments below.</p>
+</section>
+
+<!-- MEMORIAL COMMENTS -->
+<section>
+    <h3>🕊️ In memory</h3>
+
+    <div id="disqus_thread"></div>
+    <script>
+    var disqus_config = function () {
+        this.page.url = window.location.href;
+        this.page.identifier = "give-me-org-memorial";
+        this.page.disable_ads = true;
+    };
+    (function () {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://give-me-org.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    </script>
 </section>
 
 </main>
 
 <script>
-/* DEBUG SLIDESHOW */
+function showThanks() {
+    document.getElementById("thankyou").style.display = "block";
+}
+
+/* SLIDESHOW */
 let i = 0;
 const slides = document.querySelectorAll(".slide");
 setInterval(() => {
     slides[i].classList.remove("active");
     i = (i + 1) % slides.length;
     slides[i].classList.add("active");
-}, 3000);
+}, 4500);
 </script>
 
 </body>
