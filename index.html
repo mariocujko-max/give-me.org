@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +7,6 @@
 <title>give-me.org – Support dogs in need</title>
 <meta name="description" content="give-me.org is a private donation page supporting dogs in need. Food, care and dignity.">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <link rel="icon" href="/favicon.png">
 
 <style>
@@ -22,9 +22,10 @@ main{
     padding:20px;
 }
 
-/* HERO */
+/* HERO IMAGE – STABLE */
 .hero{
-    position:relative;
+    width:100%;
+    max-width:1400px;
     margin:40px auto;
 }
 .hero img{
@@ -32,16 +33,6 @@ main{
     height:auto;
     display:block;
     border-radius:20px;
-}
-.hero h1{
-    position:absolute;
-    top:32px;
-    left:50%;
-    transform:translateX(-50%);
-    font-size:56px;
-    color:#f5c542;
-    text-shadow:0 6px 25px rgba(0,0,0,0.9);
-    margin:0;
 }
 
 /* SECTIONS */
@@ -118,12 +109,8 @@ section{
     border-bottom:1px solid #333;
 }
 
-/* MOBILE FIX */
+/* MOBILE */
 @media(max-width:800px){
-    .hero h1{
-        font-size:34px;
-        top:18px;
-    }
     .gallery{
         grid-template-columns:1fr;
     }
@@ -135,7 +122,7 @@ section{
 
 <main>
 
-<!-- HERO -->
+<!-- HERO IMAGE -->
 <div class="hero">
     <img src="comic.png" alt="Dogs together">
 </div>
@@ -179,6 +166,7 @@ bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed
 <!-- SLIDESHOW -->
 <section>
 <h3>Because love keeps going</h3>
+
 <div class="slide active"><img src="park.png"></div>
 <div class="slide"><img src="welpenkorb.png"></div>
 <div class="slide"><img src="urlaub.png"></div>
@@ -195,9 +183,10 @@ bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed
 <p>Add your name in the comments below.</p>
 </section>
 
-<!-- MEMORIAL -->
+<!-- MEMORIAL COMMENTS -->
 <section>
 <h3>🕊️ In memory</h3>
+
 <div id="disqus_thread"></div>
 <script>
 var disqus_config=function(){
