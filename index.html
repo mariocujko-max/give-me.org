@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 
 <title>give-me.org – Support dogs in need</title>
-<meta name="description" content="Private donation page supporting dogs in need. Food, care and dignity. No tracking, no cookies.">
+<meta name="description" content="Private donation page supporting dogs in need. Food, care and dignity.">
 <meta name="robots" content="index, follow">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -83,16 +83,16 @@ section{
     border-radius:50px;
     text-decoration:none;
 }
-.thankyou{display:none;margin-top:20px}
-
-/* COUNTER */
-.counter{
-    font-size:32px;
-    color:#f5c542;
-    margin-top:26px;
+.thankyou{
+    display:none;
+    margin-top:20px;
 }
 
-/* SLIDESHOW */
+/* SLIDESHOW – 50% */
+.slideshow{
+    max-width:600px;        /* ≈ 50% von 1200px */
+    margin:0 auto;
+}
 .slide{display:none}
 .slide.active{display:block}
 .slide img{
@@ -113,7 +113,12 @@ section{
 
 /* MOBILE */
 @media(max-width:800px){
-    .gallery{grid-template-columns:1fr}
+    .gallery{
+        grid-template-columns:1fr;
+    }
+    .slideshow{
+        max-width:100%;
+    }
 }
 </style>
 </head>
@@ -157,19 +162,17 @@ bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed
 <div class="thankyou" id="thankyou">
 <strong>Thank you.</strong><br>Your help truly matters.
 </div>
-
-<div class="counter">
-💛 Donations received: €1,240
-</div>
 </section>
 
-<!-- SLIDESHOW -->
+<!-- SLIDESHOW (SMALLER) -->
 <section>
 <h3>Because love keeps going</h3>
 
-<div class="slide active"><img src="park.png" loading="lazy"></div>
-<div class="slide"><img src="welpenkorb.png" loading="lazy"></div>
-<div class="slide"><img src="urlaub.png" loading="lazy"></div>
+<div class="slideshow">
+    <div class="slide active"><img src="park.png" loading="lazy"></div>
+    <div class="slide"><img src="welpenkorb.png" loading="lazy"></div>
+    <div class="slide"><img src="urlaub.png" loading="lazy"></div>
+</div>
 </section>
 
 <!-- ADOPT A NAME -->
