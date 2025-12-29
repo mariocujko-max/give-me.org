@@ -5,6 +5,10 @@
 <title>give-me.org</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ✅ FAVICON -->
+<link rel="icon" type="image/png" href="/favicon.png" sizes="96x96">
+<link rel="icon" type="image/png" href="/favicon.png" sizes="48x48">
+
 <style>
 /* BASE */
 body {
@@ -168,7 +172,6 @@ main {
 <!-- 4️⃣ DONATION -->
 <section class="donation fade">
     <h2>Support the dogs</h2>
-
     <p>Food. Care. Dignity.</p>
 
     <div class="address">
@@ -180,45 +183,4 @@ main {
     </div>
 
     <a class="button"
-       href="bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed"
-       onclick="showThanks()">
-       Donate to help the dogs
-    </a>
-
-    <div class="thankyou" id="thankyou">
-        <strong>Thank you.</strong><br>
-        Your help truly matters.
-    </div>
-</section>
-
-<!-- 5️⃣ LEGAL -->
-<div class="legal">
-    This is a private donation page.<br>
-    Donations are voluntary and non-refundable.<br>
-    No goods or services are provided in return.<br>
-    No cookies or tracking are used.
-</div>
-
-</main>
-
-<script>
-/* FADE-IN ON SCROLL */
-const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-        }
-    });
-}, { threshold: 0.2 });
-
-document.querySelectorAll(".fade").forEach(el => observer.observe(el));
-
-function showThanks() {
-    setTimeout(() => {
-        document.getElementById("thankyou").style.display = "block";
-    }, 600);
-}
-</script>
-
-</body>
-</html>
+       href="bitcoin
