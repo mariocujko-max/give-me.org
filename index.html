@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,6 +17,7 @@
 <link rel="icon" href="/favicon.png">
 
 <style>
+/* ===== GLOBAL RESET ===== */
 * {
     box-sizing: border-box;
 }
@@ -43,6 +45,13 @@ section {
     text-align: center;
 }
 
+/* ===== FIREFOX-PROOF IMAGE RULE ===== */
+img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
 /* ===== GALLERY (Comic + Story Images) ===== */
 .gallery {
     display: grid;
@@ -52,10 +61,10 @@ section {
 }
 
 .gallery img {
-    width: 100%;
-    height: auto;
-    display: block;
+    aspect-ratio: 3 / 4;      /* 🔑 FIX */
+    object-fit: contain;      /* ganzes Bild sichtbar */
     border-radius: 18px;
+    background: #000;
 }
 
 /* ===== DONATION ===== */
@@ -67,6 +76,7 @@ section {
 
 .qr img {
     width: 220px;
+    aspect-ratio: 1 / 1;      /* QR stabil */
     background: #fff;
     padding: 12px;
     border-radius: 12px;
@@ -83,7 +93,7 @@ section {
     text-decoration: none;
 }
 
-/* ===== SLIDESHOW – FULL IMAGE & BIGGER ===== */
+/* ===== SLIDESHOW – FULL IMAGE, BIGGER, STABLE ===== */
 .slideshow {
     max-width: 800px;
     margin: 0 auto;
@@ -98,9 +108,7 @@ section {
 }
 
 .slide img {
-    width: 100%;
-    height: auto;
-    display: block;
+    aspect-ratio: 3 / 4;      /* 🔑 SAME AS COMICS */
     object-fit: contain;
     border-radius: 18px;
     background: #000;
