@@ -5,7 +5,7 @@
 <title>give-me.org</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- ✅ FAVICON -->
+<!-- FAVICON -->
 <link rel="icon" type="image/png" href="/favicon.png" sizes="96x96">
 <link rel="icon" type="image/png" href="/favicon.png" sizes="48x48">
 
@@ -127,13 +127,19 @@ main {
     margin: 50px 20px 30px;
 }
 
-/* FADE-IN */
+/* FADE */
 .fade {
+    opacity: 1;
+    transform: none;
+}
+
+/* JS ENABLED */
+.js .fade {
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 1s ease, transform 1s ease;
 }
-.fade.visible {
+.js .fade.visible {
     opacity: 1;
     transform: translateY(0);
 }
@@ -154,22 +160,18 @@ main {
 
 <main>
 
-<!-- 1️⃣ COMIC -->
 <img src="comic.png?v=6" class="main-image fade" alt="Comic">
 
-<!-- 2️⃣ QUOTE -->
 <section class="story fade">
     <strong>While excuses rest on the couch, the dogs pay the price.</strong>
 </section>
 
-<!-- 3️⃣ STORY IMAGES -->
 <section class="gallery">
     <img src="story1.png" class="fade" alt="Story 1">
     <img src="story2.png" class="fade" alt="Story 2">
     <img src="story3.png" class="fade" alt="Story 3">
 </section>
 
-<!-- 4️⃣ DONATION -->
 <section class="donation fade">
     <h2>Support the dogs</h2>
     <p>Food. Care. Dignity.</p>
@@ -183,4 +185,47 @@ main {
     </div>
 
     <a class="button"
-       href="bitcoin
+       href="bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed"
+       onclick="showThanks()">
+       Donate to help the dogs
+    </a>
+
+    <div class="thankyou" id="thankyou">
+        <strong>Thank you.</strong><br>
+        Your help truly matters.
+    </div>
+</section>
+
+<div class="legal">
+    This is a private donation page.<br>
+    Donations are voluntary and non-refundable.<br>
+    No goods or services are provided in return.<br>
+    No cookies or tracking are used.
+</div>
+
+</main>
+
+<script>
+/* ENABLE JS MODE */
+document.documentElement.classList.add("js");
+
+/* FADE-IN */
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+        }
+    });
+}, { threshold: 0.2 });
+
+document.querySelectorAll(".fade").forEach(el => observer.observe(el));
+
+function showThanks() {
+    setTimeout(() => {
+        document.getElementById("thankyou").style.display = "block";
+    }, 600);
+}
+</script>
+
+</body>
+</html>
