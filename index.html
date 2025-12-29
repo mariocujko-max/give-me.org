@@ -3,19 +3,11 @@
 <head>
 <meta charset="UTF-8">
 
-<!-- SEO -->
 <title>give-me.org – Support dogs in need</title>
-<meta name="description" content="give-me.org is a private donation page supporting dogs in need. Food, care and dignity. No tracking, no cookies.">
-<meta name="robots" content="index, follow">
-
+<meta name="description" content="give-me.org is a private donation page supporting dogs in need. Food, care and dignity.">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" href="/favicon.png">
 
-<!-- Open Graph -->
-<meta property="og:title" content="give-me.org – Support dogs in need">
-<meta property="og:description" content="Food. Care. Dignity. A private donation page to help dogs.">
-<meta property="og:image" content="https://give-me.org/comic.png">
-<meta property="og:url" content="https://give-me.org">
+<link rel="icon" href="/favicon.png">
 
 <style>
 body{
@@ -24,24 +16,32 @@ body{
     background:#0a0a0a;
     color:#eee;
 }
-main{max-width:1200px;margin:auto;padding:20px}
+main{
+    max-width:1200px;
+    margin:auto;
+    padding:20px;
+}
 
 /* HERO */
-.hero{position:relative;margin:40px auto}
+.hero{
+    position:relative;
+    margin:40px auto;
+}
 .hero img{
     width:100%;
-    min-height:80vh;
-    object-fit:cover;
-    border-radius:20px
+    height:auto;
+    display:block;
+    border-radius:20px;
 }
 .hero h1{
     position:absolute;
-    top:40px;
+    top:32px;
     left:50%;
     transform:translateX(-50%);
-    font-size:64px;
+    font-size:56px;
     color:#f5c542;
-    text-shadow:0 8px 30px rgba(0,0,0,.9)
+    text-shadow:0 6px 25px rgba(0,0,0,0.9);
+    margin:0;
 }
 
 /* SECTIONS */
@@ -50,7 +50,7 @@ section{
     padding:40px;
     border-radius:24px;
     margin-top:60px;
-    text-align:center
+    text-align:center;
 }
 
 /* GALLERY */
@@ -58,61 +58,75 @@ section{
     display:grid;
     grid-template-columns:repeat(3,1fr);
     gap:24px;
-    margin-top:30px
+    margin-top:30px;
 }
-.gallery img{width:100%;border-radius:18px}
+.gallery img{
+    width:100%;
+    border-radius:18px;
+}
 
 /* DONATION */
 .address{
     color:#f5c542;
     word-break:break-all;
-    margin:20px 0
+    margin:20px 0;
 }
 .qr img{
-    width:260px;
+    width:240px;
     background:#fff;
     padding:14px;
-    border-radius:14px
+    border-radius:14px;
 }
 .button{
     display:inline-block;
     margin-top:30px;
-    padding:20px 46px;
+    padding:18px 42px;
     background:linear-gradient(135deg,#f5c542,#ffe27a);
     color:#000;
-    font-size:22px;
+    font-size:20px;
     border-radius:50px;
-    text-decoration:none
+    text-decoration:none;
 }
-.thankyou{display:none;margin-top:20px}
+.thankyou{
+    display:none;
+    margin-top:20px;
+}
 
 /* COUNTER */
 .counter{
-    font-size:42px;
+    font-size:36px;
     color:#f5c542;
-    margin-top:30px
+    margin-top:30px;
 }
 
 /* SLIDESHOW */
 .slide{display:none}
 .slide.active{display:block}
-.slide img{width:100%;border-radius:18px}
+.slide img{
+    width:100%;
+    border-radius:18px;
+}
 
 /* LIST */
 .list{
     max-width:500px;
     margin:30px auto;
-    text-align:left
+    text-align:left;
 }
 .list li{
     padding:10px 0;
-    border-bottom:1px solid #333
+    border-bottom:1px solid #333;
 }
 
-/* MOBILE */
+/* MOBILE FIX */
 @media(max-width:800px){
-    .gallery{grid-template-columns:1fr}
-    .hero h1{font-size:36px}
+    .hero h1{
+        font-size:34px;
+        top:18px;
+    }
+    .gallery{
+        grid-template-columns:1fr;
+    }
 }
 </style>
 </head>
@@ -134,9 +148,9 @@ section{
 
 <!-- STORY IMAGES -->
 <section class="gallery">
-    <img src="story1.png" alt="Dog story">
-    <img src="story2.png" alt="Dog story">
-    <img src="story3.png" alt="Dog story">
+    <img src="story1.png" alt="">
+    <img src="story2.png" alt="">
+    <img src="story3.png" alt="">
 </section>
 
 <!-- DONATION -->
@@ -159,14 +173,13 @@ bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed
 </div>
 
 <div class="counter">
-💛 Donations received: <span>€1,240</span>
+💛 Donations received: €1,240
 </div>
 </section>
 
-<!-- AFTER THANKS SLIDESHOW -->
+<!-- SLIDESHOW -->
 <section>
 <h3>Because love keeps going</h3>
-
 <div class="slide active"><img src="park.png"></div>
 <div class="slide"><img src="welpenkorb.png"></div>
 <div class="slide"><img src="urlaub.png"></div>
@@ -175,22 +188,17 @@ bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed
 <!-- ADOPT A NAME -->
 <section>
 <h3>🐕 Adopt a name</h3>
-<p>Leave a name for one of the dogs.</p>
-
 <ul class="list">
 <li>🐾 Luna</li>
 <li>🐾 Max</li>
 <li>🐾 Bella</li>
 </ul>
-
 <p>Add your name in the comments below.</p>
 </section>
 
-<!-- MEMORIAL COMMENTS -->
+<!-- MEMORIAL -->
 <section>
 <h3>🕊️ In memory</h3>
-<p>Share a thought for a dog that mattered to you.</p>
-
 <div id="disqus_thread"></div>
 <script>
 var disqus_config=function(){
