@@ -1,10 +1,21 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>give-me.org</title>
+
+<!-- SEO -->
+<title>give-me.org – Support dogs in need</title>
+<meta name="description" content="give-me.org is a private donation page supporting dogs in need. Food, care and dignity. No tracking, no cookies.">
+<meta name="robots" content="index, follow">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" href="/favicon.png">
+
+<!-- Open Graph -->
+<meta property="og:title" content="give-me.org – Support dogs in need">
+<meta property="og:description" content="Food. Care. Dignity. A private donation page to help dogs.">
+<meta property="og:image" content="https://give-me.org/comic.png">
+<meta property="og:url" content="https://give-me.org">
 
 <style>
 body{
@@ -17,11 +28,19 @@ main{max-width:1200px;margin:auto;padding:20px}
 
 /* HERO */
 .hero{position:relative;margin:40px auto}
-.hero img{width:100%;min-height:80vh;object-fit:cover;border-radius:20px}
+.hero img{
+    width:100%;
+    min-height:80vh;
+    object-fit:cover;
+    border-radius:20px
+}
 .hero h1{
-    position:absolute;top:40px;left:50%;
+    position:absolute;
+    top:40px;
+    left:50%;
     transform:translateX(-50%);
-    font-size:64px;color:#f5c542;
+    font-size:64px;
+    color:#f5c542;
     text-shadow:0 8px 30px rgba(0,0,0,.9)
 }
 
@@ -34,44 +53,65 @@ section{
     text-align:center
 }
 
-/* GALLERIES */
-.gallery,.after-gallery{
+/* GALLERY */
+.gallery{
     display:grid;
     grid-template-columns:repeat(3,1fr);
-    gap:24px;margin-top:30px
+    gap:24px;
+    margin-top:30px
 }
-img{border-radius:18px;width:100%}
+.gallery img{width:100%;border-radius:18px}
 
 /* DONATION */
-.address{color:#f5c542;word-break:break-all;margin:20px 0}
+.address{
+    color:#f5c542;
+    word-break:break-all;
+    margin:20px 0
+}
 .qr img{
-    width:260px;background:#fff;
-    padding:14px;border-radius:14px
+    width:260px;
+    background:#fff;
+    padding:14px;
+    border-radius:14px
 }
 .button{
     display:inline-block;
     margin-top:30px;
     padding:20px 46px;
     background:linear-gradient(135deg,#f5c542,#ffe27a);
-    color:#000;font-size:22px;
-    border-radius:50px;text-decoration:none
+    color:#000;
+    font-size:22px;
+    border-radius:50px;
+    text-decoration:none
 }
 .thankyou{display:none;margin-top:20px}
+
+/* COUNTER */
+.counter{
+    font-size:42px;
+    color:#f5c542;
+    margin-top:30px
+}
 
 /* SLIDESHOW */
 .slide{display:none}
 .slide.active{display:block}
+.slide img{width:100%;border-radius:18px}
 
-/* LANGUAGE */
-.lang-switch{
-    position:fixed;top:20px;right:20px;
-    background:#000;padding:10px 14px;
-    border-radius:12px;font-size:14px;cursor:pointer
+/* LIST */
+.list{
+    max-width:500px;
+    margin:30px auto;
+    text-align:left
+}
+.list li{
+    padding:10px 0;
+    border-bottom:1px solid #333
 }
 
 /* MOBILE */
 @media(max-width:800px){
-    .gallery,.after-gallery{grid-template-columns:1fr}
+    .gallery{grid-template-columns:1fr}
     .hero h1{font-size:36px}
 }
 </style>
@@ -79,33 +119,30 @@ img{border-radius:18px;width:100%}
 
 <body>
 
-<div class="lang-switch" onclick="toggleLang()">🌍 DE / EN</div>
-
 <main>
 
 <!-- HERO -->
 <div class="hero">
-    <img src="comic.png">
+    <img src="comic.png" alt="Dogs together">
     <h1>give-me.org</h1>
 </div>
 
 <!-- STORY -->
 <section>
-<p data-de="Während Ausreden auf der Couch liegen, zahlen Hunde den Preis."
-   data-en="While excuses rest on the couch, dogs pay the price."></p>
+<strong>While excuses rest on the couch, the dogs pay the price.</strong>
 </section>
 
-<!-- STORY GALLERY -->
+<!-- STORY IMAGES -->
 <section class="gallery">
-<img src="story1.png">
-<img src="story2.png">
-<img src="story3.png">
+    <img src="story1.png" alt="Dog story">
+    <img src="story2.png" alt="Dog story">
+    <img src="story3.png" alt="Dog story">
 </section>
 
 <!-- DONATION -->
 <section>
-<h2 data-de="Unterstütze die Hunde" data-en="Support the dogs"></h2>
-<p data-de="Futter. Pflege. Würde." data-en="Food. Care. Dignity."></p>
+<h2>Support the dogs</h2>
+<p>Food. Care. Dignity.</p>
 
 <div class="address">
 bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed
@@ -115,35 +152,50 @@ bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed
 <img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed">
 </div>
 
-<a class="button" onclick="thanks()">Donate</a>
+<a class="button" onclick="showThanks()">Donate</a>
 
-<div class="thankyou" id="thanks">
-<strong>Thank you ❤️</strong>
+<div class="thankyou" id="thankyou">
+<strong>Thank you.</strong><br>Your help truly matters.
+</div>
+
+<div class="counter">
+💛 Donations received: <span>€1,240</span>
 </div>
 </section>
 
-<!-- AFTER THANKS -->
+<!-- AFTER THANKS SLIDESHOW -->
 <section>
-<h3 data-de="Weil Liebe weitergeht" data-en="Because love keeps going"></h3>
+<h3>Because love keeps going</h3>
 
 <div class="slide active"><img src="park.png"></div>
 <div class="slide"><img src="welpenkorb.png"></div>
 <div class="slide"><img src="urlaub.png"></div>
 </section>
 
-<!-- COMMENTS -->
+<!-- ADOPT A NAME -->
 <section>
-<h3>🐾 Name a dog</h3>
-<p>Write a name you would give one of the dogs.</p>
+<h3>🐕 Adopt a name</h3>
+<p>Leave a name for one of the dogs.</p>
+
+<ul class="list">
+<li>🐾 Luna</li>
+<li>🐾 Max</li>
+<li>🐾 Bella</li>
+</ul>
+
+<p>Add your name in the comments below.</p>
+</section>
+
+<!-- MEMORIAL COMMENTS -->
+<section>
+<h3>🕊️ In memory</h3>
+<p>Share a thought for a dog that mattered to you.</p>
 
 <div id="disqus_thread"></div>
 <script>
 var disqus_config=function(){
 this.page.url=window.location.href;
-this.page.identifier="give-me-org";
-this.callbacks.onNewComment=[function(c){
-if(c.text.length<3)return false;
-}];
+this.page.identifier="give-me-org-memorial";
 };
 (function(){
 var d=document,s=d.createElement('script');
@@ -157,28 +209,18 @@ s.setAttribute('data-timestamp',+new Date());
 </main>
 
 <script>
-/* THANK YOU */
-function thanks(){
-document.getElementById("thanks").style.display="block";
+function showThanks(){
+    document.getElementById("thankyou").style.display="block";
 }
 
 /* SLIDESHOW */
-let s=0,slides=document.querySelectorAll(".slide");
+let i=0;
+const slides=document.querySelectorAll(".slide");
 setInterval(()=>{
-slides[s].classList.remove("active");
-s=(s+1)%slides.length;
-slides[s].classList.add("active");
+    slides[i].classList.remove("active");
+    i=(i+1)%slides.length;
+    slides[i].classList.add("active");
 },4000);
-
-/* LANGUAGE */
-let lang="de";
-function toggleLang(){
-lang=lang==="de"?"en":"de";
-document.querySelectorAll("[data-de]").forEach(el=>{
-el.innerText=el.dataset[lang];
-});
-}
-toggleLang();
 </script>
 
 </body>
