@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>give-me.org – Support dogs in need</title>
+<title>help us – Support dogs in need</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
@@ -42,10 +42,12 @@ section {
 }
 
 .curved-title text {
-    font-size: 64px;
-    fill: #bfeeee;
-    font-family: Georgia, "Times New Roman", serif;
-    letter-spacing: 2px;
+    font-size: 76px;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    letter-spacing: 4px;
+    fill: url(#grad);
+    text-transform: uppercase;
 }
 
 /* image grid */
@@ -119,7 +121,8 @@ section {
     }
 
     .curved-title text {
-        font-size: 42px;
+        font-size: 48px;
+        letter-spacing: 2px;
     }
 
     section {
@@ -137,13 +140,22 @@ section {
 <section class="story-comic">
 
     <!-- Curved headline -->
-    <svg viewBox="0 0 1000 200" class="curved-title" aria-hidden="true">
+    <svg viewBox="0 0 1000 220" class="curved-title" aria-hidden="true">
+        <defs>
+            <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#ffcc33"/>
+                <stop offset="50%" stop-color="#ff9933"/>
+                <stop offset="100%" stop-color="#ffcc66"/>
+            </linearGradient>
+        </defs>
+
         <path id="curve"
-              d="M 100 150 Q 500 40 900 150"
+              d="M 80 170 Q 500 30 920 170"
               fill="transparent"/>
+
         <text>
             <textPath href="#curve" startOffset="50%" text-anchor="middle">
-                give-me.org
+                HELP&nbsp;US
             </textPath>
         </text>
     </svg>
@@ -178,7 +190,7 @@ section {
         <img src="https://api.qrserver.com/v1/create-qr-code/?size=260x260&data=bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed">
     </div>
 
-    <!-- MEMORY IMAGES (welpenkorb removed) -->
+    <!-- MEMORY IMAGES -->
     <div class="memory-grid">
         <img src="park.jpg" alt="Park">
         <img src="urlaub.jpg" alt="Vacation">
