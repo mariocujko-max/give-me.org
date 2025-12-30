@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,50 +34,57 @@ main {
     padding: 20px;
 }
 
-/* ===== SECTIONS ===== */
+/* ===== SECTION ===== */
 section {
     background: #121212;
     padding: 40px;
-    border-radius: 24px;
+    border-radius: 28px;
     margin-top: 60px;
     text-align: center;
 }
 
-/* ===== HERO / COMIC (LARGE) ===== */
-.hero {
-    max-width: 1200px;
-    margin: 20px auto 60px;
-    padding: 0;
-    background: none;
+/* ===== STORY COMIC ===== */
+.story-comic {
+    background: #121212;
 }
 
-.hero img {
+/* curved title */
+.curved-title {
     width: 100%;
-    height: auto;
-    display: block;
-    border-radius: 24px;
+    max-width: 900px;
+    margin: 0 auto 40px;
 }
 
-/* ===== STORY TEXT ===== */
+.curved-title text {
+    font-size: 64px;
+    fill: #bfeeee;
+    font-family: Georgia, "Times New Roman", serif;
+    letter-spacing: 2px;
+}
+
+/* image grid */
+.story-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+}
+
+/* unified image look */
+.story-grid img {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: contain;
+    background: #0b0b0b;
+    border-radius: 22px;
+    padding: 12px;
+    display: block;
+}
+
+/* ===== TEXT ===== */
 .story-text {
     font-size: 18px;
     font-weight: bold;
-}
-
-/* ===== STORY GALLERY ===== */
-.story-gallery {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-    margin-top: 30px;
-}
-
-.story-gallery img {
-    width: 100%;
-    aspect-ratio: 3 / 4;
-    object-fit: cover;
-    border-radius: 18px;
-    display: block;
 }
 
 /* ===== DONATION ===== */
@@ -107,56 +113,18 @@ section {
     text-decoration: none;
 }
 
-/* ===== SLIDESHOW ===== */
-.slideshow {
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.slide {
-    display: none;
-}
-
-.slide.active {
-    display: block;
-}
-
-.slide img {
-    width: 100%;
-    height: auto;
-    object-fit: contain;
-    border-radius: 18px;
-    background: #000;
-    display: block;
-}
-
-/* ===== LIST ===== */
-.list {
-    max-width: 500px;
-    margin: 30px auto;
-    text-align: left;
-}
-
-.list li {
-    padding: 10px 0;
-    border-bottom: 1px solid #333;
-}
-
-/* ===== LEGAL ===== */
-.legal {
-    font-size: 14px;
-    color: #aaa;
-    line-height: 1.6;
-}
-
 /* ===== MOBILE ===== */
 @media (max-width: 800px) {
-    .story-gallery {
+    .story-grid {
         grid-template-columns: 1fr;
     }
 
-    .hero img {
-        border-radius: 0;
+    .curved-title text {
+        font-size: 42px;
+    }
+
+    section {
+        padding: 20px;
     }
 }
 </style>
@@ -166,9 +134,29 @@ section {
 
 <main>
 
-<!-- HERO COMIC -->
-<section class="hero">
-    <img src="comic.png" alt="Comic image" loading="eager" decoding="async">
+<!-- STORY COMIC BLOCK -->
+<section class="story-comic">
+
+    <!-- Curved headline -->
+    <svg viewBox="0 0 1000 200" class="curved-title" aria-hidden="true">
+        <path id="curve"
+              d="M 100 150 Q 500 40 900 150"
+              fill="transparent"/>
+        <text>
+            <textPath href="#curve" startOffset="50%" text-anchor="middle">
+                give-me.org
+            </textPath>
+        </text>
+    </svg>
+
+    <!-- All 4 images -->
+    <div class="story-grid">
+        <img src="comic.png" alt="Story part 1">
+        <img src="story1.png" alt="Story part 2">
+        <img src="story2.png" alt="Story part 3">
+        <img src="story3.png" alt="Story part 4">
+    </div>
+
 </section>
 
 <!-- STORY TEXT -->
@@ -176,13 +164,6 @@ section {
     <div class="story-text">
         While excuses rest on the couch, the dogs pay the price.
     </div>
-</section>
-
-<!-- STORY IMAGES -->
-<section class="story-gallery">
-    <img src="story1.png" loading="lazy" decoding="async" alt="">
-    <img src="story2.png" loading="lazy" decoding="async" alt="">
-    <img src="story3.png" loading="lazy" decoding="async" alt="">
 </section>
 
 <!-- DONATION -->
@@ -195,8 +176,7 @@ section {
     </div>
 
     <div class="qr">
-        <img src="https://api.qrserver.com/v1/create-qr-code/?size=260x260&data=bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed"
-             loading="lazy" decoding="async">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=260x260&data=bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed">
     </div>
 
     <a class="button" href="bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed">
@@ -204,52 +184,10 @@ section {
     </a>
 </section>
 
-<!-- SLIDESHOW -->
-<section>
-    <h3>Because love keeps going</h3>
-
-    <div class="slideshow">
-        <div class="slide active"><img src="park.png" loading="lazy"></div>
-        <div class="slide"><img src="welpenkorb.png" loading="lazy"></div>
-        <div class="slide"><img src="urlaub.png" loading="lazy"></div>
-    </div>
-</section>
-
-<!-- ADOPT A NAME -->
-<section>
-    <h3>🐕 Adopt a name</h3>
-    <ul class="list">
-        <li>🐾 Luna</li>
-        <li>🐾 Max</li>
-        <li>🐾 Bella</li>
-    </ul>
-    <p>Add your name in the comments below.</p>
-</section>
-
-<!-- COMMENTS -->
-<section>
-    <h3>🕊️ In memory</h3>
-
-    <div id="disqus_thread"></div>
-    <script>
-    var disqus_config = function () {
-        this.page.url = window.location.href;
-        this.page.identifier = "give-me-org-memorial";
-        this.page.disable_ads = true;
-    };
-    (function () {
-        var d = document, s = d.createElement('script');
-        s.src = 'https://give-me-org.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-    </script>
-</section>
-
-<!-- LEGAL NOTICE -->
+<!-- LEGAL -->
 <section>
     <h3>Legal notice</h3>
-    <div class="legal">
+    <div style="font-size:14px;color:#aaa;line-height:1.6">
         This is a private, non-commercial donation page.<br>
         Donations are voluntary and non-refundable.<br>
         No goods or services are provided in return.<br>
@@ -259,17 +197,6 @@ section {
 </section>
 
 </main>
-
-<script>
-/* SLIDESHOW */
-let i = 0;
-const slides = document.querySelectorAll(".slide");
-setInterval(() => {
-    slides[i].classList.remove("active");
-    i = (i + 1) % slides.length;
-    slides[i].classList.add("active");
-}, 4500);
-</script>
 
 </body>
 </html>
