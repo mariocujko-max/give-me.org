@@ -30,23 +30,111 @@ section {
     text-align: center;
 }
 
-/* HERO */
-.hero {
+/* ================= HERO COMIC ================= */
+
+.comic-wrapper {
+    position: relative;
     max-width: 640px;
     margin: 30px auto;
 }
-.hero img {
+
+.comic-base {
     width: 100%;
+    display: block;
     border-radius: 20px;
 }
 
-/* TEXT */
+/* Overlay */
+.overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+/* Coins */
+.coin {
+    position: absolute;
+    width: 36px;
+    left: 50%;
+    top: 15%;
+    opacity: 0;
+    transform: translateX(-50%);
+}
+
+.drop1 { animation: coinDrop 2.2s ease-in forwards; }
+.drop2 { animation: coinDrop 2.2s ease-in 0.6s forwards; }
+.drop3 { animation: coinDrop 2.2s ease-in 1.2s forwards; }
+
+@keyframes coinDrop {
+    0% {
+        transform: translate(-50%, -60px) rotate(0deg);
+        opacity: 0;
+    }
+    30% { opacity: 1; }
+    100% {
+        transform: translate(-50%, 240px) rotate(420deg);
+        opacity: 1;
+    }
+}
+
+/* Bowl glow */
+.bowl-glow {
+    position: absolute;
+    bottom: 18%;
+    left: 50%;
+    width: 160px;
+    height: 50px;
+    transform: translateX(-50%);
+    background: radial-gradient(circle, rgba(255,220,120,0.9), transparent 70%);
+    opacity: 0;
+}
+
+.glow-on {
+    animation: glowPulse 1.6s ease-out forwards;
+}
+
+@keyframes glowPulse {
+    0% { opacity: 0; }
+    30% { opacity: 1; }
+    100% { opacity: 0.6; }
+}
+
+/* BTC text */
+.btc-text {
+    position: absolute;
+    bottom: 6%;
+    width: 100%;
+    text-align: center;
+    opacity: 0;
+}
+
+.btc-show {
+    animation: textFade 2s ease forwards;
+}
+
+.btc-amount {
+    color: #f5c542;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.btc-thanks {
+    font-size: 15px;
+    color: #eee;
+}
+
+@keyframes textFade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* ================= TEXT & BUTTON ================= */
+
 .story-text {
     font-size: 18px;
     font-weight: bold;
 }
 
-/* DONATION */
 .address {
     color: #f5c542;
     word-break: break-all;
@@ -69,121 +157,44 @@ section {
     font-size: 20px;
     border-radius: 50px;
     text-decoration: none;
+    cursor: pointer;
 }
-
-/* ===== HOPE BOWL ===== */
-.bowl-container {
-    position: relative;
-    width: 260px;
-    margin: 40px auto 10px;
-}
-
-.bowl {
-    width: 100%;
-    position: relative;
-    z-index: 3;
-}
-
-.glow {
-    position: absolute;
-    width: 160px;
-    height: 60px;
-    background: radial-gradient(circle, rgba(245,197,66,0.6), transparent 70%);
-    bottom: 25px;
-    left: 50%;
-    transform: translateX(-50%);
-    opacity: 0;
-}
-
-.coin {
-    position: absolute;
-    width: 38px;
-    top: -80px;
-    left: 50%;
-    transform: translateX(-50%);
-    opacity: 0;
-    pointer-events: none;
-}
-
-.drop1 { animation: drop 2.4s ease-in forwards; }
-.drop2 { animation: drop 2.4s ease-in 0.6s forwards; }
-.drop3 { animation: drop 2.4s ease-in 1.2s forwards; }
-
-@keyframes drop {
-    0% { transform: translate(-50%, -90px) rotate(0deg); opacity: 0; }
-    25% { opacity: 1; }
-    100% { transform: translate(-50%, 150px) rotate(420deg); opacity: 1; }
-}
-
-.shake { animation: shake 0.4s ease; }
-@keyframes shake {
-    0% { transform: rotate(0); }
-    25% { transform: rotate(-2deg); }
-    50% { transform: rotate(2deg); }
-    100% { transform: rotate(0); }
-}
-
-.glow-on { animation: glow 1.5s ease-out forwards; }
-@keyframes glow {
-    0% { opacity: 0; }
-    30% { opacity: 1; }
-    100% { opacity: 0.6; }
-}
-
-/* particles */
-.hope-particles span {
-    position: absolute;
-    bottom: 40px;
-    width: 6px;
-    height: 6px;
-    background: #ffe27a;
-    border-radius: 50%;
-    opacity: 0;
-    animation: rise 3s ease-out forwards;
-}
-
-@keyframes rise {
-    0% { transform: translateY(0) scale(0.6); opacity: 0; }
-    20% { opacity: 0.8; }
-    100% { transform: translateY(-120px) scale(1.2); opacity: 0; }
-}
-
-/* COUNTER & THANKS */
-.btc-counter {
-    margin-top: 14px;
-    font-size: 18px;
-    color: #f5c542;
-}
-
-.btc-sub {
-    font-size: 14px;
-    color: #aaa;
-}
-
-.thanks {
-    margin-top: 12px;
-    font-size: 16px;
-    color: #ddd;
-    opacity: 0;
-    transition: opacity 1.5s ease;
-}
-.thanks.show { opacity: 1; }
 </style>
 </head>
 
 <body>
 <main>
 
-<section class="hero">
-    <img src="comic.png" alt="Comic">
+<!-- HERO COMIC WITH ANIMATION -->
+<section>
+    <div class="comic-wrapper">
+        <img src="comic.png" class="comic-base" alt="Comic">
+
+        <div class="overlay">
+            <img src="bitcoin.png" class="coin coin1">
+            <img src="bitcoin.png" class="coin coin2">
+            <img src="bitcoin.png" class="coin coin3">
+
+            <div class="bowl-glow"></div>
+
+            <div class="btc-text">
+                <div class="btc-amount">0.00000010 BTC</div>
+                <div class="btc-thanks">Thank you for caring.</div>
+            </div>
+        </div>
+
+        <audio id="coinSound" src="coin.mp3"></audio>
+    </div>
 </section>
 
+<!-- STORY -->
 <section>
     <div class="story-text">
         While excuses rest on the couch, the dogs pay the price.
     </div>
 </section>
 
+<!-- DONATION -->
 <section>
     <h2>Support the dogs</h2>
     <p>Food. Care. Dignity.</p>
@@ -196,89 +207,39 @@ section {
         <img src="https://api.qrserver.com/v1/create-qr-code/?size=260x260&data=bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed">
     </div>
 
-    <div class="bowl-container">
-        <div class="glow"></div>
-        <div class="hope-particles"></div>
-
-        <img src="bowl.png" class="bowl" alt="">
-        <img src="bitcoin.png" class="coin coin1">
-        <img src="bitcoin.png" class="coin coin2">
-        <img src="bitcoin.png" class="coin coin3">
-    </div>
-
-    <div class="btc-counter">
-        <span id="btcAmount">0.00000000</span> BTC
-        <div class="btc-sub">Every satoshi matters.</div>
-    </div>
-
-    <div class="thanks" id="thanksText"></div>
-
     <a class="button" id="donateBtn"
        href="bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed">
         Donate
     </a>
-
-    <audio id="coinSound" src="coin.mp3" preload="auto"></audio>
 </section>
 
 </main>
 
 <script>
 const donateBtn = document.getElementById("donateBtn");
+const coins = document.querySelectorAll(".coin");
+const glow = document.querySelector(".bowl-glow");
+const text = document.querySelector(".btc-text");
 const sound = document.getElementById("coinSound");
+
 sound.volume = 0.4;
 
-const coins = document.querySelectorAll(".coin");
-const bowl = document.querySelector(".bowl");
-const glow = document.querySelector(".glow");
-const btcDisplay = document.getElementById("btcAmount");
-const thanks = document.getElementById("thanksText");
-const particles = document.querySelector(".hope-particles");
-
-const thanksTexts = [
-    "Thank you for caring.",
-    "Someone will eat tonight.",
-    "Hope is a quiet thing.",
-    "You made a difference.",
-    "Kindness travels far."
-];
-
-let btc = 0;
-
 donateBtn.addEventListener("click", () => {
-
     coins[0].classList.add("drop1");
     coins[1].classList.add("drop2");
     coins[2].classList.add("drop3");
 
-    coins.forEach((coin, index) => {
+    coins.forEach((c, i) => {
         setTimeout(() => {
             sound.currentTime = 0;
             sound.play();
-
-            bowl.classList.add("shake");
             glow.classList.add("glow-on");
-
-            btc += 0.00000010;
-            btcDisplay.textContent = btc.toFixed(8);
-
-            thanks.textContent = thanksTexts[Math.floor(Math.random() * thanksTexts.length)];
-            thanks.classList.add("show");
-
-            for (let i = 0; i < 6; i++) {
-                const p = document.createElement("span");
-                p.style.left = (40 + Math.random() * 40) + "%";
-                particles.appendChild(p);
-                setTimeout(() => p.remove(), 3000);
-            }
-
-            setTimeout(() => {
-                bowl.classList.remove("shake");
-                glow.classList.remove("glow-on");
-            }, 500);
-
-        }, index * 600 + 800);
+        }, i * 600 + 700);
     });
+
+    setTimeout(() => {
+        text.classList.add("btc-show");
+    }, 1800);
 });
 </script>
 
