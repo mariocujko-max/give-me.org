@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,6 +31,23 @@ section {
     border-radius: 28px;
     margin-top: 60px;
     text-align: center;
+}
+
+/* ===== HEADER / SLOGAN ===== */
+header {
+    text-align: center;
+    padding: 40px 20px;
+}
+header h1 {
+    font-size: 2.5em;
+    color: #fff;
+    margin-bottom: 10px;
+}
+header p {
+    font-size: 1.2em;
+    color: #aaa;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
 /* ===== STORY COMIC ===== */
@@ -90,6 +108,8 @@ section {
     border-radius: 15px;
     margin: 20px 0;
     border: 1px dashed #f5c542;
+    display: inline-block;
+    max-width: 100%;
 }
 
 .address {
@@ -150,13 +170,18 @@ section {
     .curved-title text { font-size: 60px; }
     .story-grid, .memory-grid { grid-template-columns: 1fr; }
     section { padding: 20px; }
+    header h1 { font-size: 1.8em; }
 }
 </style>
 </head>
 <body>
 
 <main>
-<h1 style="position:absolute;left:-9999px;">Private Donation Page for Dogs - give-me.org</h1>
+
+<header>
+    <h1>Keine Ausreden mehr. Nur Hilfe.</h1>
+    <p>Deine Spende finanziert Futter und medizinische Versorgung für Hunde, die sonst niemanden haben.</p>
+</header>
 
 <section class="story-comic">
     <svg viewBox="0 0 1000 260" class="curved-title" aria-hidden="true">
@@ -182,10 +207,20 @@ section {
 
     <div class="story-text-box">
         <div class="story-part">
-            <strong>1. Die unsichtbare Not:</strong> Hunger ist kein lautes Geräusch, er ist ein dumpfer Schmerz. Viele dieser Hunde kennen nur harten Beton und die Hoffnung auf einen freundlichen Blick.
+            <strong>1. Die unsichtbare Not:</strong><br>
+            Hunger ist kein lautes Geräusch, er ist ein dumpfer Schmerz. Viele dieser Hunde kennen nur harten Beton und die Hoffnung auf einen freundlichen Blick.
         </div>
         <div class="story-part">
-            <strong>2. Deine Entscheidung zählt:</strong> Während Ausreden auf dem Sofa ruhen, verändert deine Hilfe eine ganze Welt für eine Seele auf vier Pfoten.
+            <strong>2. Die Kosten der Gleichgültigkeit:</strong><br>
+            Ein Klick, ein Scrollen, eine Ausrede. Doch für eine Seele auf vier Pfoten bedeutet unsere Bequemlichkeit einen weiteren Tag ohne Schutz.
+        </div>
+        <div class="story-part">
+            <strong>3. Deine Entscheidung zählt:</strong><br>
+            Während Ausreden auf dem Sofa ruhen, verändert deine Hilfe eine ganze Welt für eine Seele auf vier Pfoten.
+        </div>
+        <div class="story-part">
+            <strong>4. Gemeinsam für die Schwächsten:</strong><br>
+            give-me.org ist ein privates Versprechen. Keine Verwaltungskosten, nur direkte Hilfe. Lass uns aufhören zu warten.
         </div>
     </div>
 </section>
@@ -213,16 +248,16 @@ section {
     </div>
 </section>
 
-<section style="background: none; border: 1px solid #222;">
+<section style="background: none; border: 1px solid #222; margin-top: 40px;">
     <h3>More ways to help</h3>
     <ul style="list-style:none;padding:0;line-height:2.5; display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;">
-        <li><a href="/donate" style="color:#aaa;">Donate directly</a></li>
-        <li><a href="/tierfutter-spenden" style="color:#aaa;">Animal food</a></li>
-        <li><a href="/tieroperation-spenden" style="color:#aaa;">Surgeries</a></li>
+        <li><a href="donate.html" style="color:#aaa; text-decoration: none; border-bottom: 1px dotted #555;">Donate money</a></li>
+        <li><a href="tierfutter-spenden.html" style="color:#aaa; text-decoration: none; border-bottom: 1px dotted #555;">Donate animal food</a></li>
+        <li><a href="tieroperation-spenden.html" style="color:#aaa; text-decoration: none; border-bottom: 1px dotted #555;">Medical surgeries</a></li>
     </ul>
 </section>
 
-<section style="background: none; opacity: 0.6; font-size: 13px;">
+<section style="background: none; opacity: 0.6; font-size: 13px; padding-top: 0;">
     <p>Private, non-commercial page. No cookies. No tracking. 100% Direct.</p>
 </section>
 
@@ -233,10 +268,13 @@ function copyAddr() {
     const addr = document.getElementById('wallet-addr').innerText;
     navigator.clipboard.writeText(addr).then(() => {
         const btn = document.querySelector('.copy-btn');
+        const originalText = btn.innerText;
+        
         btn.innerText = "✅ Copied!";
         btn.style.background = "#28a745";
+        
         setTimeout(() => {
-            btn.innerText = "Copy Address";
+            btn.innerText = originalText;
             btn.style.background = "#f7931a";
         }, 2000);
     });
