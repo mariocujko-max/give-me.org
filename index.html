@@ -2,11 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-
 <title>Donate to Help Dogs in Need – Private Support | give-me.org</title>
 <meta name="description" content="Private donation page to help dogs in need with food, care, and dignity. Direct help without organizations.">
 <link rel="canonical" href="https://give-me.org/">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="index, follow">
 
@@ -50,16 +48,15 @@ section {
     letter-spacing: 6px;
     text-transform: uppercase;
     fill: url(#grad);
-    filter:
-        drop-shadow(0 0 10px rgba(255,120,60,0.6))
-        drop-shadow(0 0 26px rgba(255,180,80,0.5));
+    filter: drop-shadow(0 0 10px rgba(255,120,60,0.6));
 }
 
-/* ===== STORY IMAGES ===== */
+/* ===== STORY IMAGES & TEXT ===== */
 .story-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 28px;
+    margin-bottom: 40px;
 }
 
 .story-grid img {
@@ -68,41 +65,74 @@ section {
     display: block;
     border-radius: 22px;
     background: #0b0b0b;
+    border: 1px solid #333;
 }
 
-/* ===== TEXT ===== */
-.story-text {
-    font-size: 18px;
-    font-weight: bold;
+.story-text-box {
+    text-align: left;
+    max-width: 800px;
+    margin: 40px auto;
+    line-height: 1.8;
 }
 
-/* ===== DONATION ===== */
+.story-part {
+    margin-bottom: 25px;
+    border-left: 3px solid #ff9a2f;
+    padding-left: 20px;
+}
+
+.story-part strong { color: #ff9a2f; font-size: 1.1em; }
+
+/* ===== DONATION & BUTTONS ===== */
+.address-container {
+    background: #1a1a1a;
+    padding: 20px;
+    border-radius: 15px;
+    margin: 20px 0;
+    border: 1px dashed #f5c542;
+}
+
 .address {
     color: #f5c542;
     word-break: break-all;
-    margin: 20px 0;
+    font-family: monospace;
+    font-size: 1.1em;
+    display: block;
+    margin-bottom: 15px;
+}
+
+.copy-btn {
+    background: #f7931a;
+    color: #000;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
 }
 
 .qr img {
     width: 220px;
-    height: auto;
+    margin: 20px 0;
     background: #fff;
     padding: 12px;
     border-radius: 12px;
 }
 
-.button {
+.button-main {
     display: inline-block;
     margin-top: 30px;
-    padding: 18px 42px;
-    background: linear-gradient(135deg, #ff9a2f, #ffd36a);
+    padding: 20px 50px;
+    background: linear-gradient(135deg, #28a745, #85e09b);
     color: #000;
-    font-size: 22px;
+    font-size: 24px;
+    font-weight: bold;
     border-radius: 50px;
     text-decoration: none;
+    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.4);
 }
 
-/* ===== MEMORY IMAGES ===== */
 .memory-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -112,49 +142,23 @@ section {
 
 .memory-grid img {
     width: 100%;
-    height: auto;
-    display: block;
     border-radius: 20px;
-    background: #0b0b0b;
 }
 
 /* ===== MOBILE ===== */
 @media (max-width: 768px) {
-
-    main {
-        padding: 12px;
-    }
-
-    section {
-        padding: 24px;
-        margin-top: 40px;
-    }
-
-    .curved-title text {
-        font-size: 72px;
-        letter-spacing: 4px;
-    }
-
-    .story-grid,
-    .memory-grid {
-        grid-template-columns: 1fr;
-    }
+    .curved-title text { font-size: 60px; }
+    .story-grid, .memory-grid { grid-template-columns: 1fr; }
+    section { padding: 20px; }
 }
 </style>
 </head>
-
 <body>
 
 <main>
+<h1 style="position:absolute;left:-9999px;">Private Donation Page for Dogs - give-me.org</h1>
 
-<!-- SEO H1 (invisible) -->
-<h1 style="position:absolute;left:-9999px;">
-Donate to Help Dogs in Need – Private Donation Page
-</h1>
-
-<!-- STORY COMIC -->
 <section class="story-comic">
-
     <svg viewBox="0 0 1000 260" class="curved-title" aria-hidden="true">
         <defs>
             <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -163,82 +167,81 @@ Donate to Help Dogs in Need – Private Donation Page
                 <stop offset="100%" stop-color="#ffe066"/>
             </linearGradient>
         </defs>
-
-        <path id="curve"
-              d="M 40 200 Q 500 10 960 200"
-              fill="transparent"/>
-
+        <path id="curve" d="M 40 200 Q 500 10 960 200" fill="transparent"/>
         <text>
-            <textPath href="#curve" startOffset="50%" text-anchor="middle">
-                HELP&nbsp;US
-            </textPath>
+            <textPath href="#curve" startOffset="50%" text-anchor="middle">HELP THEM</textPath>
         </text>
     </svg>
 
     <div class="story-grid">
-        <img src="comic.jpg" alt="Dogs in need – story part 1">
-        <img src="story1.jpg" alt="Dogs in need – story part 2">
-        <img src="story2.jpg" alt="Dogs in need – story part 3">
-        <img src="story3.jpg" alt="Dogs in need – story part 4">
+        <img src="comic.jpg" alt="No more excuses - dogs pay the price">
+        <img src="story1.jpg" alt="Hunger and cold">
+        <img src="story2.jpg" alt="Medical care needed">
+        <img src="story3.jpg" alt="The path to dignity">
     </div>
 
-</section>
-
-<section>
-    <div class="story-text">
-        While excuses rest on the couch, the dogs pay the price.
+    <div class="story-text-box">
+        <div class="story-part">
+            <strong>1. Die unsichtbare Not:</strong> Hunger ist kein lautes Geräusch, er ist ein dumpfer Schmerz. Viele dieser Hunde kennen nur harten Beton und die Hoffnung auf einen freundlichen Blick.
+        </div>
+        <div class="story-part">
+            <strong>2. Deine Entscheidung zählt:</strong> Während Ausreden auf dem Sofa ruhen, verändert deine Hilfe eine ganze Welt für eine Seele auf vier Pfoten.
+        </div>
     </div>
 </section>
 
-<section>
-    <h2>Support the dogs</h2>
-    <p>Food. Care. Dignity.</p>
+<section id="donate">
+    <h2>Direct Support</h2>
+    <p style="font-size: 1.2em; color: #bbb;">Food. Care. Dignity.</p>
 
-    <div class="address">
-        bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed
+    <div class="address-container">
+        <span class="address" id="wallet-addr">bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed</span>
+        <button class="copy-btn" onclick="copyAddr()">Copy Address</button>
     </div>
 
     <div class="qr">
-        <img src="https://api.qrserver.com/v1/create-qr-code/?size=260x260&data=bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed" alt="Bitcoin donation QR code">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=260x260&data=bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed" alt="Bitcoin QR">
     </div>
+
+    <a class="button-main" href="bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed">
+        Donate Bitcoin
+    </a>
 
     <div class="memory-grid">
-        <img src="park.jpg" alt="Memory with dogs">
-        <img src="urlaub.jpg" alt="Rescue moments">
+        <img src="park.jpg" alt="Happy dogs">
+        <img src="urlaub.jpg" alt="Success story">
     </div>
-
-    <a class="button"
-       href="bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed"
-       aria-label="Donate Bitcoin to help dogs in need">
-        Donate
-    </a>
 </section>
 
-<!-- INTERNAL LINKS -->
-<section>
-    <h3>More Ways to Help</h3>
-    <ul style="list-style:none;padding:0;line-height:2;">
-        <li><a href="/donate">Donate directly</a></li>
-        <li><a href="/tierfutter-spenden">Donate animal food</a></li>
-        <li><a href="/tieroperation-spenden">Help with animal surgeries</a></li>
-        <li><a href="/tierheim-unterstuetzen">Support animal shelters</a></li>
-        <li><a href="/obdachlosen-helfen">Help homeless people</a></li>
+<section style="background: none; border: 1px solid #222;">
+    <h3>More ways to help</h3>
+    <ul style="list-style:none;padding:0;line-height:2.5; display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;">
+        <li><a href="/donate" style="color:#aaa;">Donate directly</a></li>
+        <li><a href="/tierfutter-spenden" style="color:#aaa;">Animal food</a></li>
+        <li><a href="/tieroperation-spenden" style="color:#aaa;">Surgeries</a></li>
     </ul>
 </section>
 
-<!-- LEGAL -->
-<section>
-    <h3>Legal notice</h3>
-    <div style="font-size:14px;color:#aaa;line-height:1.6">
-        This is a private, non-commercial donation page.<br>
-        Donations are voluntary and non-refundable.<br>
-        No goods or services are provided in return.<br>
-        No cookies, tracking, or analytics are used.<br>
-        This website does not represent a registered charity or organization.
-    </div>
+<section style="background: none; opacity: 0.6; font-size: 13px;">
+    <p>Private, non-commercial page. No cookies. No tracking. 100% Direct.</p>
 </section>
 
 </main>
+
+<script>
+function copyAddr() {
+    const addr = document.getElementById('wallet-addr').innerText;
+    navigator.clipboard.writeText(addr).then(() => {
+        const btn = document.querySelector('.copy-btn');
+        btn.innerText = "✅ Copied!";
+        btn.style.background = "#28a745";
+        setTimeout(() => {
+            btn.innerText = "Copy Address";
+            btn.style.background = "#f7931a";
+        }, 2000);
+    });
+}
+</script>
 
 </body>
 </html>
