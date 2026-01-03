@@ -39,15 +39,18 @@ header {
     padding: 40px 20px;
 }
 header h1 {
-    font-size: 2.5em;
+    font-size: 3em;
+    font-weight: 900;
     color: #fff;
     margin-bottom: 10px;
+    letter-spacing: 1px;
 }
 header p {
-    font-size: 1.2em;
+    font-size: 1.3em;
     color: #aaa;
-    max-width: 600px;
+    max-width: 700px;
     margin: 0 auto;
+    line-height: 1.5;
 }
 
 /* ===== STORY COMIC ===== */
@@ -91,15 +94,21 @@ header p {
     max-width: 800px;
     margin: 40px auto;
     line-height: 1.8;
+    font-size: 1.1em;
 }
 
 .story-part {
-    margin-bottom: 25px;
-    border-left: 3px solid #ff9a2f;
-    padding-left: 20px;
+    margin-bottom: 30px;
+    border-left: 4px solid #ff9a2f;
+    padding-left: 25px;
 }
 
-.story-part strong { color: #ff9a2f; font-size: 1.1em; }
+.story-part strong { 
+    color: #ff9a2f; 
+    font-size: 1.2em; 
+    display: block; 
+    margin-bottom: 5px;
+}
 
 /* ===== DONATION & BUTTONS ===== */
 .address-container {
@@ -170,7 +179,7 @@ header p {
     .curved-title text { font-size: 60px; }
     .story-grid, .memory-grid { grid-template-columns: 1fr; }
     section { padding: 20px; }
-    header h1 { font-size: 1.8em; }
+    header h1 { font-size: 2em; }
 }
 </style>
 </head>
@@ -179,8 +188,8 @@ header p {
 <main>
 
 <header>
-    <h1>Keine Ausreden mehr. Nur Hilfe.</h1>
-    <p>Deine Spende finanziert Futter und medizinische Versorgung für Hunde, die sonst niemanden haben.</p>
+    <h1>NO MORE EXCUSES.</h1>
+    <p>Your donation directly funds food, surgery, and dignity for dogs who have no one else.</p>
 </header>
 
 <section class="story-comic">
@@ -207,20 +216,20 @@ header p {
 
     <div class="story-text-box">
         <div class="story-part">
-            <strong>1. Die unsichtbare Not:</strong><br>
-            Hunger ist kein lautes Geräusch, er ist ein dumpfer Schmerz. Viele dieser Hunde kennen nur harten Beton und die Hoffnung auf einen freundlichen Blick.
+            <strong>1. The Invisible Need</strong>
+            Hunger is not a loud noise; it is a dull ache. Many of these dogs know only hard concrete and the hope for a single kind look.
         </div>
         <div class="story-part">
-            <strong>2. Die Kosten der Gleichgültigkeit:</strong><br>
-            Ein Klick, ein Scrollen, eine Ausrede. Doch für eine Seele auf vier Pfoten bedeutet unsere Bequemlichkeit einen weiteren Tag ohne Schutz.
+            <strong>2. The Cost of Indifference</strong>
+            A click, a scroll, an excuse. But for a soul on four paws, our comfort means another day without protection or medicine.
         </div>
         <div class="story-part">
-            <strong>3. Deine Entscheidung zählt:</strong><br>
-            Während Ausreden auf dem Sofa ruhen, verändert deine Hilfe eine ganze Welt für eine Seele auf vier Pfoten.
+            <strong>3. Your Decision Counts</strong>
+            While excuses rest on the couch, your help changes an entire world for a dog. It’s not just money—it’s survival.
         </div>
         <div class="story-part">
-            <strong>4. Gemeinsam für die Schwächsten:</strong><br>
-            give-me.org ist ein privates Versprechen. Keine Verwaltungskosten, nur direkte Hilfe. Lass uns aufhören zu warten.
+            <strong>4. Together for the Weakest</strong>
+            give-me.org is a private promise. No administrative costs, just direct help. Let's stop waiting and start saving lives.
         </div>
     </div>
 </section>
@@ -243,8 +252,8 @@ header p {
     </a>
 
     <div class="memory-grid">
-        <img src="park.jpg" alt="Happy dogs">
-        <img src="urlaub.jpg" alt="Success story">
+        <img src="park.jpg" alt="Happy dogs in park">
+        <img src="urlaub.jpg" alt="Rescue success">
     </div>
 </section>
 
@@ -269,10 +278,8 @@ function copyAddr() {
     navigator.clipboard.writeText(addr).then(() => {
         const btn = document.querySelector('.copy-btn');
         const originalText = btn.innerText;
-        
         btn.innerText = "✅ Copied!";
         btn.style.background = "#28a745";
-        
         setTimeout(() => {
             btn.innerText = originalText;
             btn.style.background = "#f7931a";
