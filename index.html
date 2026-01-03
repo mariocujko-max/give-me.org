@@ -83,7 +83,7 @@ header p {
     filter: drop-shadow(0 0 10px rgba(255,120,60,0.6));
 }
 
-/* ===== STORY IMAGES & TEXT ===== */
+/* ===== STORY IMAGES & VIDEO ===== */
 .story-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -91,7 +91,7 @@ header p {
     margin-bottom: 40px;
 }
 
-/* HIER GEÄNDERT: Gilt jetzt auch für das Video-Element */
+/* CSS UPDATE: Gilt jetzt für Bilder UND Video */
 .story-grid img, 
 .story-grid video {
     width: 100%;
@@ -100,7 +100,7 @@ header p {
     border-radius: 22px;
     background: #0b0b0b;
     border: 1px solid #333;
-    object-fit: cover; /* Sorgt dafür, dass Video/Bild den Platz gut ausfüllen */
+    object-fit: cover;
 }
 
 .story-text-box {
@@ -224,7 +224,7 @@ header p {
     <div class="story-grid">
         <img src="comic.jpg" alt="No more excuses - dogs pay the price">
         
-        <video controls playsinline>
+        <video autoplay muted loop playsinline>
             <source src="video.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
