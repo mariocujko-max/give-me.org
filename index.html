@@ -91,13 +91,16 @@ header p {
     margin-bottom: 40px;
 }
 
-.story-grid img {
+/* HIER GEÄNDERT: Gilt jetzt auch für das Video-Element */
+.story-grid img, 
+.story-grid video {
     width: 100%;
     height: auto;
     display: block;
     border-radius: 22px;
     background: #0b0b0b;
     border: 1px solid #333;
+    object-fit: cover; /* Sorgt dafür, dass Video/Bild den Platz gut ausfüllen */
 }
 
 .story-text-box {
@@ -220,7 +223,11 @@ header p {
 
     <div class="story-grid">
         <img src="comic.jpg" alt="No more excuses - dogs pay the price">
-        <img src="story1.jpg" alt="Hunger and cold">
+        
+        <video controls playsinline>
+            <source src="video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
         <img src="story2.jpg" alt="Medical care needed">
         <img src="story3.jpg" alt="The path to dignity">
     </div>
