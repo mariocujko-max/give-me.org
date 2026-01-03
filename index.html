@@ -26,17 +26,17 @@ section {
     background: #121212;
     padding: 40px;
     border-radius: 28px;
-    margin-top: 40px; /* Etwas weniger Abstand für Kompaktheit */
+    margin-top: 50px;
     text-align: center;
 }
 
-/* ===== HEADER / SLOGAN ===== */
+/* ===== HEADER ===== */
 header {
     text-align: center;
-    padding: 60px 20px 20px;
+    padding: 50px 20px 20px;
 }
 header h1 {
-    font-size: 3.5em; /* Groß und dominant */
+    font-size: 3.5em;
     font-weight: 900;
     color: #fff;
     margin-bottom: 15px;
@@ -51,32 +51,21 @@ header p {
     line-height: 1.5;
 }
 
-/* ===== NEUE ÜBERSCHRIFT (statt bunter Kurve) ===== */
-.section-headline {
-    font-size: 2.5em; /* Etwas kleiner als H1, aber gleicher Stil */
-    font-weight: 900;
-    color: #fff;
-    text-transform: uppercase;
-    margin-bottom: 40px;
-    letter-spacing: 2px;
-    display: block;
-}
-
-/* ===== STORY GRID ===== */
+/* ===== STORY GRID (Große Bilder) ===== */
 .story-grid {
     display: grid;
-    /* Wir nutzen auto-fit, damit es bei 3 Elementen gut aussieht */
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+    /* Zurück zum 2-Spalten-Layout, damit die Bilder groß sind */
+    grid-template-columns: repeat(2, 1fr); 
     gap: 28px;
     margin-bottom: 40px;
+    margin-top: 20px; /* Etwas Abstand nach oben, da "HELP THEM" weg ist */
 }
 
-/* Styling für Bilder UND Video (einheitlich) */
+/* Styling für Bilder UND Video (einheitlich und groß) */
 .story-grid img, 
 .story-grid video {
     width: 100%;
-    height: 100%;
-    aspect-ratio: 16/9; /* Einheitliches Format für alle */
+    aspect-ratio: 16/9; /* Einheitliches Querformat */
     display: block;
     border-radius: 22px;
     background: #0b0b0b;
@@ -149,7 +138,7 @@ header p {
 /* ===== MOBILE ===== */
 @media (max-width: 768px) {
     header h1 { font-size: 2.2em; }
-    .section-headline { font-size: 1.8em; }
+    /* Auf Handys wird es automatisch 1-spaltig */
     .story-grid { grid-template-columns: 1fr; }
 }
 </style>
@@ -164,16 +153,17 @@ header p {
     </header>
 
     <section>
-        <h2 class="section-headline">HELP THEM</h2>
-
         <div class="story-grid">
+            <img src="comic.jpg" alt="No more excuses">
+
             <video autoplay muted loop playsinline controls>
                 <source src="video.mp4" type="video/mp4">
             </video>
 
             <img src="story2.jpg" alt="Medical care needed">
+            
             <img src="story3.jpg" alt="The path to dignity">
-            </div>
+        </div>
 
         <div class="story-text-box">
             <div class="story-part">
