@@ -51,17 +51,17 @@ header p {
     line-height: 1.5;
 }
 
-/* ===== STORY GRID (Große Bilder) ===== */
+/* ===== STORY GRID (Altes Format: 2x2) ===== */
 .story-grid {
     display: grid;
-    /* Zurück zum 2-Spalten-Layout, damit die Bilder groß sind */
+    /* Genau wie früher: 2 Spalten */
     grid-template-columns: repeat(2, 1fr); 
     gap: 28px;
     margin-bottom: 40px;
-    margin-top: 20px; /* Etwas Abstand nach oben, da "HELP THEM" weg ist */
+    margin-top: 20px;
 }
 
-/* Styling für Bilder UND Video (einheitlich und groß) */
+/* Einheitliches Design für Video und Bilder */
 .story-grid img, 
 .story-grid video {
     width: 100%;
@@ -138,7 +138,6 @@ header p {
 /* ===== MOBILE ===== */
 @media (max-width: 768px) {
     header h1 { font-size: 2.2em; }
-    /* Auf Handys wird es automatisch 1-spaltig */
     .story-grid { grid-template-columns: 1fr; }
 }
 </style>
@@ -153,12 +152,13 @@ header p {
     </header>
 
     <section>
+        
         <div class="story-grid">
-            <img src="comic.jpg" alt="No more excuses">
-
             <video autoplay muted loop playsinline controls>
                 <source src="video.mp4" type="video/mp4">
             </video>
+
+            <img src="story1.jpg" alt="Hunger and cold">
 
             <img src="story2.jpg" alt="Medical care needed">
             
