@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -59,13 +58,14 @@ header p {
     gap: 28px;
     margin-bottom: 40px;
     margin-top: 20px;
-    align-items: start; /* Sorgt dafür, dass Elemente oben bündig sind */
+    align-items: start;
 }
 
-/* 1. REGEL FÜR DAS VIDEO (16:9 Breitbild) */
+/* 1. REGEL FÜR DAS VIDEO (16:9 Breitbild) - ZENTRIERT */
 .story-grid video {
+    grid-column: 1 / -1; /* Video nimmt nun die volle Breite ein (zentriert) */
     width: 100%;
-    aspect-ratio: 16/9; /* FORMAT 16:9 */
+    aspect-ratio: 16/9;
     display: block;
     border-radius: 22px;
     background: #0b0b0b;
@@ -76,7 +76,7 @@ header p {
 /* 2. REGEL FÜR DIE BILDER (4:6 Hochformat) */
 .story-grid img {
     width: 100%;
-    aspect-ratio: 4/6; /* FORMAT 4:6 (Hochformat) */
+    aspect-ratio: 4/6;
     display: block;
     border-radius: 22px;
     background: #0b0b0b;
@@ -175,7 +175,7 @@ header p {
 <main>
 
     <header>
-        <h1>NO MORE EXCUSES.</h1>
+        <h1>BE THEIR HERO TODAY.</h1>
         <p>Your donation directly funds food, surgery, and dignity for dogs who have no one else.</p>
     </header>
 
@@ -185,8 +185,6 @@ header p {
             <video autoplay muted loop playsinline controls>
                 <source src="video.mp4" type="video/mp4">
             </video>
-
-            <img src="story1.jpg" alt="Hunger and cold">
 
             <img src="story2.jpg" alt="Medical care needed">
             
