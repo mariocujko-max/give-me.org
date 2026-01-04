@@ -63,7 +63,7 @@ header p {
 
 /* 1. REGEL FÜR DAS VIDEO (16:9 Breitbild) - ZENTRIERT */
 .story-grid video {
-    grid-column: 1 / -1; /* Video nimmt nun die volle Breite ein (zentriert) */
+    grid-column: 1 / -1; 
     width: 100%;
     aspect-ratio: 16/9;
     display: block;
@@ -154,19 +154,37 @@ header p {
     margin-top: 60px;
 }
 
-/* BILDER HIER AUCH 4:6 */
 .memory-grid img {
     width: 100%;
-    aspect-ratio: 4/6; /* FORMAT 4:6 */
+    aspect-ratio: 4/6; 
     border-radius: 20px;
     object-fit: cover;
     border: 1px solid #333;
 }
 
-/* ===== MOBILE ===== */
+/* ===== MOBILE OPTIMIERUNG (HIER WURDE GEÄNDERT) ===== */
 @media (max-width: 768px) {
-    header h1 { font-size: 2.2em; }
-    .story-grid, .memory-grid { grid-template-columns: 1fr; }
+    /* 1. Weniger Rand am Bildschirmrand -> Mehr Platz fürs Video */
+    main {
+        padding: 10px; 
+    }
+
+    /* 2. Weniger Rand in der Box -> Video wird breiter und höher */
+    section {
+        padding: 20px 15px; 
+        border-radius: 20px;
+    }
+
+    header h1 { font-size: 2.0em; }
+    
+    .story-grid, .memory-grid { 
+        grid-template-columns: 1fr; 
+    }
+
+    /* 3. Optional: Video etwas weniger abrunden auf Handy */
+    .story-grid video {
+        border-radius: 15px;
+    }
 }
 </style>
 </head>
@@ -182,8 +200,9 @@ header p {
     <section>
         
         <div class="story-grid">
-            <video autoplay muted loop playsinline controls>
-                <source src="video.mp4" type="video/mp4">
+            <video autoplay muted loop playsinline controls poster="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/BigBuckBunny.jpg">
+                <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
+                Your browser does not support the video tag.
             </video>
 
             <img src="story2.jpg" alt="Medical care needed">
