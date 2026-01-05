@@ -11,180 +11,233 @@
 <link rel="apple-touch-icon" href="logo.png">
 
 <style>
-* { box-sizing: border-box; }
+    * { box-sizing: border-box; }
 
-body {
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    background: #0a0a0a;
-    color: #eee;
-}
+    body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background: #0a0a0a;
+        color: #eee;
+    }
 
-main {
-    max-width: 1200px;
-    margin: auto;
-    padding: 24px;
-}
+    main {
+        max-width: 1200px;
+        margin: auto;
+        padding: 24px;
+    }
 
-section {
-    background: #121212;
-    padding: 40px;
-    border-radius: 28px;
-    margin-top: 50px;
-    text-align: center;
-}
-
-/* ===== HEADER ===== */
-header {
-    text-align: center;
-    padding: 50px 20px 20px;
-}
-header h1 {
-    font-size: 3.5em;
-    font-weight: 900;
-    color: #fff;
-    margin-bottom: 15px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-}
-header p {
-    font-size: 1.4em;
-    color: #aaa;
-    max-width: 700px;
-    margin: 0 auto;
-    line-height: 1.5;
-}
-
-/* ===== STORY GRID ===== */
-.story-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); 
-    gap: 28px;
-    margin-bottom: 40px;
-    margin-top: 20px;
-    align-items: start;
-}
-
-/* 1. VIDEO REGEL (ZENTRIERT & BREIT AUF PC) */
-.story-grid video {
-    grid-column: 1 / -1; 
-    width: 100%;
-    aspect-ratio: 16/9;
-    display: block;
-    border-radius: 22px;
-    background: #0b0b0b;
-    border: 1px solid #333;
-    object-fit: cover;
-}
-
-/* 2. BILDER REGEL (HOCHFORMAT) */
-.story-grid img {
-    width: 100%;
-    aspect-ratio: 4/6;
-    display: block;
-    border-radius: 22px;
-    background: #0b0b0b;
-    border: 1px solid #333;
-    object-fit: cover;
-}
-
-/* Text unter den Bildern */
-.story-text-box {
-    text-align: left;
-    max-width: 800px;
-    margin: 40px auto;
-    line-height: 1.8;
-    font-size: 1.1em;
-}
-
-.story-part {
-    margin-bottom: 30px;
-    border-left: 4px solid #ff9a2f;
-    padding-left: 25px;
-}
-
-.story-part strong { 
-    color: #ff9a2f; 
-    font-size: 1.2em; 
-    display: block; 
-    margin-bottom: 5px;
-}
-
-/* ===== DONATION AREA ===== */
-.address-container {
-    background: #1a1a1a;
-    padding: 20px;
-    border-radius: 15px;
-    margin: 20px 0;
-    border: 1px dashed #f5c542;
-    display: inline-block;
-    max-width: 100%;
-}
-.address {
-    color: #f5c542;
-    word-break: break-all;
-    font-family: monospace;
-    font-size: 1.1em;
-    display: block;
-    margin-bottom: 15px;
-}
-.copy-btn {
-    background: #f7931a;
-    color: #000;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-}
-.button-main {
-    display: inline-block;
-    margin-top: 30px;
-    padding: 20px 50px;
-    background: linear-gradient(135deg, #28a745, #85e09b);
-    color: #000;
-    font-size: 24px;
-    font-weight: bold;
-    border-radius: 50px;
-    text-decoration: none;
-    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.4);
-}
-
-/* ===== MEMORY GRID (Untere Bilder) ===== */
-.memory-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
-    margin-top: 60px;
-}
-
-.memory-grid img {
-    width: 100%;
-    aspect-ratio: 4/6; 
-    border-radius: 20px;
-    object-fit: cover;
-    border: 1px solid #333;
-}
-
-/* ===== MOBILE OPTIMIERUNG (Video groß) ===== */
-@media (max-width: 768px) {
-    main { padding: 10px; } /* Weniger Rand außen */
-    
     section {
-        padding: 20px 15px; /* Weniger Rand innen -> Video größer */
-        border-radius: 20px;
+        background: #121212;
+        padding: 40px;
+        border-radius: 28px;
+        margin-top: 50px;
+        text-align: center;
     }
 
-    header h1 { font-size: 2.0em; }
+    /* ===== HEADER ===== */
+    header {
+        text-align: center;
+        padding: 50px 20px 20px;
+    }
+    header h1 {
+        font-size: 3.5em;
+        font-weight: 900;
+        color: #fff;
+        margin-bottom: 15px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
+    header p {
+        font-size: 1.4em;
+        color: #aaa;
+        max-width: 700px;
+        margin: 0 auto;
+        line-height: 1.5;
+    }
+
+    /* ===== STORY GRID ===== */
+    .story-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 28px;
+        margin-bottom: 40px;
+        margin-top: 20px;
+        align-items: start;
+    }
+
+    /* --- VIDEO AMBIENT MODE START --- */
     
-    .story-grid, .memory-grid { 
-        grid-template-columns: 1fr; 
+    .video-wrapper {
+        grid-column: 1 / -1;
+        width: 100%;
+        position: relative; /* Wichtig für die Schichtung */
+        border-radius: 22px;
+        overflow: hidden;   /* Damit der Blur nicht über den Rand lappt */
+        background: #000;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* Minimale Höhe auf PC sicherstellen */
+        min-height: 500px; 
     }
 
-    .story-grid video {
-        border-radius: 15px;
+    /* 1. Das Hintergrund-Video (Unscharf) */
+    .video-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Füllt den ganzen Hintergrund aus */
+        filter: blur(25px) brightness(0.6); /* Der Blur-Effekt + etwas dunkler */
+        z-index: 1; /* Ebene 1 (ganz hinten) */
+        pointer-events: none; /* Nicht klickbar */
     }
-}
+
+    /* 2. Das Haupt-Video (Scharf) */
+    .video-main {
+        position: relative;
+        z-index: 2; /* Ebene 2 (vorne) */
+        width: 100%;
+        height: auto;
+        max-height: 85vh;
+        object-fit: contain;
+        border-radius: 12px;
+        box-shadow: 0 0 40px rgba(0,0,0,0.7); /* Schatten, damit es sich abhebt */
+    }
+
+    /* PC-Ansicht: Begrenzung der Breite des scharfen Videos */
+    @media (min-width: 768px) {
+        .video-main {
+            width: auto;
+            max-width: 400px; 
+            margin: 40px 0; /* Abstand zum Rand des Containers */
+        }
+    }
+
+    /* HANDY-Ansicht: Wir verstecken den unscharfen Hintergrund um Akku zu sparen */
+    @media (max-width: 767px) {
+        .video-bg {
+            display: none; /* Handy braucht keinen Blur-Hintergrund, Video ist eh Fullscreen */
+        }
+        .video-wrapper {
+            min-height: auto; /* Keine Mindesthöhe am Handy nötig */
+            background: transparent;
+        }
+        .video-main {
+            box-shadow: none;
+            margin: 0;
+            border-radius: 15px;
+        }
+    }
+    /* --- VIDEO AMBIENT MODE ENDE --- */
+
+
+    /* BILDER REGEL */
+    .story-grid img {
+        width: 100%;
+        aspect-ratio: 4/6;
+        display: block;
+        border-radius: 22px;
+        background: #0b0b0b;
+        border: 1px solid #333;
+        object-fit: cover;
+    }
+
+    /* Text unter den Bildern */
+    .story-text-box {
+        text-align: left;
+        max-width: 800px;
+        margin: 40px auto;
+        line-height: 1.8;
+        font-size: 1.1em;
+    }
+
+    .story-part {
+        margin-bottom: 30px;
+        border-left: 4px solid #ff9a2f;
+        padding-left: 25px;
+    }
+
+    .story-part strong { 
+        color: #ff9a2f; 
+        font-size: 1.2em; 
+        display: block; 
+        margin-bottom: 5px;
+    }
+
+    /* ===== DONATION AREA ===== */
+    .address-container {
+        background: #1a1a1a;
+        padding: 20px;
+        border-radius: 15px;
+        margin: 20px 0;
+        border: 1px dashed #f5c542;
+        display: inline-block;
+        max-width: 100%;
+    }
+    .address {
+        color: #f5c542;
+        word-break: break-all;
+        font-family: monospace;
+        font-size: 1.1em;
+        display: block;
+        margin-bottom: 15px;
+    }
+    .copy-btn {
+        background: #f7931a;
+        color: #000;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+    .button-main {
+        display: inline-block;
+        margin-top: 30px;
+        padding: 20px 50px;
+        background: linear-gradient(135deg, #28a745, #85e09b);
+        color: #000;
+        font-size: 24px;
+        font-weight: bold;
+        border-radius: 50px;
+        text-decoration: none;
+        box-shadow: 0 4px 15px rgba(40, 167, 69, 0.4);
+    }
+
+    /* ===== MEMORY GRID (Untere Bilder) ===== */
+    .memory-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+        margin-top: 60px;
+    }
+
+    .memory-grid img {
+        width: 100%;
+        aspect-ratio: 4/6; 
+        border-radius: 20px;
+        object-fit: cover;
+        border: 1px solid #333;
+    }
+
+    /* ===== MOBILE LAYOUT ===== */
+    @media (max-width: 768px) {
+        main { padding: 10px; } 
+        
+        section {
+            padding: 20px 15px;
+            border-radius: 20px;
+        }
+
+        header h1 { font-size: 2.0em; }
+        
+        .story-grid, .memory-grid { 
+            grid-template-columns: 1fr; 
+        }
+    }
 </style>
 </head>
 <body>
@@ -199,11 +252,18 @@ header p {
     <section>
         
         <div class="story-grid">
-            <video autoplay muted loop playsinline controls>
-                <source src="video.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
+            <div class="video-wrapper">
+                
+                <video class="video-bg" autoplay muted loop playsinline>
+                    <source src="video.mp4" type="video/mp4">
+                </video>
 
+                <video class="video-main" autoplay muted loop playsinline controls>
+                    <source src="video.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+
+            </div>
             <img src="story2.jpg" alt="Medical care needed">
             
             <img src="story3.jpg" alt="The path to dignity">
