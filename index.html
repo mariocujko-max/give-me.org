@@ -10,51 +10,23 @@
 
 <style>
 *{box-sizing:border-box}
-body{
-    margin:0;
-    font-family:Arial,Helvetica,sans-serif;
-    background:#0a0a0a;
-    color:#eee;
-}
-main{
-    max-width:1100px;
-    margin:auto;
-    padding:24px;
-}
-section{
-    background:#121212;
-    padding:42px;
-    border-radius:26px;
-    margin-top:60px;
-    text-align:center;
-}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#0a0a0a;color:#eee}
+main{max-width:1100px;margin:auto;padding:24px}
+section{background:#121212;padding:42px;border-radius:26px;margin-top:60px;text-align:center}
 
 /* HEADER */
-header{
-    text-align:center;
-    padding:80px 20px 40px;
-}
-header h1{
-    font-size:2.8em;
-    font-weight:900;
-    margin:0;
-    color:#fff;
-    letter-spacing:0.4px;
-}
-header p{
-    margin-top:16px;
-    color:#888;
-    font-size:1.1em;
-}
+header{text-align:center;padding:80px 20px 40px}
+header h1{font-size:2.8em;font-weight:900;margin:0;color:#fff}
+header p{margin-top:16px;color:#888;font-size:1.1em}
 
-/* VIDEO – EINHEITLICH */
+/* VIDEO – BASIS */
 .video-wrapper{
     width:100%;
     position:relative;
     border-radius:22px;
     overflow:hidden;
     background:#000;
-    min-height:400px;
+    min-height:420px;
 }
 .video-bg{
     position:absolute;
@@ -69,21 +41,23 @@ header p{
 .video-main{
     position:relative;
     z-index:2;
-    max-width:360px;
     width:100%;
     margin:48px auto;
     border-radius:14px;
     box-shadow:0 0 36px rgba(0,0,0,.7);
 }
 
+/* GRÖSSEN */
+.video-normal{max-width:360px}
+.video-large{max-width:440px}
+
 /* BTC */
 .address-box{
     background:#1a1a1a;
-    padding:24px;
+    padding:22px;
     border-radius:16px;
     border:1px dashed #f5c542;
     display:inline-block;
-    max-width:100%;
 }
 .address{
     font-family:monospace;
@@ -110,37 +84,18 @@ header p{
     flex-wrap:wrap;
     margin-top:24px;
 }
-.links a{
-    color:#aaa;
-    text-decoration:none;
-    border-bottom:1px dotted #555;
-}
+.links a{color:#aaa;text-decoration:none;border-bottom:1px dotted #555}
 
 /* MOBILE */
 @media(max-width:768px){
     main{padding:14px}
-    section{
-        padding:24px 18px;
-        margin-top:40px;
-        border-radius:22px;
-    }
-    header{
-        padding:50px 10px 20px;
-    }
-    header h1{
-        font-size:2.1em;
-    }
-    header p{
-        font-size:1em;
-    }
-    .video-wrapper{
-        min-height:auto;
-    }
-    .video-bg{
-        display:none;
-    }
+    section{padding:24px 18px;margin-top:40px}
+    header{padding:50px 10px 20px}
+    header h1{font-size:2.1em}
+    header p{font-size:1em}
+    .video-bg{display:none}
     .video-main{
-        max-width:100%;
+        max-width:100%!important;
         margin:22px auto;
         box-shadow:none;
         border-radius:16px;
@@ -163,19 +118,19 @@ header p{
         <video class="video-bg" autoplay muted loop playsinline>
             <source src="video.mp4" type="video/mp4">
         </video>
-        <video class="video-main" autoplay muted loop playsinline controls>
+        <video class="video-main video-normal" autoplay muted loop playsinline controls>
             <source src="video.mp4" type="video/mp4">
         </video>
     </div>
 </section>
 
-<!-- VIDEO 2 -->
+<!-- VIDEO 2 (größer) -->
 <section>
     <div class="video-wrapper">
         <video class="video-bg" autoplay muted loop playsinline>
             <source src="video2.mp4" type="video/mp4">
         </video>
-        <video class="video-main" autoplay muted loop playsinline controls>
+        <video class="video-main video-large" autoplay muted loop playsinline controls>
             <source src="video2.mp4" type="video/mp4">
         </video>
     </div>
@@ -192,21 +147,21 @@ header p{
         <button class="copy-btn" onclick="copyText()">Copy address</button>
     </div>
 
-    <div style="margin-top:26px">
+    <div style="margin-top:22px">
         <img
-          src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed"
+          src="https://api.qrserver.com/v1/create-qr-code/?size=170x170&data=bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed"
           alt="Bitcoin QR"
-          style="background:#fff;padding:10px;border-radius:12px;max-width:100%">
+          style="background:#fff;padding:8px;border-radius:10px">
     </div>
 </section>
 
-<!-- VIDEO 3 -->
+<!-- VIDEO 3 (größer) -->
 <section>
     <div class="video-wrapper">
         <video class="video-bg" autoplay muted loop playsinline>
             <source src="leerer-hundenapf-regen.mp4" type="video/mp4">
         </video>
-        <video class="video-main" autoplay muted loop playsinline controls>
+        <video class="video-main video-large" autoplay muted loop playsinline controls>
             <source src="leerer-hundenapf-regen.mp4" type="video/mp4">
         </video>
     </div>
