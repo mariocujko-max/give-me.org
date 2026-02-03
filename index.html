@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Bitcoin saves lives | give-me.org</title>
-<meta name="description" content="Direct Bitcoin & Lightning help for street dogs. No organizations. No bureaucracy.">
+<meta name="description" content="Direct Bitcoin help for street dogs. No organizations. No bureaucracy.">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link rel="icon" href="logo.png" type="image/png">
@@ -15,18 +15,8 @@ main{max-width:1200px;margin:auto;padding:24px}
 section{background:#121212;padding:40px;border-radius:28px;margin-top:50px;text-align:center}
 
 header{text-align:center;padding:70px 20px 30px}
-header h1{
-    font-size:3.1em;
-    font-weight:900;
-    letter-spacing:0.5px;
-    margin:0;
-    color:#fff;
-}
-header p{
-    margin-top:14px;
-    color:#888;
-    font-size:1.15em;
-}
+header h1{font-size:3em;font-weight:900;margin:0;color:#fff}
+header p{margin-top:14px;color:#888;font-size:1.15em}
 
 .video-wrapper{
     width:100%;
@@ -57,15 +47,6 @@ header p{
     box-shadow:0 0 40px rgba(0,0,0,.7)
 }
 
-.story-text{
-    max-width:820px;
-    margin:40px auto;
-    text-align:left;
-    line-height:1.8;
-    font-size:1.05em
-}
-.story-text strong{color:#ff9a2f}
-
 .address-box{
     background:#1a1a1a;
     padding:22px;
@@ -74,14 +55,12 @@ header p{
     display:inline-block;
     max-width:100%
 }
-.address,.ln{
+.address{
     font-family:monospace;
+    color:#f5c542;
     word-break:break-all;
     font-size:1.05em
 }
-.address{color:#f5c542}
-.ln{color:#85e09b}
-
 .copy-btn{
     margin-top:14px;
     background:#f7931a;
@@ -91,26 +70,6 @@ header p{
     border-radius:8px;
     font-weight:bold;
     cursor:pointer
-}
-
-.button-main{
-    display:inline-block;
-    margin-top:28px;
-    padding:18px 48px;
-    border-radius:50px;
-    background:linear-gradient(135deg,#28a745,#85e09b);
-    color:#000;
-    font-weight:bold;
-    text-decoration:none;
-    font-size:22px;
-    box-shadow:0 4px 15px rgba(40,167,69,.4)
-}
-
-.ln-box{
-    margin-top:40px;
-    border:1px dashed #666;
-    padding:22px;
-    border-radius:16px
 }
 
 .links{
@@ -143,6 +102,7 @@ header p{
     <p>One transaction. Real help.</p>
 </header>
 
+<!-- VIDEO 1 -->
 <section>
     <div class="video-wrapper">
         <video class="video-bg" autoplay muted loop playsinline>
@@ -152,13 +112,9 @@ header p{
             <source src="video.mp4" type="video/mp4">
         </video>
     </div>
-
-    <div class="story-text">
-        <strong>The reality</strong><br>
-        No shelters. No safety. Hunger is silent — and deadly.
-    </div>
 </section>
 
+<!-- VIDEO 2 -->
 <section>
     <div class="video-wrapper">
         <video class="video-bg" autoplay muted loop playsinline>
@@ -170,17 +126,7 @@ header p{
     </div>
 </section>
 
-<section>
-    <div class="video-wrapper">
-        <video class="video-bg" autoplay muted loop playsinline>
-            <source src="leerer-hundenapf-regen.mp4" type="video/mp4">
-        </video>
-        <video class="video-main" autoplay muted loop playsinline controls>
-            <source src="leerer-hundenapf-regen.mp4" type="video/mp4">
-        </video>
-    </div>
-</section>
-
+<!-- BITCOIN DONATION -->
 <section id="donate">
     <h2>Direct Bitcoin</h2>
 
@@ -188,23 +134,26 @@ header p{
         <div class="address" id="btc">
             bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed
         </div>
-        <button class="copy-btn" onclick="copyText('btc')">Copy BTC</button>
+        <button class="copy-btn" onclick="copyText()">Copy address</button>
     </div>
 
-    <br>
-    <a class="button-main" href="bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed">
-        Donate Bitcoin
-    </a>
+    <div style="margin-top:25px">
+        <img
+          src="https://api.qrserver.com/v1/create-qr-code/?size=260x260&data=bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed"
+          alt="Bitcoin QR Code"
+          style="background:#fff;padding:10px;border-radius:12px;max-width:100%">
+    </div>
+</section>
 
-    <div class="ln-box">
-        <h3>Lightning</h3>
-        <div class="ln" id="ln">
-            LNURL1DP68GURN8GHJ7MRWW4EXCTN0D3SK...
-        </div>
-        <button class="copy-btn" onclick="copyText('ln')">Copy Lightning</button>
-        <p style="color:#777;font-size:13px;margin-top:10px">
-            Replace with your real Lightning address / LNURL
-        </p>
+<!-- VIDEO 3 -->
+<section>
+    <div class="video-wrapper">
+        <video class="video-bg" autoplay muted loop playsinline>
+            <source src="leerer-hundenapf-regen.mp4" type="video/mp4">
+        </video>
+        <video class="video-main" autoplay muted loop playsinline controls>
+            <source src="leerer-hundenapf-regen.mp4" type="video/mp4">
+        </video>
     </div>
 </section>
 
@@ -224,9 +173,10 @@ header p{
 </main>
 
 <script>
-function copyText(id){
-    const el=document.getElementById(id);
-    navigator.clipboard.writeText(el.innerText);
+function copyText(){
+    navigator.clipboard.writeText(
+        document.getElementById("btc").innerText
+    );
 }
 </script>
 
