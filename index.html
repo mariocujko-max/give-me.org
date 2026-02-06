@@ -40,7 +40,7 @@
         }
 
         h1 { 
-            font-size: clamp(1.5rem, 5vw, 2.5rem); 
+            font-size: clamp(1.4rem, 5vw, 2.5rem); 
             font-weight: 900; 
             margin: 0; 
             text-transform: uppercase; 
@@ -60,27 +60,31 @@
             z-index: 100;
         }
         .btn-audio {
-            background: rgba(0,0,0,0.7);
-            border: 1px solid var(--cyan);
+            background: rgba(0,0,0,0.8);
+            border: 2px solid var(--cyan);
             color: var(--cyan);
-            padding: 10px 18px;
+            padding: 12px 20px;
             border-radius: 50px;
             cursor: pointer;
             backdrop-filter: blur(10px);
-            font-size: 0.7rem;
-            font-weight: bold;
-            box-shadow: 0 0 15px rgba(0, 242, 255, 0.3);
+            font-size: 0.8rem;
+            font-weight: 900;
+            box-shadow: 0 0 15px rgba(0, 242, 255, 0.4);
             transition: 0.3s;
         }
 
         main { 
             max-width: 850px; 
             margin: auto; 
-            padding-top: 93vh; 
+            /* Handy-Optimierung: Kacheln etwas höher (85vh statt 93vh) */
+            padding-top: 85vh; 
             padding-bottom: 60px;
         }
 
-        /* Content-Feld mit Neon-Leuchte */
+        @media (max-width: 600px) {
+            main { padding-top: 80vh; } /* Auf kleinen Handys noch ein Stück höher */
+        }
+
         .content-wrap {
             background: var(--glass);
             backdrop-filter: blur(30px);
@@ -97,25 +101,23 @@
             50% { box-shadow: 0 0 30px rgba(0, 242, 255, 0.5); border-color: var(--cyan); }
         }
 
-        /* Kacheln um 20% verkleinert */
         .impact-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
             gap: 15px;
             margin: 0 auto 30px auto;
-            max-width: 90%; 
+            max-width: 95%; 
         }
         .card {
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid var(--border);
-            padding: 20px 10px;
+            padding: 18px 10px;
             border-radius: 20px;
             transition: 0.3s;
         }
-        .card:hover { transform: translateY(-5px); border-color: var(--cyan); }
-        .card b { display: block; color: var(--btc); font-size: 1.1rem; margin-bottom: 5px; }
-        .card span { font-size: 0.85rem; font-weight: 600; color: #fff; }
-        .card i { display: block; font-style: normal; font-size: 0.75rem; color: var(--cyan); opacity: 0.7; }
+        .card b { display: block; color: var(--btc); font-size: 1rem; margin-bottom: 5px; }
+        .card span { font-size: 0.8rem; font-weight: 600; color: #fff; }
+        .card i { display: block; font-style: normal; font-size: 0.7rem; color: var(--cyan); opacity: 0.7; }
 
         .address-box {
             background: rgba(0,0,0,0.8);
@@ -123,7 +125,7 @@
             border-radius: 12px;
             padding: 15px;
             font-family: monospace;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: var(--cyan);
             word-break: break-all;
             margin-bottom: 20px;
@@ -148,11 +150,10 @@
 
         .qr-wrap img {
             background: #fff; padding: 12px; border-radius: 15px;
-            margin-top: 30px; width: 150px;
+            margin-top: 30px; width: 140px;
             border: 4px solid var(--cyan);
         }
 
-        /* Rechtliche Absicherung */
         .legal-footer { 
             margin-top: 50px;
             padding: 20px;
@@ -172,7 +173,7 @@
 
 <div class="audio-control">
     <button class="btn-audio" onclick="tM()" id="mB">♫ PLAY PIANO</button>
-    <audio id="mG" loop>
+    <audio id="mG" loop preload="auto">
         <source src="https://www.chosic.com/wp-content/uploads/2021/07/Rainy-Day-Music.mp3" type="audio/mpeg">
     </audio>
 </div>
@@ -214,24 +215,37 @@
         </div>
 
         <div class="legal-footer">
-            <strong>Legal Disclaimer:</strong> This website (give-me.org) is a purely private, non-commercial initiative. We are NOT a registered charity, NGO, or non-profit organization. All transfers are made on a voluntary basis as private gifts from person to person. We cannot issue donation receipts. By sending Bitcoin, you acknowledge that this is a private support of a personal mission to help animals.
+            <strong>Legal Disclaimer:</strong> This website is a purely private, non-commercial initiative. Not a registered charity. Person-to-person support. No donation receipts.
             <br><br>
-            © 2026 give-me.org • Made with heart for street dogs.
+            © 2026 give-me.org
         </div>
     </div>
 </main>
 
 <script>
+    // Video Geschwindigkeit
     const video = document.getElementById("v");
     video.playbackRate = 0.7;
 
+    // Musik-Funktion mit Browser-Fix
     function tM() {
         const m = document.getElementById("mG");
         const b = document.getElementById("mB");
-        if (m.paused) { m.play(); b.innerText = "|| PAUSE"; } 
-        else { m.pause(); b.innerText = "♫ PLAY PIANO"; }
+        
+        if (m.paused) {
+            m.play().catch(error => {
+                console.log("Musik-Autoplay wurde vom Browser blockiert. Bitte nochmal klicken.");
+            });
+            b.innerText = "|| PAUSE";
+            b.style.boxShadow = "0 0 25px #00f2ff";
+        } else {
+            m.pause();
+            b.innerText = "♫ PLAY PIANO";
+            b.style.boxShadow = "0 0 15px rgba(0, 242, 255, 0.3)";
+        }
     }
 
+    // BTC Preis Live
     async function uP() {
         try {
             const r = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd');
@@ -245,6 +259,7 @@
         } catch (e) {}
     }
 
+    // Kopier-Funktion
     function cT() {
         const a = document.getElementById("btc").innerText;
         const b = document.getElementById("cBn");
