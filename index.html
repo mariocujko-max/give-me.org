@@ -1,11 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <title>Bitcoin saves lives | Private Initiative</title>
-    <link rel="icon" type="image/png" href="favicon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <style>
         :root {
             --btc: #f7931a;
@@ -51,7 +49,6 @@
             50% { transform: scale(1.03); opacity: 1; text-shadow: 0 0 20px var(--btc); }
         }
 
-        /* Musik-Steuerung unten rechts */
         .audio-control {
             position: fixed;
             bottom: 25px;
@@ -82,9 +79,8 @@
             main { padding-top: 82vh; } 
         }
 
-        /* Das Hauptfeld: Jetzt 100% transparent innen */
         .content-wrap {
-            background: transparent; /* TRANSPARENT */
+            background: transparent; /* KOMPLETT TRANSPARENT */
             border: 2px solid var(--cyan);
             border-radius: 40px;
             padding: 40px 20px;
@@ -98,7 +94,6 @@
             50% { box-shadow: 0 0 35px rgba(0, 242, 255, 0.6); border-color: var(--cyan); }
         }
 
-        /* Die kleinen Kacheln: Dezent sichtbar */
         .impact-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
@@ -107,7 +102,7 @@
             max-width: 95%; 
         }
         .card {
-            background: rgba(0, 0, 0, 0.4); /* Leicht dunkler Hintergrund für Lesbarkeit */
+            background: rgba(0, 0, 0, 0.5); /* Damit Schrift lesbar bleibt */
             border: 1px solid var(--border);
             padding: 20px 10px;
             border-radius: 20px;
@@ -159,7 +154,7 @@
             line-height: 1.6;
             opacity: 0.7;
             text-align: center;
-            background: rgba(0,0,0,0.4);
+            background: rgba(0,0,0,0.6);
             border-radius: 0 0 40px 40px;
         }
     </style>
@@ -171,9 +166,9 @@
 </video>
 
 <div class="audio-control">
-    <button class="btn-audio" onclick="tM()" id="mB">♫ PLAY PIANO</button>
+    <button class="btn-audio" onclick="tM()" id="mB">♫ MUSIK AN</button>
     <audio id="mG" loop preload="auto">
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        <source src="sad-piano.mp3" type="audio/mpeg">
     </audio>
 </div>
 
@@ -187,17 +182,17 @@
         <div class="impact-grid">
             <div class="card">
                 <b id="p1">... BTC</b>
-                <span>Food (1 week)</span>
+                <span>Futter (1 Woche)</span>
                 <i id="u1">~ $15.00</i>
             </div>
             <div class="card">
                 <b id="p2">... BTC</b>
-                <span>Vaccines</span>
+                <span>Impfungen</span>
                 <i id="u2">~ $80.00</i>
             </div>
             <div class="card">
                 <b id="p3">... BTC</b>
-                <span>Surgery</span>
+                <span>Not-Operation</span>
                 <i id="u3">~ $300.00</i>
             </div>
         </div>
@@ -205,8 +200,8 @@
         <div class="address-box" id="btc">bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed</div>
         
         <div class="btn-group">
-            <button class="btn btn-copy" id="cBn" onclick="cT()">COPY ADDRESS</button>
-            <a href="bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed" class="btn btn-wallet">OPEN IN WALLET</a>
+            <button class="btn btn-copy" id="cBn" onclick="cT()">ADRESSE KOPIEREN</button>
+            <a href="bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed" class="btn btn-wallet">IN WALLET ÖFFNEN</a>
         </div>
         
         <div class="qr-wrap">
@@ -214,7 +209,7 @@
         </div>
 
         <div class="legal-footer">
-            <strong>Legal Disclaimer:</strong> Private, non-commercial initiative. No registered charity. No donation receipts. Person-to-person support.
+            <strong>Rechtlicher Hinweis:</strong> Rein private Initiative. Keine Organisation. Keine Spendenquittungen. Private Unterstützung von Mensch zu Tier.
             <br><br>
             © 2026 give-me.org
         </div>
@@ -231,10 +226,10 @@
         if (m.paused) {
             m.play().then(() => {
                 b.innerText = "|| PAUSE";
-            }).catch(e => alert("Please click again to enable audio."));
+            }).catch(e => console.log("Audio Error"));
         } else {
             m.pause();
-            b.innerText = "♫ PLAY PIANO";
+            b.innerText = "♫ MUSIK AN";
         }
     }
 
@@ -255,14 +250,13 @@
         const a = document.getElementById("btc").innerText;
         const b = document.getElementById("cBn");
         navigator.clipboard.writeText(a).then(() => {
-            b.innerText = "COPIED! ✓";
+            b.innerText = "KOPIERT! ✓";
             b.style.background = "#fff";
-            setTimeout(() => { b.innerText = "COPY ADDRESS"; b.style.background = "#f7931a"; }, 2000);
+            setTimeout(() => { b.innerText = "ADRESSE KOPIEREN"; b.style.background = "#f7931a"; }, 2000);
         });
     }
     uP();
     setInterval(uP, 300000);
 </script>
-
 </body>
 </html>
