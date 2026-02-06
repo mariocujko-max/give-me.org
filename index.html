@@ -5,14 +5,13 @@
     <title>Bitcoin saves lives | Direct Aid for Street Dogs</title>
     <link rel="icon" type="image/png" href="favicon.png">
 
-    <meta name="description" content="Donate Bitcoin directly to help street dogs. 100% of your donation goes to food, medical care, and life-saving surgeries.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style>
         :root {
             --btc: #f7931a;
             --cyan: #00f2ff;
-            --glass: rgba(10, 25, 41, 0.8); 
+            --glass: rgba(10, 25, 41, 0.75); 
             --border: rgba(0, 242, 255, 0.2);
         }
 
@@ -22,138 +21,141 @@
             font-family: 'Inter', sans-serif; 
             color: #fff; 
             background: #000;
+            overflow-x: hidden;
         }
 
-        /* Hintergrundvideo */
+        /* Hintergrundvideo auf halber Geschwindigkeit via JS */
         .bg-video {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             object-fit: cover; z-index: -2;
-            filter: brightness(0.5);
+            filter: brightness(0.55);
         }
 
-        /* Header */
         header { 
             position: fixed;
             top: 0; left: 0; width: 100%;
             text-align: center; 
-            padding: 25px 20px;
+            padding: 20px;
             z-index: 10;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, transparent 100%);
-            backdrop-filter: blur(8px);
+            background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, transparent 100%);
         }
 
         h1 { 
-            font-size: clamp(1.5rem, 5vw, 2.5rem); 
+            font-size: clamp(1.4rem, 4vw, 2.2rem); 
             font-weight: 900; 
             margin: 0; 
             text-transform: uppercase; 
-            animation: breathe 8s ease-in-out infinite;
+            animation: breathe 6s ease-in-out infinite;
         }
 
         @keyframes breathe {
-            0%, 100% { transform: scale(1); opacity: 0.7; }
-            50% { transform: scale(1.03); opacity: 1; text-shadow: 0 0 20px var(--btc); }
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.02); opacity: 1; text-shadow: 0 0 15px var(--btc); }
         }
 
-        /* Audio Control */
+        /* Musik-Button */
         .audio-control {
             position: fixed;
-            bottom: 20px;
+            top: 20px;
             right: 20px;
             z-index: 100;
         }
         .btn-audio {
             background: rgba(255,255,255,0.1);
-            border: 1px solid var(--cyan);
+            border: 1px solid var(--border);
             color: #fff;
-            padding: 10px 15px;
+            padding: 8px 12px;
             border-radius: 50px;
             cursor: pointer;
             backdrop-filter: blur(10px);
-            font-size: 0.8rem;
+            font-size: 0.7rem;
         }
 
-        /* Content Layout */
+        /* Layout-Anpassung: Kacheln HOCHschieben */
         main { 
-            max-width: 850px; 
+            max-width: 900px; 
             margin: auto; 
-            padding-top: 100vh; /* Startet nach dem Video-Bereich */
-            padding-bottom: 60px;
+            /* Startet bei 60% der Bildschirmhöhe, damit die Kacheln 
+               direkt unter dem Napf (Bildmitte) sichtbar sind */
+            padding-top: 60vh; 
+            padding-bottom: 50px;
         }
 
         .content-wrap {
             background: var(--glass);
-            backdrop-filter: blur(25px);
+            backdrop-filter: blur(20px);
             border: 1px solid var(--border);
-            border-radius: 40px;
-            padding: 50px 25px;
+            border-radius: 40px 40px 20px 20px;
+            padding: 30px 20px;
             text-align: center;
+            box-shadow: 0 -10px 40px rgba(0,0,0,0.5);
         }
 
-        /* Modernisierte Kacheln UNTER dem Hundenapf */
+        /* Kacheln-Grid: Kompakter für bessere Sichtbarkeit ohne Scrollen */
         .impact-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-top: 40px;
-            margin-bottom: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 12px;
+            margin-bottom: 30px;
         }
         .card {
-            background: rgba(255, 255, 255, 0.02);
+            background: rgba(255, 255, 255, 0.03);
             border: 1px solid var(--border);
-            padding: 30px 15px;
-            border-radius: 24px;
-            transition: all 0.5s ease;
+            padding: 15px 10px;
+            border-radius: 18px;
+            transition: 0.3s;
         }
-        .card:hover { 
-            transform: translateY(-10px); 
-            background: rgba(0, 242, 255, 0.05);
-            border-color: var(--cyan);
-        }
-        .card b { display: block; color: var(--btc); font-size: 1.4rem; margin-bottom: 5px; }
-        .card i { display: block; font-style: normal; font-size: 0.8rem; color: var(--cyan); margin-top: 10px; }
+        .card:hover { border-color: var(--cyan); background: rgba(0, 242, 255, 0.05); }
+        .card b { display: block; color: var(--btc); font-size: 1.1rem; }
+        .card span { font-size: 0.8rem; display: block; margin-top: 4px; }
+        .card i { font-style: normal; font-size: 0.7rem; color: var(--cyan); opacity: 0.8; }
 
-        /* Buttons */
+        /* Action-Bereich */
         .address-box {
-            background: rgba(0,0,0,0.8);
+            background: rgba(0,0,0,0.6);
             border: 1px solid var(--cyan);
-            border-radius: 16px;
-            padding: 20px;
+            border-radius: 12px;
+            padding: 12px;
             font-family: monospace;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             color: var(--cyan);
             word-break: break-all;
-            margin-bottom: 25px;
+            margin: 20px 0;
+        }
+
+        .btn-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
         }
         .btn {
-            border: none; padding: 20px;
-            border-radius: 16px; font-weight: 900;
-            cursor: pointer; width: 100%; transition: 0.3s;
-            font-size: 1rem; text-decoration: none;
-            display: inline-block; margin-bottom: 15px;
+            border: none; padding: 15px;
+            border-radius: 12px; font-weight: 800;
+            cursor: pointer; transition: 0.2s;
+            font-size: 0.85rem; text-decoration: none;
             text-align: center;
         }
         .btn-copy { background: var(--btc); color: #000; }
         .btn-wallet { background: #fff; color: #000; }
+        .btn:active { transform: scale(0.96); }
 
         .qr-wrap img {
-            background: #fff; padding: 15px; border-radius: 25px;
-            margin-top: 30px; width: 180px;
-            border: 5px solid var(--cyan);
+            background: #fff; padding: 10px; border-radius: 15px;
+            margin-top: 25px; width: 140px;
         }
 
-        footer { padding: 40px; opacity: 0.4; font-size: 0.8rem; }
+        footer { padding: 30px; opacity: 0.3; font-size: 0.7rem; }
     </style>
 </head>
 <body>
 
-<video id="myVideo" class="bg-video" autoplay muted loop playsinline>
+<video id="mainVideo" class="bg-video" autoplay muted loop playsinline>
     <source src="leerer-hundenapf-regen.mp4" type="video/mp4">
 </video>
 
 <div class="audio-control">
-    <button class="btn-audio" onclick="toggleMusic()" id="musicBtn">♫ Play Sad Music</button>
+    <button class="btn-audio" onclick="toggleMusic()" id="musicBtn">♫ Play Piano</button>
     <audio id="bgMusic" loop>
         <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-17.mp3" type="audio/mpeg">
     </audio>
@@ -161,88 +163,75 @@
 
 <header>
     <h1>Bitcoin saves lives.</h1>
-    <p style="color: var(--cyan); letter-spacing: 5px; font-size: 0.8rem;">DIRECT SATOSHI AID</p>
+    <p style="color: var(--cyan); font-size: 0.7rem; letter-spacing: 4px; font-weight: bold; margin-top: 5px;">DIRECT SATOSHI AID</p>
 </header>
 
 <main>
     <div class="content-wrap">
-        <h2 style="color: var(--cyan); margin-top: 0;">Help a soul today</h2>
-        <p style="opacity: 0.7;">Your donation goes 100% directly to the street dogs.</p>
-
-        <div class="address-box" id="btc">bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed</div>
-        
-        <button class="btn btn-copy" id="copyBtn" onclick="copyText()">COPY ADDRESS</button>
-        <a href="bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed" class="btn btn-wallet">OPEN WALLET</a>
-
         <div class="impact-grid">
             <div class="card">
                 <b id="price1">... BTC</b>
-                <span>Food for 1 week</span>
+                <span>Food (1 week)</span>
                 <i id="usd1">~ $15.00</i>
             </div>
             <div class="card">
                 <b id="price2">... BTC</b>
-                <span>Vaccines & Care</span>
+                <span>Medical Care</span>
                 <i id="usd2">~ $80.00</i>
             </div>
             <div class="card">
                 <b id="price3">... BTC</b>
-                <span>Emergency Surgery</span>
+                <span>Surgery</span>
                 <i id="usd3">~ $300.00</i>
             </div>
         </div>
+
+        <div class="address-box" id="btc">bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed</div>
+        
+        <div class="btn-row">
+            <button class="btn btn-copy" id="copyBtn" onclick="copyText()">COPY ADDRESS</button>
+            <a href="bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed" class="btn btn-wallet">OPEN WALLET</a>
+        </div>
         
         <div class="qr-wrap">
-            <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed" alt="QR">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed" alt="QR">
         </div>
 
-        <footer>
-            give-me.org • 2026 • Satoshi for Souls
-        </footer>
+        <footer>give-me.org • 2026</footer>
     </div>
 </main>
 
 <script>
-    // VIDEO GESCHWINDIGKEIT AUF 0.1x (Sehr langsam)
-    const video = document.getElementById("myVideo");
-    video.playbackRate = 0.1;
+    // Video auf 0.5 Geschwindigkeit setzen
+    const v = document.getElementById("mainVideo");
+    v.playbackRate = 0.5;
 
-    // Musik Steuerung
     function toggleMusic() {
-        const music = document.getElementById("bgMusic");
-        const btn = document.getElementById("musicBtn");
-        if (music.paused) {
-            music.play();
-            btn.innerText = "|| Pause Music";
-        } else {
-            music.pause();
-            btn.innerText = "♫ Play Music";
-        }
+        const m = document.getElementById("bgMusic");
+        const b = document.getElementById("musicBtn");
+        if (m.paused) { m.play(); b.innerText = "|| Pause"; } 
+        else { m.pause(); b.innerText = "♫ Play Piano"; }
     }
 
-    // Live BTC Preis Update
     async function updatePrices() {
         try {
-            const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd');
-            const data = await response.json();
+            const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd');
+            const data = await res.json();
             const btcPrice = data.bitcoin.usd;
-            const targets = [15, 80, 300]; 
-            targets.forEach((usd, index) => {
-                const btcAmount = (usd / btcPrice).toFixed(6);
-                document.getElementById(`price${index+1}`).innerText = `~ ${btcAmount} BTC`;
-                document.getElementById(`usd${index+1}`).innerText = `~ $${usd.toFixed(2)}`;
+            [15, 80, 300].forEach((usd, i) => {
+                const btc = (usd / btcPrice).toFixed(6);
+                document.getElementById(`price${i+1}`).innerText = `~ ${btc} BTC`;
+                document.getElementById(`usd${i+1}`).innerText = `~ $${usd.toFixed(2)}`;
             });
-        } catch (e) {
-            console.log("Price fetch error");
-        }
+        } catch (e) {}
     }
 
     function copyText() {
         const adr = document.getElementById("btc").innerText;
         const btn = document.getElementById("copyBtn");
         navigator.clipboard.writeText(adr).then(() => {
-            btn.innerText = "COPIED! ✓";
-            btn.style.background = "#00f2ff";
+            btn.innerText = "COPIED!";
+            btn.style.background = "#fff";
             setTimeout(() => {
                 btn.innerText = "COPY ADDRESS";
                 btn.style.background = "#f7931a";
@@ -251,7 +240,7 @@
     }
 
     updatePrices();
-    setInterval(updatePrices, 300000); 
+    setInterval(updatePrices, 300000);
 </script>
 
 </body>
