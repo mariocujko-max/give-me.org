@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <title>Bitcoin saves lives | give-me.org</title>
@@ -7,130 +7,97 @@
     <style>
         :root {
             --btc: #f7931a;
-            --glass: rgba(15, 15, 15, 0.75);
+            --glass-ultra: rgba(0, 0, 0, 0.4); /* Extrem transparent */
             --border: rgba(255, 255, 255, 0.1);
         }
 
         * { box-sizing: border-box; }
         body { 
             margin: 0; 
-            font-family: 'Inter', -apple-system, sans-serif; 
+            font-family: 'Inter', sans-serif; 
             color: #fff; 
             background: #000;
-            line-height: 1.5;
         }
 
-        /* Video fixiert im Hintergrund */
+        /* Hintergrund-Video */
         .bg-video {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: -2;
-            filter: brightness(0.8); /* Video ist klar sichtbar */
+            top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover; z-index: -2;
+            filter: brightness(0.7);
         }
 
-        /* Overlay für Lesbarkeit im Textbereich */
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.8) 100%);
-            z-index: -1;
-        }
-
-        main { 
-            max-width: 800px; 
-            margin: auto; 
-            padding-top: 50vh; /* Schiebt den Inhalt unter die Mitte des Videos */
-            padding-bottom: 50px;
-        }
-
+        /* Fixierter Header */
         header { 
+            position: fixed;
+            top: 0; left: 0; width: 100%;
             text-align: center; 
-            padding: 40px 20px;
-            text-shadow: 0 4px 15px rgba(0,0,0,0.9);
+            padding: 30px 20px;
+            z-index: 10;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, transparent 100%);
         }
-        h1 { font-size: clamp(2.2rem, 8vw, 4rem); font-weight: 900; margin: 0; }
-        header p { color: var(--btc); font-weight: bold; font-size: 1.2rem; margin-top: 5px; }
+        h1 { font-size: clamp(1.8rem, 6vw, 3rem); font-weight: 900; margin: 0; text-transform: uppercase; }
+        header p { color: var(--btc); font-weight: bold; margin: 5px 0 0; letter-spacing: 2px; }
 
-        /* Container für alle Karten UNTER dem Fokuspunkt des Videos */
+        /* Content Bereich tief nach unten verschoben */
+        main { 
+            max-width: 700px; 
+            margin: auto; 
+            padding-top: 85vh; /* Sehr tiefer Startpunkt */
+            padding-bottom: 40px;
+        }
+
         .content-wrap {
-            background: var(--glass);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            background: var(--glass-ultra);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border: 1px solid var(--border);
-            border-radius: 40px 40px 20px 20px;
+            border-radius: 40px;
             padding: 40px 25px;
-            box-shadow: 0 -20px 40px rgba(0,0,0,0.5);
+            text-align: center;
         }
 
-        /* Impact Karten */
         .impact-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: 15px;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
         }
         .card {
-            background: rgba(255,255,255,0.05);
+            background: rgba(255,255,255,0.03);
             border: 1px solid var(--border);
-            padding: 20px;
-            border-radius: 20px;
-            text-align: center;
+            padding: 15px;
+            border-radius: 15px;
         }
-        .card b { display: block; color: var(--btc); font-size: 1.3rem; margin-bottom: 5px; }
-        .card span { font-size: 0.9rem; opacity: 0.8; }
+        .card b { display: block; color: var(--btc); font-size: 1.1rem; }
+        .card span { font-size: 0.8rem; opacity: 0.7; }
+        .card i { display: block; font-style: normal; font-size: 0.7rem; color: #888; margin-top: 4px; }
 
-        /* Donate Box */
-        .donate-section {
-            text-align: center;
-            border-top: 1px solid var(--border);
-            padding-top: 30px;
-        }
         .address-box {
-            background: #000;
+            background: rgba(0,0,0,0.6);
             border: 1px solid var(--btc);
             border-radius: 12px;
-            padding: 15px;
+            padding: 12px;
             font-family: monospace;
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             color: var(--btc);
             word-break: break-all;
             margin: 20px 0;
         }
         .btn {
             background: var(--btc);
-            color: #000;
-            border: none;
-            padding: 16px 40px;
-            border-radius: 12px;
-            font-weight: 900;
-            cursor: pointer;
-            width: 100%;
-            font-size: 1.1rem;
-            transition: 0.2s;
+            color: #000; border: none; padding: 15px;
+            border-radius: 10px; font-weight: 900;
+            cursor: pointer; width: 100%; transition: 0.2s;
         }
-        .btn:active { transform: scale(0.97); }
+        .btn:active { transform: scale(0.98); }
 
         .qr-wrap img {
-            background: #fff;
-            padding: 10px;
-            border-radius: 15px;
-            margin-top: 30px;
-            width: 150px;
+            background: #fff; padding: 8px; border-radius: 12px;
+            margin-top: 25px; width: 130px;
         }
 
-        footer { text-align: center; padding: 40px; opacity: 0.4; font-size: 0.8rem; }
-
-        @media (max-width: 600px) {
-            main { padding-top: 40vh; }
-            .impact-grid { grid-template-columns: 1fr; }
-        }
+        footer { padding: 30px; opacity: 0.3; font-size: 0.7rem; }
     </style>
 </head>
 <body>
@@ -138,59 +105,82 @@
 <video class="bg-video" autoplay muted loop playsinline>
     <source src="leerer-hundenapf-regen.mp4" type="video/mp4">
 </video>
-<div class="overlay"></div>
+
+<header>
+    <h1>Bitcoin saves lives.</h1>
+    <p>100% Direct Aid</p>
+</header>
 
 <main>
-    <header>
-        <h1>Bitcoin saves lives.</h1>
-        <p>100% Direct Aid</p>
-    </header>
-
     <div class="content-wrap">
         <div class="impact-grid">
             <div class="card">
-                <b>~ 0.0003 BTC</b>
-                <span>Warm meal for 1 week</span>
+                <b id="price1">Lade...</b>
+                <span>Futter für 1 Woche</span>
+                <i id="eur1">~ 15.00 €</i>
             </div>
             <div class="card">
-                <b>~ 0.0015 BTC</b>
-                <span>Vaccines & Medical care</span>
+                <b id="price2">Lade...</b>
+                <span>Impfung & Pflege</span>
+                <i id="eur2">~ 75.00 €</i>
             </div>
             <div class="card">
-                <b>~ 0.0050 BTC</b>
-                <span>Life-saving surgery</span>
+                <b id="price3">Lade...</b>
+                <span>Notfall-OP</span>
+                <i id="eur3">~ 250.00 €</i>
             </div>
         </div>
 
-        <div class="donate-section">
-            <h2 style="margin:0">Direct Support</h2>
-            <div class="address-box" id="btc">bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed</div>
-            <button class="btn" id="copyBtn" onclick="copyText()">COPY BTC ADDRESS</button>
-            
-            <div class="qr-wrap">
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed" alt="QR">
-            </div>
+        <h2 style="font-size: 1.2rem; margin: 0;">Direkt helfen</h2>
+        <div class="address-box" id="btc">bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed</div>
+        <button class="btn" id="copyBtn" onclick="copyText()">ADRESSE KOPIEREN</button>
+        
+        <div class="qr-wrap">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed" alt="QR">
         </div>
 
         <footer>
-            Private Initiative • No Fees • Satoshi for Street Dogs
+            Keine Orga. Keine Gebühren. Nur Hilfe.
         </footer>
     </div>
 </main>
 
 <script>
+    // Live BTC Kurs abrufen und Werte berechnen
+    async function updatePrices() {
+        try {
+            const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=eur');
+            const data = await response.json();
+            const btcPrice = data.bitcoin.eur;
+
+            const examples = [15, 75, 250]; // Euro Werte
+            examples.forEach((eur, index) => {
+                const btcVal = (eur / btcPrice).toFixed(6);
+                document.getElementById(`price${index+1}`).innerText = `~ ${btcVal} BTC`;
+            });
+        } catch (e) {
+            // Fallback falls API limitiert
+            document.getElementById('price1').innerText = "~ 0.0003 BTC";
+            document.getElementById('price2').innerText = "~ 0.0015 BTC";
+            document.getElementById('price3').innerText = "~ 0.0050 BTC";
+        }
+    }
+
     function copyText() {
         const adr = document.getElementById("btc").innerText;
         const btn = document.getElementById("copyBtn");
         navigator.clipboard.writeText(adr).then(() => {
-            btn.innerText = "COPIED! ✓";
+            btn.innerText = "KOPIERT!";
             btn.style.background = "#fff";
             setTimeout(() => {
-                btn.innerText = "COPY BTC ADDRESS";
+                btn.innerText = "ADRESSE KOPIEREN";
                 btn.style.background = "#f7931a";
             }, 2000);
         });
     }
+
+    updatePrices();
+    setInterval(updatePrices, 300000); // Alle 5 Min aktualisieren
 </script>
 
 </body>
