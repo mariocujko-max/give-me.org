@@ -4,15 +4,17 @@
     <meta charset="UTF-8">
     <title>Bitcoin saves lives | Direct Aid for Street Dogs</title>
     
-    <meta name="description" content="Donate Bitcoin directly to help street dogs. 100% of your donation goes to food, medical care, and life-saving surgeries. No fees, no bureaucracy.">
-    <meta name="keywords" content="Bitcoin, Donation, Street Dogs, Animal Aid, Crypto Charity, Help Dogs, Satoshi, give-me.org">
-    <meta name="author" content="give-me.org">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="apple-touch-icon" href="favicon.png">
+
+    <meta name="description" content="Donate Bitcoin directly to help street dogs. 100% of your donation goes to food, medical care, and life-saving surgeries.">
+    <meta name="keywords" content="Bitcoin, Donation, Street Dogs, Animal Aid, Crypto Charity, give-me.org">
     <meta name="robots" content="index, follow">
 
     <meta property="og:title" content="Bitcoin saves lives | give-me.org">
     <meta property="og:description" content="Your Satoshi. Their second chance. Direct aid for street dogs worldwide.">
-    <meta property="og:image" content="https://www.give-me.org/logo.png">
-    <meta property="og:url" content="https://www.give-me.org/">
+    <meta property="og:image" content="https://give-me.org/favicon.png">
+    <meta property="og:url" content="https://give-me.org/">
     <meta name="twitter:card" content="summary_large_image">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,7 +29,7 @@
         * { box-sizing: border-box; }
         body { 
             margin: 0; 
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; 
+            font-family: 'Inter', -apple-system, sans-serif; 
             color: #fff; 
             background: #000;
             overflow-x: hidden;
@@ -41,7 +43,7 @@
             filter: brightness(0.7);
         }
 
-        /* Fixierter Header */
+        /* Fixierter Header mit Animation */
         header { 
             position: fixed;
             top: 0; left: 0; width: 100%;
@@ -52,7 +54,23 @@
             backdrop-filter: blur(5px);
             -webkit-backdrop-filter: blur(5px);
         }
-        h1 { font-size: clamp(1.5rem, 5vw, 2.5rem); font-weight: 900; margin: 0; text-transform: uppercase; letter-spacing: 1px; }
+
+        h1 { 
+            font-size: clamp(1.5rem, 5vw, 2.5rem); 
+            font-weight: 900; 
+            margin: 0; 
+            text-transform: uppercase; 
+            letter-spacing: 1px;
+            /* Animation für die Überschrift */
+            animation: breathe 4s ease-in-out infinite;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); opacity: 0.9; text-shadow: 0 0 10px rgba(255,255,255,0.2); }
+            50% { transform: scale(1.03); opacity: 1; text-shadow: 0 0 25px rgba(247, 147, 26, 0.5); }
+        }
+
         header p { color: var(--btc); font-weight: bold; margin: 5px 0 0; letter-spacing: 3px; font-size: 0.9rem; }
 
         /* Content Wrap */
@@ -71,10 +89,8 @@
             border-radius: 40px;
             padding: 50px 25px;
             text-align: center;
-            box-shadow: 0 -20px 50px rgba(0,0,0,0.5);
         }
 
-        /* Impact Grid */
         .impact-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -86,12 +102,13 @@
             border: 1px solid var(--border);
             padding: 20px 10px;
             border-radius: 20px;
+            transition: transform 0.3s;
         }
+        .card:hover { transform: translateY(-5px); border-color: var(--btc); }
         .card b { display: block; color: var(--btc); font-size: 1.1rem; }
         .card span { font-size: 0.85rem; opacity: 0.8; display: block; margin: 5px 0; }
         .card i { display: block; font-style: normal; font-size: 0.75rem; color: #aaa; }
 
-        /* Donation Area */
         .address-box {
             background: rgba(0,0,0,0.6);
             border: 1px solid var(--btc);
@@ -164,8 +181,6 @@
         </div>
 
         <h2 style="font-size: 1.4rem; margin: 0;">Help Now</h2>
-        <p style="opacity:0.6; font-size: 0.9rem;">No bureaucracy. No middleman.</p>
-
         <div class="address-box" id="btc">bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed</div>
         
         <div class="button-group">
@@ -174,33 +189,28 @@
         </div>
         
         <div class="qr-wrap">
-            <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed" alt="Bitcoin QR Code">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed" alt="QR">
         </div>
 
         <footer>
-            Private Page • No Cookies • No Tracking • No Fees<br>
-            Direct Satoshi Aid for Souls • 2026
+            Private Page • Satoshi for Souls • 2026
         </footer>
     </div>
 </main>
 
 <script>
-    // Live BTC to USD Converter
     async function updatePrices() {
         try {
             const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd');
             const data = await response.json();
             const btcPrice = data.bitcoin.usd;
-
-            const targets = [15, 80, 300]; // USD Examples
+            const targets = [15, 80, 300]; 
             targets.forEach((usd, index) => {
                 const btcAmount = (usd / btcPrice).toFixed(6);
                 document.getElementById(`price${index+1}`).innerText = `~ ${btcAmount} BTC`;
                 document.getElementById(`usd${index+1}`).innerText = `~ $${usd.toFixed(2)}`;
             });
         } catch (e) {
-            console.log("Price update failed.");
-            // Fallback values
             document.getElementById('price1').innerText = "~ 0.0003 BTC";
             document.getElementById('price2').innerText = "~ 0.0015 BTC";
             document.getElementById('price3').innerText = "~ 0.0050 BTC";
@@ -221,7 +231,7 @@
     }
 
     updatePrices();
-    setInterval(updatePrices, 300000); // Update every 5 minutes
+    setInterval(updatePrices, 300000); 
 </script>
 
 </body>
