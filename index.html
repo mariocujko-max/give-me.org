@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -52,7 +53,6 @@
             50% { transform: scale(1.03); opacity: 1; text-shadow: 0 0 20px var(--btc); }
         }
 
-        /* Musik-Steuerung unten rechts */
         .audio-control {
             position: fixed;
             bottom: 25px;
@@ -76,13 +76,12 @@
         main { 
             max-width: 850px; 
             margin: auto; 
-            /* Handy-Optimierung: Kacheln etwas höher (85vh statt 93vh) */
             padding-top: 85vh; 
             padding-bottom: 60px;
         }
 
         @media (max-width: 600px) {
-            main { padding-top: 80vh; } /* Auf kleinen Handys noch ein Stück höher */
+            main { padding-top: 80vh; } 
         }
 
         .content-wrap {
@@ -174,7 +173,7 @@
 <div class="audio-control">
     <button class="btn-audio" onclick="tM()" id="mB">♫ PLAY PIANO</button>
     <audio id="mG" loop preload="auto">
-        <source src="https://www.chosic.com/wp-content/uploads/2021/07/Rainy-Day-Music.mp3" type="audio/mpeg">
+        <source src="https://cdn.pixabay.com/audio/2022/02/07/audio_64b6339121.mp3" type="audio/mpeg">
     </audio>
 </div>
 
@@ -223,21 +222,25 @@
 </main>
 
 <script>
-    // Video Geschwindigkeit
     const video = document.getElementById("v");
     video.playbackRate = 0.7;
 
-    // Musik-Funktion mit Browser-Fix
     function tM() {
         const m = document.getElementById("mG");
         const b = document.getElementById("mB");
         
         if (m.paused) {
-            m.play().catch(error => {
-                console.log("Musik-Autoplay wurde vom Browser blockiert. Bitte nochmal klicken.");
-            });
-            b.innerText = "|| PAUSE";
-            b.style.boxShadow = "0 0 25px #00f2ff";
+            // Expliziter Play-Befehl
+            const playPromise = m.play();
+            
+            if (playPromise !== undefined) {
+                playPromise.then(_ => {
+                    b.innerText = "|| PAUSE";
+                    b.style.boxShadow = "0 0 25px #00f2ff";
+                }).catch(error => {
+                    console.log("Playback blocked");
+                });
+            }
         } else {
             m.pause();
             b.innerText = "♫ PLAY PIANO";
@@ -245,7 +248,6 @@
         }
     }
 
-    // BTC Preis Live
     async function uP() {
         try {
             const r = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd');
@@ -259,7 +261,6 @@
         } catch (e) {}
     }
 
-    // Kopier-Funktion
     function cT() {
         const a = document.getElementById("btc").innerText;
         const b = document.getElementById("cBn");
