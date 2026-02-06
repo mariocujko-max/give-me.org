@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Bitcoin saves lives | Direct Aid for Street Dogs</title>
+    <title>Bitcoin saves lives | Private Initiative</title>
     <link rel="icon" type="image/png" href="favicon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -10,7 +10,7 @@
         :root {
             --btc: #f7931a;
             --cyan: #00f2ff;
-            --glass: rgba(10, 25, 41, 0.85); 
+            --glass: rgba(10, 25, 41, 0.9); 
             --border: rgba(0, 242, 255, 0.3);
         }
 
@@ -27,7 +27,7 @@
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             object-fit: cover; z-index: -2;
-            filter: brightness(0.5);
+            filter: brightness(0.4);
         }
 
         header { 
@@ -60,103 +60,108 @@
             z-index: 100;
         }
         .btn-audio {
-            background: rgba(0,0,0,0.6);
+            background: rgba(0,0,0,0.7);
             border: 1px solid var(--cyan);
             color: var(--cyan);
             padding: 10px 18px;
             border-radius: 50px;
             cursor: pointer;
             backdrop-filter: blur(10px);
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: bold;
             box-shadow: 0 0 15px rgba(0, 242, 255, 0.3);
             transition: 0.3s;
         }
-        .btn-audio:hover { transform: scale(1.05); box-shadow: 0 0 20px var(--cyan); }
 
         main { 
             max-width: 850px; 
             margin: auto; 
-            /* Startet bei 92% Höhe, damit nur der "Neon-Rand" der Kacheln oben rausguckt */
-            padding-top: 92vh; 
+            padding-top: 93vh; 
             padding-bottom: 60px;
         }
 
-        /* Content-Feld mit umlaufender Neon-Leuchte */
+        /* Content-Feld mit Neon-Leuchte */
         .content-wrap {
             background: var(--glass);
-            backdrop-filter: blur(25px);
+            backdrop-filter: blur(30px);
             border: 2px solid var(--cyan);
             border-radius: 40px;
-            padding: 40px 25px;
+            padding: 40px 20px;
             text-align: center;
-            /* Neon Glow Effekt */
-            box-shadow: 0 0 20px rgba(0, 242, 255, 0.2), inset 0 0 15px rgba(0, 242, 255, 0.1);
-            animation: neonPulse 3s ease-in-out infinite;
+            box-shadow: 0 0 20px rgba(0, 242, 255, 0.2);
+            animation: neonPulse 4s ease-in-out infinite;
         }
 
         @keyframes neonPulse {
-            0%, 100% { box-shadow: 0 0 15px rgba(0, 242, 255, 0.3); border-color: rgba(0, 242, 255, 0.4); }
-            50% { box-shadow: 0 0 30px rgba(0, 242, 255, 0.6); border-color: var(--cyan); }
+            0%, 100% { box-shadow: 0 0 15px rgba(0, 242, 255, 0.2); border-color: rgba(0, 242, 255, 0.3); }
+            50% { box-shadow: 0 0 30px rgba(0, 242, 255, 0.5); border-color: var(--cyan); }
         }
 
+        /* Kacheln um 20% verkleinert */
         .impact-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
-            margin-bottom: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin: 0 auto 30px auto;
+            max-width: 90%; 
         }
         .card {
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid var(--border);
-            padding: 30px 15px;
-            border-radius: 24px;
-            transition: all 0.4s ease;
+            padding: 20px 10px;
+            border-radius: 20px;
+            transition: 0.3s;
         }
-        .card:hover { 
-            transform: translateY(-8px); 
-            background: rgba(0, 242, 255, 0.08);
-            border-color: var(--cyan);
-        }
-        .card b { display: block; color: var(--btc); font-size: 1.3rem; margin-bottom: 8px; }
-        .card span { font-size: 0.95rem; font-weight: 600; color: #fff; }
-        .card i { display: block; font-style: normal; font-size: 0.8rem; color: var(--cyan); margin-top: 10px; opacity: 0.8; }
+        .card:hover { transform: translateY(-5px); border-color: var(--cyan); }
+        .card b { display: block; color: var(--btc); font-size: 1.1rem; margin-bottom: 5px; }
+        .card span { font-size: 0.85rem; font-weight: 600; color: #fff; }
+        .card i { display: block; font-style: normal; font-size: 0.75rem; color: var(--cyan); opacity: 0.7; }
 
         .address-box {
             background: rgba(0,0,0,0.8);
             border: 1px solid var(--cyan);
-            border-radius: 16px;
-            padding: 20px;
+            border-radius: 12px;
+            padding: 15px;
             font-family: monospace;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: var(--cyan);
             word-break: break-all;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
         
         .btn-group {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 12px;
+            max-width: 400px;
+            margin: 0 auto;
         }
         .btn {
-            border: none; padding: 20px;
-            border-radius: 16px; font-weight: 900;
-            cursor: pointer; width: 100%; transition: 0.3s;
-            font-size: 1rem; text-decoration: none;
-            display: inline-block;
+            border: none; padding: 18px;
+            border-radius: 14px; font-weight: 800;
+            cursor: pointer; width: 100%; transition: 0.2s;
+            font-size: 0.9rem; text-decoration: none;
             text-align: center;
         }
         .btn-copy { background: var(--btc); color: #000; }
         .btn-wallet { background: #fff; color: #000; }
 
         .qr-wrap img {
-            background: #fff; padding: 15px; border-radius: 20px;
-            margin-top: 35px; width: 180px;
-            border: 5px solid var(--cyan);
+            background: #fff; padding: 12px; border-radius: 15px;
+            margin-top: 30px; width: 150px;
+            border: 4px solid var(--cyan);
         }
 
-        footer { padding: 40px; opacity: 0.4; font-size: 0.8rem; }
+        /* Rechtliche Absicherung */
+        .legal-footer { 
+            margin-top: 50px;
+            padding: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.7rem;
+            line-height: 1.6;
+            opacity: 0.5;
+            text-align: justify;
+        }
     </style>
 </head>
 <body>
@@ -166,15 +171,15 @@
 </video>
 
 <div class="audio-control">
-    <button class="btn-audio" onclick="tM()" id="mB">♫ PLAY MUSIC</button>
+    <button class="btn-audio" onclick="tM()" id="mB">♫ PLAY PIANO</button>
     <audio id="mG" loop>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-17.mp3" type="audio/mpeg">
+        <source src="https://www.chosic.com/wp-content/uploads/2021/07/Rainy-Day-Music.mp3" type="audio/mpeg">
     </audio>
 </div>
 
 <header>
     <h1>Bitcoin saves lives.</h1>
-    <p style="color: var(--cyan); letter-spacing: 5px; font-weight: bold; font-size: 0.8rem; margin-top: 5px;">DIRECT AID</p>
+    <p style="color: var(--cyan); letter-spacing: 4px; font-weight: bold; font-size: 0.75rem; margin-top: 5px;">PRIVATE INITIATIVE</p>
 </header>
 
 <main>
@@ -182,17 +187,17 @@
         <div class="impact-grid">
             <div class="card">
                 <b id="p1">... BTC</b>
-                <span>Food for 1 week</span>
+                <span>Food (1 week)</span>
                 <i id="u1">~ $15.00</i>
             </div>
             <div class="card">
                 <b id="p2">... BTC</b>
-                <span>Vaccines & Care</span>
+                <span>Vaccines</span>
                 <i id="u2">~ $80.00</i>
             </div>
             <div class="card">
                 <b id="p3">... BTC</b>
-                <span>Emergency Surgery</span>
+                <span>Surgery</span>
                 <i id="u3">~ $300.00</i>
             </div>
         </div>
@@ -205,10 +210,14 @@
         </div>
         
         <div class="qr-wrap">
-            <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed" alt="QR">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed" alt="QR">
         </div>
 
-        <footer>give-me.org • 2026 • Satoshi for Souls</footer>
+        <div class="legal-footer">
+            <strong>Legal Disclaimer:</strong> This website (give-me.org) is a purely private, non-commercial initiative. We are NOT a registered charity, NGO, or non-profit organization. All transfers are made on a voluntary basis as private gifts from person to person. We cannot issue donation receipts. By sending Bitcoin, you acknowledge that this is a private support of a personal mission to help animals.
+            <br><br>
+            © 2026 give-me.org • Made with heart for street dogs.
+        </div>
     </div>
 </main>
 
@@ -220,7 +229,7 @@
         const m = document.getElementById("mG");
         const b = document.getElementById("mB");
         if (m.paused) { m.play(); b.innerText = "|| PAUSE"; } 
-        else { m.pause(); b.innerText = "♫ PLAY MUSIC"; }
+        else { m.pause(); b.innerText = "♫ PLAY PIANO"; }
     }
 
     async function uP() {
