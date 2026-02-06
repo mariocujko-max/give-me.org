@@ -2,25 +2,38 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Bitcoin saves lives | give-me.org</title>
+    <title>Bitcoin saves lives | Direct Aid for Street Dogs</title>
+    
+    <meta name="description" content="Donate Bitcoin directly to help street dogs. 100% of your donation goes to food, medical care, and life-saving surgeries. No fees, no bureaucracy.">
+    <meta name="keywords" content="Bitcoin, Donation, Street Dogs, Animal Aid, Crypto Charity, Help Dogs, Satoshi, give-me.org">
+    <meta name="author" content="give-me.org">
+    <meta name="robots" content="index, follow">
+
+    <meta property="og:title" content="Bitcoin saves lives | give-me.org">
+    <meta property="og:description" content="Your Satoshi. Their second chance. Direct aid for street dogs worldwide.">
+    <meta property="og:image" content="https://www.give-me.org/logo.png">
+    <meta property="og:url" content="https://www.give-me.org/">
+    <meta name="twitter:card" content="summary_large_image">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <style>
         :root {
             --btc: #f7931a;
-            --glass-ultra: rgba(0, 0, 0, 0.35); /* Maximum transparency */
+            --glass-ultra: rgba(0, 0, 0, 0.35); 
             --border: rgba(255, 255, 255, 0.12);
         }
 
         * { box-sizing: border-box; }
         body { 
             margin: 0; 
-            font-family: 'Inter', -apple-system, sans-serif; 
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; 
             color: #fff; 
             background: #000;
             overflow-x: hidden;
         }
 
-        /* Background Video */
+        /* Hintergrundvideo */
         .bg-video {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -28,7 +41,7 @@
             filter: brightness(0.7);
         }
 
-        /* Fixed Transparent Header */
+        /* Fixierter Header */
         header { 
             position: fixed;
             top: 0; left: 0; width: 100%;
@@ -42,7 +55,7 @@
         h1 { font-size: clamp(1.5rem, 5vw, 2.5rem); font-weight: 900; margin: 0; text-transform: uppercase; letter-spacing: 1px; }
         header p { color: var(--btc); font-weight: bold; margin: 5px 0 0; letter-spacing: 3px; font-size: 0.9rem; }
 
-        /* Content starts deep down */
+        /* Content Wrap */
         main { 
             max-width: 700px; 
             margin: auto; 
@@ -104,6 +117,7 @@
             font-size: 1rem;
             text-decoration: none;
             display: inline-block;
+            text-align: center;
         }
         .btn-copy { background: var(--btc); color: #000; }
         .btn-wallet { background: #fff; color: #000; }
@@ -164,8 +178,8 @@
         </div>
 
         <footer>
-            Private Page • No Fees • No Tracking<br>
-            Satoshi for Souls • 2024
+            Private Page • No Cookies • No Tracking • No Fees<br>
+            Direct Satoshi Aid for Souls • 2026
         </footer>
     </div>
 </main>
@@ -178,17 +192,18 @@
             const data = await response.json();
             const btcPrice = data.bitcoin.usd;
 
-            const targets = [15, 80, 300]; // USD Values
+            const targets = [15, 80, 300]; // USD Examples
             targets.forEach((usd, index) => {
                 const btcAmount = (usd / btcPrice).toFixed(6);
                 document.getElementById(`price${index+1}`).innerText = `~ ${btcAmount} BTC`;
                 document.getElementById(`usd${index+1}`).innerText = `~ $${usd.toFixed(2)}`;
             });
         } catch (e) {
-            console.log("Price update failed, using fallbacks.");
-            document.getElementById('price1').innerText = "~ 0.0002 BTC";
-            document.getElementById('price2').innerText = "~ 0.0012 BTC";
-            document.getElementById('price3').innerText = "~ 0.0045 BTC";
+            console.log("Price update failed.");
+            // Fallback values
+            document.getElementById('price1').innerText = "~ 0.0003 BTC";
+            document.getElementById('price2').innerText = "~ 0.0015 BTC";
+            document.getElementById('price3').innerText = "~ 0.0050 BTC";
         }
     }
 
@@ -206,7 +221,7 @@
     }
 
     updatePrices();
-    setInterval(updatePrices, 300000); // Refresh every 5 minutes
+    setInterval(updatePrices, 300000); // Update every 5 minutes
 </script>
 
 </body>
