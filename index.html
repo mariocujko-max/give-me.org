@@ -1,149 +1,171 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Bitcoin Saves Lives | Direct Aid for Street Dogs</title>
-    <meta name="description" content="Direct Bitcoin help for street dogs. No bureaucracy, no admin costs. 100% of your Satoshi goes to food and medical care.">
+    <title>Bitcoin Saves Lives | give-me.org</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <meta property="og:title" content="Bitcoin Saves Lives">
-    <meta property="og:description" content="Direct aid for street dogs via Bitcoin.">
-    <meta property="og:image" content="logo.png"> 
-    
-    <link rel="icon" href="logo.png" type="image/png">
-
     <style>
         :root {
             --btc-orange: #f7931a;
-            --bg-dark: #0a0a0a;
-            --card-bg: #121212;
-            --text-gray: #888;
+            --bg: #0a0a0a;
+            --card: #121212;
         }
 
-        * { box-sizing: border-box; transition: all 0.2s ease; }
-        body { margin: 0; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background: var(--bg-dark); color: #eee; line-height: 1.6; }
-        main { max-width: 900px; margin: auto; padding: 20px; }
-        
-        section { background: var(--card-bg); padding: 40px 20px; border-radius: 26px; margin-top: 40px; text-align: center; border: 1px solid #1f1f1f; }
+        * { box-sizing: border-box; }
+        body { 
+            margin: 0; 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
+            background: var(--bg); 
+            color: #fff; 
+            overflow-x: hidden;
+        }
 
-        header { text-align: center; padding: 60px 20px 20px; }
-        header h1 { font-size: 3em; font-weight: 900; margin: 0; color: #fff; line-height: 1.1; }
-        header p { margin-top: 15px; color: var(--text-gray); font-size: 1.2em; }
+        /* Scroll-Animation Vorbereitung */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
-        /* Video Styling */
-        .video-wrapper { width: 100%; position: relative; border-radius: 22px; overflow: hidden; background: #000; min-height: 300px; display: flex; align-items: center; justify-content: center; }
-        .video-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: blur(20px) brightness(.4); z-index: 1; pointer-events: none; }
-        .video-main { position: relative; z-index: 2; width: 90%; max-width: 400px; border-radius: 14px; box-shadow: 0 10px 40px rgba(0,0,0,.8); }
+        main { max-width: 800px; margin: auto; padding: 20px; }
 
-        /* Bitcoin Section */
-        .address-box { background: #1a1a1a; padding: 25px; border-radius: 20px; border: 1px solid #333; display: block; margin: 20px auto; max-width: 100%; }
-        .address { font-family: 'Courier New', monospace; color: var(--btc-orange); word-break: break-all; font-size: 1.1em; display: block; margin-bottom: 15px; }
-        
-        .btn-group { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
-        .copy-btn, .open-btn { border: none; padding: 12px 24px; border-radius: 12px; font-weight: bold; cursor: pointer; text-decoration: none; font-size: 14px; }
-        .copy-btn { background: var(--btc-orange); color: #000; }
-        .copy-btn:active { transform: scale(0.95); }
-        .open-btn { background: #333; color: #fff; }
+        header { 
+            height: 80vh; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            text-align: center; 
+        }
+        h1 { font-size: clamp(2.5rem, 8vw, 4rem); margin: 0; letter-spacing: -1px; }
+        header p { color: var(--btc-orange); font-size: 1.2rem; margin-top: 10px; font-weight: bold; }
 
-        /* Impact Stats */
-        .impact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
-        .impact-item { background: #1a1a1a; padding: 15px; border-radius: 15px; font-size: 0.9em; border: 1px solid #222; }
-        .impact-item span { color: var(--btc-orange); display: block; font-weight: bold; font-size: 1.2em; }
+        /* Das Haupt-Video im Fokus */
+        .focus-section { 
+            margin: 100px 0; 
+            text-align: center; 
+        }
+        .video-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 0 50px rgba(247, 147, 26, 0.2);
+            border: 1px solid #222;
+        }
+        video { width: 100%; display: block; }
 
-        .links { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-top: 20px; }
-        .links a { color: var(--text-gray); text-decoration: none; font-size: 0.9em; border-bottom: 1px solid #333; padding-bottom: 2px; }
-        .links a:hover { color: #fff; border-color: var(--btc-orange); }
+        /* BTC Box */
+        .donation-card {
+            background: var(--card);
+            padding: 40px 20px;
+            border-radius: 30px;
+            text-align: center;
+            margin: 60px 0;
+            border: 1px solid #1f1f1f;
+        }
+        .address {
+            font-family: monospace;
+            color: var(--btc-orange);
+            background: #000;
+            padding: 15px;
+            border-radius: 12px;
+            display: block;
+            margin: 20px 0;
+            word-break: break-all;
+            border: 1px dashed #444;
+        }
+        .copy-btn {
+            background: var(--btc-orange);
+            border: none;
+            color: #000;
+            padding: 15px 40px;
+            border-radius: 12px;
+            font-weight: 900;
+            cursor: pointer;
+            width: 100%;
+            max-width: 300px;
+            font-size: 1rem;
+        }
 
-        @media(max-width:768px){
-            header h1 { font-size: 2.2em; }
-            .impact-grid { grid-template-columns: 1fr; }
-            .video-bg { display: none; }
+        footer {
+            text-align: center;
+            padding: 100px 20px;
+            opacity: 0.4;
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 600px) {
+            header { height: 60vh; }
+            .video-container { border-radius: 20px; }
         }
     </style>
 </head>
-
 <body>
+
 <main>
+    <header class="reveal">
+        <h1>Bitcoin saves lives.</h1>
+        <p>100% Direct Animal Aid</p>
+    </header>
 
-<header>
-    <h1>Bitcoin saves lives.</h1>
-    <p>Direct aid. No middleman. No fees.</p>
-</header>
-
-<section>
-    <div class="video-wrapper">
-        <video class="video-bg" autoplay muted loop playsinline><source src="video.mp4" type="video/mp4"></video>
-        <video class="video-main" autoplay muted loop playsinline controls poster="video-placeholder.jpg">
-            <source src="video.mp4" type="video/mp4">
-        </video>
-    </div>
-</section>
-
-<section id="impact">
-    <h2>Why Bitcoin?</h2>
-    <p>Traditional donations lose up to 30% in admin fees. Bitcoin goes 100% to the cause.</p>
-    <div class="impact-grid">
-        <div class="impact-item"><span>0.0005 BTC</span> Provides food for 1 dog / month</div>
-        <div class="impact-item"><span>0.0025 BTC</span> Covers life-saving surgery</div>
-    </div>
-</section>
-
-<section id="donate">
-    <h2>Send Support</h2>
-    <div class="address-box">
-        <span class="address" id="btc">bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed</span>
-        <div class="btn-group">
-            <button class="copy-btn" id="copyBtn" onclick="copyText()">Copy Address</button>
-            <a href="bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed" class="open-btn">Open in Wallet</a>
+    <section class="focus-section reveal">
+        <div class="video-container">
+            <video autoplay muted loop playsinline controls>
+                <source src="leerer-hundenapf-regen.mp4" type="video/mp4">
+            </video>
         </div>
-    </div>
-    
-    <div style="margin-top:25px">
-        <img loading="lazy"
-          src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed"
-          alt="Bitcoin QR Code"
-          style="background:#fff;padding:12px;border-radius:12px; box-shadow: 0 0 20px rgba(247,147,26,0.2)">
-    </div>
-</section>
+        <p style="margin-top: 20px; color: #888;">No bureaucracy. Just survival.</p>
+    </section>
 
-<section>
-    <div class="video-wrapper">
-        <video class="video-bg" autoplay muted loop playsinline><source src="leerer-hundenapf-regen.mp4" type="video/mp4"></video>
-        <video class="video-main" autoplay muted loop playsinline controls>
-            <source src="leerer-hundenapf-regen.mp4" type="video/mp4">
-        </video>
-    </div>
-</section>
+    <section class="donation-card reveal">
+        <h2>Direct Support</h2>
+        <div class="address" id="btc">bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed</div>
+        <button class="copy-btn" id="copyBtn" onclick="copyText()">COPY ADDRESS</button>
+        
+        <div style="margin-top: 30px;">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed" 
+                 alt="QR Code" 
+                 style="background: #fff; padding: 10px; border-radius: 10px;">
+        </div>
+    </section>
 
-<section style="background:none; border:1px solid #222">
-    <h3>Help in other ways</h3>
-    <div class="links">
-        <a href="donate.html">Fiat Donation</a>
-        <a href="tierfutter-spenden.html">Pet Food</a>
-        <a href="tieroperation-spenden.html">Medical Support</a>
-    </div>
-</section>
-
-<footer style="text-align:center; padding:40px; opacity:0.5; font-size:12px">
-    <p>Private Initiative &bull; No Cookies &bull; No Tracking &bull; 100% Direct Aid</p>
-</footer>
-
+    <footer class="reveal">
+        Private Page • No Cookies • No Tracking • No Fees
+    </footer>
 </main>
 
 <script>
-function copyText(){
-    const btn = document.getElementById("copyBtn");
-    const address = document.getElementById("btc").innerText;
-    
-    navigator.clipboard.writeText(address).then(() => {
-        btn.innerText = "Copied! ✓";
-        btn.style.background = "#4CAF50";
-        setTimeout(() => {
-            btn.innerText = "Copy Address";
-            btn.style.background = "#f7931a";
-        }, 2000);
-    });
-}
+    // Copy Funktion mit Feedback
+    function copyText() {
+        const adr = document.getElementById("btc").innerText;
+        const btn = document.getElementById("copyBtn");
+        navigator.clipboard.writeText(adr).then(() => {
+            btn.innerText = "COPIED!";
+            btn.style.background = "#fff";
+            setTimeout(() => {
+                btn.innerText = "COPY ADDRESS";
+                btn.style.background = "#f7931a";
+            }, 2000);
+        });
+    }
+
+    // Scroll-Reveal Logik
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
 
 </body>
