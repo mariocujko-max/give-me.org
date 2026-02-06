@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,8 +10,7 @@
         :root {
             --btc: #f7931a;
             --cyan: #00f2ff;
-            --glass: rgba(10, 25, 41, 0.9); 
-            --border: rgba(0, 242, 255, 0.3);
+            --border: rgba(0, 242, 255, 0.4);
         }
 
         * { box-sizing: border-box; }
@@ -28,7 +26,7 @@
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             object-fit: cover; z-index: -2;
-            filter: brightness(0.4);
+            filter: brightness(0.45);
         }
 
         header { 
@@ -53,6 +51,7 @@
             50% { transform: scale(1.03); opacity: 1; text-shadow: 0 0 20px var(--btc); }
         }
 
+        /* Musik-Steuerung unten rechts */
         .audio-control {
             position: fixed;
             bottom: 25px;
@@ -60,7 +59,7 @@
             z-index: 100;
         }
         .btn-audio {
-            background: rgba(0,0,0,0.8);
+            background: rgba(0,0,0,0.7);
             border: 2px solid var(--cyan);
             color: var(--cyan);
             padding: 12px 20px;
@@ -70,7 +69,6 @@
             font-size: 0.8rem;
             font-weight: 900;
             box-shadow: 0 0 15px rgba(0, 242, 255, 0.4);
-            transition: 0.3s;
         }
 
         main { 
@@ -81,12 +79,12 @@
         }
 
         @media (max-width: 600px) {
-            main { padding-top: 80vh; } 
+            main { padding-top: 82vh; } 
         }
 
+        /* Das Hauptfeld: Jetzt 100% transparent innen */
         .content-wrap {
-            background: var(--glass);
-            backdrop-filter: blur(30px);
+            background: transparent; /* TRANSPARENT */
             border: 2px solid var(--cyan);
             border-radius: 40px;
             padding: 40px 20px;
@@ -96,10 +94,11 @@
         }
 
         @keyframes neonPulse {
-            0%, 100% { box-shadow: 0 0 15px rgba(0, 242, 255, 0.2); border-color: rgba(0, 242, 255, 0.3); }
-            50% { box-shadow: 0 0 30px rgba(0, 242, 255, 0.5); border-color: var(--cyan); }
+            0%, 100% { box-shadow: 0 0 15px rgba(0, 242, 255, 0.3); border-color: rgba(0, 242, 255, 0.4); }
+            50% { box-shadow: 0 0 35px rgba(0, 242, 255, 0.6); border-color: var(--cyan); }
         }
 
+        /* Die kleinen Kacheln: Dezent sichtbar */
         .impact-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
@@ -108,15 +107,15 @@
             max-width: 95%; 
         }
         .card {
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(0, 0, 0, 0.4); /* Leicht dunkler Hintergrund für Lesbarkeit */
             border: 1px solid var(--border);
-            padding: 18px 10px;
+            padding: 20px 10px;
             border-radius: 20px;
-            transition: 0.3s;
+            backdrop-filter: blur(5px);
         }
-        .card b { display: block; color: var(--btc); font-size: 1rem; margin-bottom: 5px; }
-        .card span { font-size: 0.8rem; font-weight: 600; color: #fff; }
-        .card i { display: block; font-style: normal; font-size: 0.7rem; color: var(--cyan); opacity: 0.7; }
+        .card b { display: block; color: var(--btc); font-size: 1.1rem; margin-bottom: 5px; }
+        .card span { font-size: 0.85rem; font-weight: 600; color: #fff; }
+        .card i { display: block; font-style: normal; font-size: 0.75rem; color: var(--cyan); opacity: 0.8; }
 
         .address-box {
             background: rgba(0,0,0,0.8);
@@ -124,10 +123,10 @@
             border-radius: 12px;
             padding: 15px;
             font-family: monospace;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             color: var(--cyan);
             word-break: break-all;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
         
         .btn-group {
@@ -140,27 +139,28 @@
         .btn {
             border: none; padding: 18px;
             border-radius: 14px; font-weight: 800;
-            cursor: pointer; width: 100%; transition: 0.2s;
-            font-size: 0.9rem; text-decoration: none;
-            text-align: center;
+            cursor: pointer; width: 100%; font-size: 0.95rem;
+            text-decoration: none; text-align: center;
         }
         .btn-copy { background: var(--btc); color: #000; }
         .btn-wallet { background: #fff; color: #000; }
 
         .qr-wrap img {
             background: #fff; padding: 12px; border-radius: 15px;
-            margin-top: 30px; width: 140px;
+            margin-top: 35px; width: 160px;
             border: 4px solid var(--cyan);
         }
 
         .legal-footer { 
             margin-top: 50px;
             padding: 20px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            font-size: 0.7rem;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            font-size: 0.75rem;
             line-height: 1.6;
-            opacity: 0.5;
-            text-align: justify;
+            opacity: 0.7;
+            text-align: center;
+            background: rgba(0,0,0,0.4);
+            border-radius: 0 0 40px 40px;
         }
     </style>
 </head>
@@ -173,7 +173,7 @@
 <div class="audio-control">
     <button class="btn-audio" onclick="tM()" id="mB">♫ PLAY PIANO</button>
     <audio id="mG" loop preload="auto">
-        <source src="https://cdn.pixabay.com/audio/2022/02/07/audio_64b6339121.mp3" type="audio/mpeg">
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
     </audio>
 </div>
 
@@ -214,7 +214,7 @@
         </div>
 
         <div class="legal-footer">
-            <strong>Legal Disclaimer:</strong> This website is a purely private, non-commercial initiative. Not a registered charity. Person-to-person support. No donation receipts.
+            <strong>Legal Disclaimer:</strong> Private, non-commercial initiative. No registered charity. No donation receipts. Person-to-person support.
             <br><br>
             © 2026 give-me.org
         </div>
@@ -228,23 +228,13 @@
     function tM() {
         const m = document.getElementById("mG");
         const b = document.getElementById("mB");
-        
         if (m.paused) {
-            // Expliziter Play-Befehl
-            const playPromise = m.play();
-            
-            if (playPromise !== undefined) {
-                playPromise.then(_ => {
-                    b.innerText = "|| PAUSE";
-                    b.style.boxShadow = "0 0 25px #00f2ff";
-                }).catch(error => {
-                    console.log("Playback blocked");
-                });
-            }
+            m.play().then(() => {
+                b.innerText = "|| PAUSE";
+            }).catch(e => alert("Please click again to enable audio."));
         } else {
             m.pause();
             b.innerText = "♫ PLAY PIANO";
-            b.style.boxShadow = "0 0 15px rgba(0, 242, 255, 0.3)";
         }
     }
 
@@ -270,7 +260,6 @@
             setTimeout(() => { b.innerText = "COPY ADDRESS"; b.style.background = "#f7931a"; }, 2000);
         });
     }
-
     uP();
     setInterval(uP, 300000);
 </script>
