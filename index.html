@@ -28,7 +28,8 @@
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             object-fit: cover; z-index: -2;
-            filter: brightness(0.45);
+            /* VIDEO HELLER GEMACHT (von 0.45 auf 0.8) */
+            filter: brightness(0.8);
         }
 
         header { 
@@ -37,7 +38,7 @@
             text-align: center; 
             padding: 25px 20px;
             z-index: 10;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, transparent 100%);
+            background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, transparent 100%);
         }
 
         h1 { 
@@ -46,10 +47,11 @@
             margin: 0; 
             text-transform: uppercase; 
             animation: breathe 6s ease-in-out infinite;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
         }
 
         @keyframes breathe {
-            0%, 100% { transform: scale(1); opacity: 0.8; }
+            0%, 100% { transform: scale(1); opacity: 0.9; }
             50% { transform: scale(1.03); opacity: 1; text-shadow: 0 0 20px var(--btc); }
         }
 
@@ -106,19 +108,19 @@
             max-width: 95%; 
         }
         .card {
-            background: rgba(0, 0, 0, 0.5); 
+            background: rgba(0, 0, 0, 0.6); /* Leicht dunkler für bessere Lesbarkeit auf hellem Video */
             border: 1px solid var(--border);
             padding: 20px 10px;
             border-radius: 20px;
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(8px);
         }
         .card b { display: block; color: var(--btc); font-size: 1.1rem; margin-bottom: 5px; }
         .card span { font-size: 0.85rem; font-weight: 600; color: #fff; }
-        .card i { display: block; font-style: normal; font-size: 0.75rem; color: var(--cyan); opacity: 0.8; }
+        .card i { display: block; font-style: normal; font-size: 0.75rem; color: var(--cyan); opacity: 0.9; }
 
         .address-box {
-            background: rgba(0,0,0,0.8);
-            border: 1px solid var(--cyan);
+            background: rgba(0,0,0,0.85);
+            border: 2px solid var(--cyan);
             border-radius: 12px;
             padding: 15px;
             font-family: monospace;
@@ -126,6 +128,7 @@
             color: var(--cyan);
             word-break: break-all;
             margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
         }
         
         .btn-group {
@@ -145,24 +148,22 @@
             align-items: center;
             justify-content: center;
             text-transform: uppercase;
-            gap: 10px; /* Abstand zwischen Icon und Text */
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
         
         .btn i { font-size: 1.2rem; }
 
-        /* Copy Button */
         .btn-copy { background: var(--btc); color: #000; }
         .btn-copy:hover { transform: scale(1.02); filter: brightness(1.1); }
 
-        /* Wallet Button */
         .btn-wallet { 
             background: #fff; 
             color: #000;
             border: 2px solid #fff;
         }
-        .btn-wallet:hover { background: transparent; color: #fff; }
+        .btn-wallet:hover { background: rgba(0,0,0,0.7); color: #fff; }
 
-        /* TikTok Glitch Button */
         .btn-tiktok { 
             background: #000; 
             color: #fff; 
@@ -178,6 +179,7 @@
             background: #fff; padding: 12px; border-radius: 15px;
             margin-top: 35px; width: 160px;
             border: 4px solid var(--cyan);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
         .legal-footer { 
@@ -186,10 +188,11 @@
             border-top: 1px solid rgba(255,255,255,0.2);
             font-size: 0.75rem;
             line-height: 1.6;
-            opacity: 0.7;
+            opacity: 0.9;
             text-align: center;
-            background: rgba(0,0,0,0.6);
+            background: rgba(0,0,0,0.7);
             border-radius: 0 0 40px 40px;
+            text-shadow: 0 1px 5px rgba(0,0,0,1);
         }
     </style>
 </head>
@@ -208,7 +211,7 @@
 
 <header>
     <h1>Bitcoin saves lives.</h1>
-    <p style="color: var(--cyan); letter-spacing: 4px; font-weight: bold; font-size: 0.75rem; margin-top: 5px;">PRIVATE INITIATIVE</p>
+    <p style="color: var(--cyan); letter-spacing: 4px; font-weight: bold; font-size: 0.75rem; margin-top: 5px; text-shadow: 0 2px 5px rgba(0,0,0,0.8);">PRIVATE INITIATIVE</p>
 </header>
 
 <main>
