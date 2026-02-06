@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
 
+# Verweis auf deine Sitemap (Wichtig für Google)
 Sitemap: https://give-me.org/sitemap.xml
