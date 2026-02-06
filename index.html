@@ -10,8 +10,8 @@
         :root {
             --btc: #f7931a;
             --cyan: #00f2ff;
-            --glass: rgba(10, 25, 41, 0.8); 
-            --border: rgba(0, 242, 255, 0.2);
+            --glass: rgba(10, 25, 41, 0.85); 
+            --border: rgba(0, 242, 255, 0.3);
         }
 
         * { box-sizing: border-box; }
@@ -52,43 +52,54 @@
             50% { transform: scale(1.03); opacity: 1; text-shadow: 0 0 20px var(--btc); }
         }
 
+        /* Musik-Steuerung unten rechts */
         .audio-control {
             position: fixed;
-            top: 25px;
-            right: 20px;
+            bottom: 25px;
+            right: 25px;
             z-index: 100;
         }
         .btn-audio {
-            background: rgba(255,255,255,0.1);
-            border: 1px solid var(--border);
-            color: #fff;
-            padding: 8px 15px;
+            background: rgba(0,0,0,0.6);
+            border: 1px solid var(--cyan);
+            color: var(--cyan);
+            padding: 10px 18px;
             border-radius: 50px;
             cursor: pointer;
             backdrop-filter: blur(10px);
             font-size: 0.75rem;
+            font-weight: bold;
+            box-shadow: 0 0 15px rgba(0, 242, 255, 0.3);
+            transition: 0.3s;
         }
+        .btn-audio:hover { transform: scale(1.05); box-shadow: 0 0 20px var(--cyan); }
 
         main { 
             max-width: 850px; 
             margin: auto; 
-            /* Content Block startet früher (bei 55% Höhe), damit die Kacheln 
-               direkt unter dem visuellen Zentrum (Napf) liegen */
-            padding-top: 55vh; 
+            /* Startet bei 92% Höhe, damit nur der "Neon-Rand" der Kacheln oben rausguckt */
+            padding-top: 92vh; 
             padding-bottom: 60px;
         }
 
+        /* Content-Feld mit umlaufender Neon-Leuchte */
         .content-wrap {
             background: var(--glass);
             backdrop-filter: blur(25px);
-            border: 1px solid var(--border);
+            border: 2px solid var(--cyan);
             border-radius: 40px;
             padding: 40px 25px;
             text-align: center;
-            box-shadow: 0 -20px 50px rgba(0,0,0,0.6);
+            /* Neon Glow Effekt */
+            box-shadow: 0 0 20px rgba(0, 242, 255, 0.2), inset 0 0 15px rgba(0, 242, 255, 0.1);
+            animation: neonPulse 3s ease-in-out infinite;
         }
 
-        /* Die großen, modernen Kacheln von vorher */
+        @keyframes neonPulse {
+            0%, 100% { box-shadow: 0 0 15px rgba(0, 242, 255, 0.3); border-color: rgba(0, 242, 255, 0.4); }
+            50% { box-shadow: 0 0 30px rgba(0, 242, 255, 0.6); border-color: var(--cyan); }
+        }
+
         .impact-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -101,14 +112,6 @@
             padding: 30px 15px;
             border-radius: 24px;
             transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 3px;
-            background: linear-gradient(90deg, transparent, var(--cyan), transparent);
         }
         .card:hover { 
             transform: translateY(-8px); 
@@ -146,7 +149,6 @@
         }
         .btn-copy { background: var(--btc); color: #000; }
         .btn-wallet { background: #fff; color: #000; }
-        .btn:hover { filter: brightness(1.1); transform: translateY(-2px); }
 
         .qr-wrap img {
             background: #fff; padding: 15px; border-radius: 20px;
@@ -164,7 +166,7 @@
 </video>
 
 <div class="audio-control">
-    <button class="btn-audio" onclick="tM()" id="mB">♫ Play Music</button>
+    <button class="btn-audio" onclick="tM()" id="mB">♫ PLAY MUSIC</button>
     <audio id="mG" loop>
         <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-17.mp3" type="audio/mpeg">
     </audio>
@@ -211,15 +213,14 @@
 </main>
 
 <script>
-    // 0.7 Geschwindigkeit
     const video = document.getElementById("v");
     video.playbackRate = 0.7;
 
     function tM() {
         const m = document.getElementById("mG");
         const b = document.getElementById("mB");
-        if (m.paused) { m.play(); b.innerText = "|| Pause"; } 
-        else { m.pause(); b.innerText = "♫ Play Music"; }
+        if (m.paused) { m.play(); b.innerText = "|| PAUSE"; } 
+        else { m.pause(); b.innerText = "♫ PLAY MUSIC"; }
     }
 
     async function uP() {
