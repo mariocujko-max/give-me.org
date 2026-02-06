@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Bitcoin saves lives | Private Initiative</title>
+    <link rel="icon" type="image/png" href="favicon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <style>
         :root {
             --btc: #f7931a;
@@ -80,7 +82,7 @@
         }
 
         .content-wrap {
-            background: transparent; /* KOMPLETT TRANSPARENT */
+            background: transparent; 
             border: 2px solid var(--cyan);
             border-radius: 40px;
             padding: 40px 20px;
@@ -102,7 +104,7 @@
             max-width: 95%; 
         }
         .card {
-            background: rgba(0, 0, 0, 0.5); /* Damit Schrift lesbar bleibt */
+            background: rgba(0, 0, 0, 0.5); 
             border: 1px solid var(--border);
             padding: 20px 10px;
             border-radius: 20px;
@@ -139,6 +141,14 @@
         }
         .btn-copy { background: var(--btc); color: #000; }
         .btn-wallet { background: #fff; color: #000; }
+        
+        /* TikTok Button Style */
+        .btn-tiktok { 
+            background: #000; 
+            color: #fff; 
+            border: 1px solid #ff0050;
+            box-shadow: 2px 0 0 #00f2ff, -2px 0 0 #ff0050;
+        }
 
         .qr-wrap img {
             background: #fff; padding: 12px; border-radius: 15px;
@@ -166,7 +176,7 @@
 </video>
 
 <div class="audio-control">
-    <button class="btn-audio" onclick="tM()" id="mB">♫ MUSIK AN</button>
+    <button class="btn-audio" onclick="tM()" id="mB">♫ PLAY MUSIC</button>
     <audio id="mG" loop preload="auto">
         <source src="sad-piano.mp3" type="audio/mpeg">
     </audio>
@@ -182,17 +192,17 @@
         <div class="impact-grid">
             <div class="card">
                 <b id="p1">... BTC</b>
-                <span>Futter (1 Woche)</span>
+                <span>Food (1 week)</span>
                 <i id="u1">~ $15.00</i>
             </div>
             <div class="card">
                 <b id="p2">... BTC</b>
-                <span>Impfungen</span>
+                <span>Vaccines</span>
                 <i id="u2">~ $80.00</i>
             </div>
             <div class="card">
                 <b id="p3">... BTC</b>
-                <span>Not-Operation</span>
+                <span>Emergency Surgery</span>
                 <i id="u3">~ $300.00</i>
             </div>
         </div>
@@ -200,8 +210,9 @@
         <div class="address-box" id="btc">bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed</div>
         
         <div class="btn-group">
-            <button class="btn btn-copy" id="cBn" onclick="cT()">ADRESSE KOPIEREN</button>
-            <a href="bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed" class="btn btn-wallet">IN WALLET ÖFFNEN</a>
+            <button class="btn btn-copy" id="cBn" onclick="cT()">COPY ADDRESS</button>
+            <a href="bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed" class="btn btn-wallet">OPEN IN WALLET</a>
+            <a href="https://www.tiktok.com/@DEIN_PROFIL" target="_blank" class="btn btn-tiktok">MESSAGE ON TIKTOK</a>
         </div>
         
         <div class="qr-wrap">
@@ -209,7 +220,7 @@
         </div>
 
         <div class="legal-footer">
-            <strong>Rechtlicher Hinweis:</strong> Rein private Initiative. Keine Organisation. Keine Spendenquittungen. Private Unterstützung von Mensch zu Tier.
+            <strong>Legal Disclaimer:</strong> Purely private, non-commercial initiative. Not a registered organization. No donation receipts. Person-to-person support.
             <br><br>
             © 2026 give-me.org
         </div>
@@ -220,16 +231,19 @@
     const video = document.getElementById("v");
     video.playbackRate = 0.7;
 
+    const audio = document.getElementById("mG");
+    // Lautstärke auf 50% setzen
+    audio.volume = 0.5;
+
     function tM() {
-        const m = document.getElementById("mG");
         const b = document.getElementById("mB");
-        if (m.paused) {
-            m.play().then(() => {
+        if (audio.paused) {
+            audio.play().then(() => {
                 b.innerText = "|| PAUSE";
-            }).catch(e => console.log("Audio Error"));
+            }).catch(e => console.log("Audio play error"));
         } else {
-            m.pause();
-            b.innerText = "♫ MUSIK AN";
+            audio.pause();
+            b.innerText = "♫ PLAY MUSIC";
         }
     }
 
@@ -250,9 +264,9 @@
         const a = document.getElementById("btc").innerText;
         const b = document.getElementById("cBn");
         navigator.clipboard.writeText(a).then(() => {
-            b.innerText = "KOPIERT! ✓";
+            b.innerText = "COPIED! ✓";
             b.style.background = "#fff";
-            setTimeout(() => { b.innerText = "ADRESSE KOPIEREN"; b.style.background = "#f7931a"; }, 2000);
+            setTimeout(() => { b.innerText = "COPY ADDRESS"; b.style.background = "#f7931a"; }, 2000);
         });
     }
     uP();
