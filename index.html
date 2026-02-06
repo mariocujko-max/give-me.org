@@ -5,11 +5,13 @@
     <title>Bitcoin saves lives | Private Initiative</title>
     <link rel="icon" type="image/png" href="favicon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         :root {
             --btc: #f7931a;
             --cyan: #00f2ff;
+            --tiktok-red: #ff0050;
             --border: rgba(0, 242, 255, 0.4);
         }
 
@@ -129,25 +131,47 @@
         .btn-group {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 14px;
             max-width: 400px;
             margin: 0 auto;
         }
         .btn {
             border: none; padding: 18px;
-            border-radius: 14px; font-weight: 800;
-            cursor: pointer; width: 100%; font-size: 0.95rem;
+            border-radius: 16px; font-weight: 900;
+            cursor: pointer; width: 100%; font-size: 1rem;
             text-decoration: none; text-align: center;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-transform: uppercase;
+            gap: 10px; /* Abstand zwischen Icon und Text */
         }
-        .btn-copy { background: var(--btc); color: #000; }
-        .btn-wallet { background: #fff; color: #000; }
         
-        /* TikTok Button Style */
+        .btn i { font-size: 1.2rem; }
+
+        /* Copy Button */
+        .btn-copy { background: var(--btc); color: #000; }
+        .btn-copy:hover { transform: scale(1.02); filter: brightness(1.1); }
+
+        /* Wallet Button */
+        .btn-wallet { 
+            background: #fff; 
+            color: #000;
+            border: 2px solid #fff;
+        }
+        .btn-wallet:hover { background: transparent; color: #fff; }
+
+        /* TikTok Glitch Button */
         .btn-tiktok { 
             background: #000; 
             color: #fff; 
-            border: 1px solid #ff0050;
-            box-shadow: 2px 0 0 #00f2ff, -2px 0 0 #ff0050;
+            border: 1px solid #fff;
+            box-shadow: 3px 0 0 var(--cyan), -3px 0 0 var(--tiktok-red);
+        }
+        .btn-tiktok:hover {
+            box-shadow: 5px 0 0 var(--cyan), -5px 0 0 var(--tiktok-red);
+            transform: translateY(-2px);
         }
 
         .qr-wrap img {
@@ -176,7 +200,7 @@
 </video>
 
 <div class="audio-control">
-    <button class="btn-audio" onclick="tM()" id="mB">♫ PLAY MUSIC</button>
+    <button class="btn-audio" onclick="tM()" id="mB"><i class="fa-solid fa-music"></i> PLAY MUSIC</button>
     <audio id="mG" loop preload="auto">
         <source src="sad-piano.mp3" type="audio/mpeg">
     </audio>
@@ -210,9 +234,9 @@
         <div class="address-box" id="btc">bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed</div>
         
         <div class="btn-group">
-            <button class="btn btn-copy" id="cBn" onclick="cT()">COPY ADDRESS</button>
-            <a href="bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed" class="btn btn-wallet">OPEN IN WALLET</a>
-            <a href="https://www.tiktok.com/@DEIN_PROFIL" target="_blank" class="btn btn-tiktok">MESSAGE ON TIKTOK</a>
+            <button class="btn btn-copy" id="cBn" onclick="cT()"><i class="fa-regular fa-copy"></i> COPY ADDRESS</button>
+            <a href="bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed" class="btn btn-wallet"><i class="fa-brands fa-bitcoin"></i> OPEN IN WALLET</a>
+            <a href="https://www.tiktok.com/@giveme.org" target="_blank" class="btn btn-tiktok"><i class="fa-brands fa-tiktok"></i> MESSAGE ON TIKTOK</a>
         </div>
         
         <div class="qr-wrap">
@@ -232,18 +256,17 @@
     video.playbackRate = 0.7;
 
     const audio = document.getElementById("mG");
-    // Lautstärke auf 50% setzen
     audio.volume = 0.5;
 
     function tM() {
         const b = document.getElementById("mB");
         if (audio.paused) {
             audio.play().then(() => {
-                b.innerText = "|| PAUSE";
+                b.innerHTML = '<i class="fa-solid fa-pause"></i> PAUSE';
             }).catch(e => console.log("Audio play error"));
         } else {
             audio.pause();
-            b.innerText = "♫ PLAY MUSIC";
+            b.innerHTML = '<i class="fa-solid fa-music"></i> PLAY MUSIC';
         }
     }
 
@@ -264,9 +287,9 @@
         const a = document.getElementById("btc").innerText;
         const b = document.getElementById("cBn");
         navigator.clipboard.writeText(a).then(() => {
-            b.innerText = "COPIED! ✓";
+            b.innerHTML = '<i class="fa-solid fa-check"></i> COPIED!';
             b.style.background = "#fff";
-            setTimeout(() => { b.innerText = "COPY ADDRESS"; b.style.background = "#f7931a"; }, 2000);
+            setTimeout(() => { b.innerHTML = '<i class="fa-regular fa-copy"></i> COPY ADDRESS'; b.style.background = "#f7931a"; }, 2000);
         });
     }
     uP();
