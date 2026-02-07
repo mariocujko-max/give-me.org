@@ -12,6 +12,7 @@
             --btc: #f7931a;
             --cyan: #00f2ff;
             --tiktok-red: #ff0050;
+            --paypal-blue: #0070ba;
             --border: rgba(0, 242, 255, 0.4);
         }
 
@@ -28,7 +29,6 @@
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             object-fit: cover; z-index: -2;
-            /* VIDEO HELLER GEMACHT (von 0.45 auf 0.8) */
             filter: brightness(0.8);
         }
 
@@ -81,10 +81,6 @@
             padding-bottom: 60px;
         }
 
-        @media (max-width: 600px) {
-            main { padding-top: 82vh; } 
-        }
-
         .content-wrap {
             background: transparent; 
             border: 2px solid var(--cyan);
@@ -108,7 +104,7 @@
             max-width: 95%; 
         }
         .card {
-            background: rgba(0, 0, 0, 0.6); /* Leicht dunkler für bessere Lesbarkeit auf hellem Video */
+            background: rgba(0, 0, 0, 0.6); 
             border: 1px solid var(--border);
             padding: 20px 10px;
             border-radius: 20px;
@@ -128,58 +124,55 @@
             color: var(--cyan);
             word-break: break-all;
             margin-bottom: 25px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
         }
         
-        .btn-group {
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-            max-width: 400px;
+        /* 2x2 Button Grid */
+        .btn-grid-main {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* 2 nebeneinander */
+            gap: 12px;
+            max-width: 500px;
             margin: 0 auto;
         }
+
         .btn {
-            border: none; padding: 18px;
-            border-radius: 16px; font-weight: 900;
-            cursor: pointer; width: 100%; font-size: 1rem;
+            border: none; padding: 15px 10px;
+            border-radius: 14px; font-weight: 900;
+            cursor: pointer; font-size: 0.85rem;
             text-decoration: none; text-align: center;
             transition: 0.3s;
             display: flex;
             align-items: center;
             justify-content: center;
             text-transform: uppercase;
-            gap: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            gap: 8px;
         }
-        
-        .btn i { font-size: 1.2rem; }
+
+        .btn i { font-size: 1.1rem; }
 
         .btn-copy { background: var(--btc); color: #000; }
-        .btn-copy:hover { transform: scale(1.02); filter: brightness(1.1); }
-
-        .btn-wallet { 
-            background: #fff; 
-            color: #000;
-            border: 2px solid #fff;
+        .btn-wallet { background: #fff; color: #000; }
+        
+        .btn-paypal { 
+            background: var(--paypal-blue); 
+            color: #fff; 
         }
-        .btn-wallet:hover { background: rgba(0,0,0,0.7); color: #fff; }
-
+        
         .btn-tiktok { 
             background: #000; 
             color: #fff; 
             border: 1px solid #fff;
-            box-shadow: 3px 0 0 var(--cyan), -3px 0 0 var(--tiktok-red);
+            box-shadow: 2px 0 0 var(--cyan), -2px 0 0 var(--tiktok-red);
         }
-        .btn-tiktok:hover {
-            box-shadow: 5px 0 0 var(--cyan), -5px 0 0 var(--tiktok-red);
-            transform: translateY(-2px);
+
+        @media (max-width: 500px) {
+            .btn { font-size: 0.75rem; padding: 12px 5px; }
         }
 
         .qr-wrap img {
             background: #fff; padding: 12px; border-radius: 15px;
-            margin-top: 35px; width: 160px;
+            margin-top: 35px; width: 140px;
             border: 4px solid var(--cyan);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
         .legal-footer { 
@@ -192,7 +185,6 @@
             text-align: center;
             background: rgba(0,0,0,0.7);
             border-radius: 0 0 40px 40px;
-            text-shadow: 0 1px 5px rgba(0,0,0,1);
         }
     </style>
 </head>
@@ -211,7 +203,7 @@
 
 <header>
     <h1>Bitcoin saves lives.</h1>
-    <p style="color: var(--cyan); letter-spacing: 4px; font-weight: bold; font-size: 0.75rem; margin-top: 5px; text-shadow: 0 2px 5px rgba(0,0,0,0.8);">PRIVATE INITIATIVE</p>
+    <p style="color: var(--cyan); letter-spacing: 4px; font-weight: bold; font-size: 0.75rem; margin-top: 5px;">PRIVATE INITIATIVE</p>
 </header>
 
 <main>
@@ -236,10 +228,12 @@
 
         <div class="address-box" id="btc">bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed</div>
         
-        <div class="btn-group">
-            <button class="btn btn-copy" id="cBn" onclick="cT()"><i class="fa-regular fa-copy"></i> COPY ADDRESS</button>
-            <a href="bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed" class="btn btn-wallet"><i class="fa-brands fa-bitcoin"></i> OPEN IN WALLET</a>
-            <a href="https://www.tiktok.com/@giveme.org" target="_blank" class="btn btn-tiktok"><i class="fa-brands fa-tiktok"></i> MESSAGE ON TIKTOK</a>
+        <div class="btn-grid-main">
+            <button class="btn btn-copy" id="cBn" onclick="cT()"><i class="fa-regular fa-copy"></i> COPY BTC</button>
+            <a href="bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed" class="btn btn-wallet"><i class="fa-brands fa-bitcoin"></i> WALLET</a>
+            
+            <a href="https://www.paypal.com/paypalme/givemeorg" target="_blank" class="btn btn-paypal"><i class="fa-brands fa-paypal"></i> PAYPAL</a>
+            <a href="https://www.tiktok.com/@giveme.org" target="_blank" class="btn btn-tiktok"><i class="fa-brands fa-tiktok"></i> TIKTOK</a>
         </div>
         
         <div class="qr-wrap">
@@ -292,7 +286,7 @@
         navigator.clipboard.writeText(a).then(() => {
             b.innerHTML = '<i class="fa-solid fa-check"></i> COPIED!';
             b.style.background = "#fff";
-            setTimeout(() => { b.innerHTML = '<i class="fa-regular fa-copy"></i> COPY ADDRESS'; b.style.background = "#f7931a"; }, 2000);
+            setTimeout(() => { b.innerHTML = '<i class="fa-regular fa-copy"></i> COPY BTC'; b.style.background = "#f7931a"; }, 2000);
         });
     }
     uP();
