@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,36 +20,24 @@
 
         * { box-sizing: border-box; }
         body { 
-            margin: 0; 
-            font-family: 'Inter', sans-serif; 
-            color: #fff; 
-            background: #000;
-            overflow-x: hidden;
+            margin: 0; font-family: 'Inter', sans-serif; 
+            color: #fff; background: #000; overflow-x: hidden;
         }
 
         .bg-video {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            object-fit: cover; z-index: -2;
-            filter: brightness(0.8);
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover; z-index: -2; filter: brightness(0.8);
         }
 
         header { 
-            position: fixed;
-            top: 0; left: 0; width: 100%;
-            text-align: center; 
-            padding: 25px 20px;
-            z-index: 10;
+            position: fixed; top: 0; left: 0; width: 100%;
+            text-align: center; padding: 25px 20px; z-index: 10;
             background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, transparent 100%);
         }
 
         h1 { 
-            font-size: clamp(1.4rem, 5vw, 2.5rem); 
-            font-weight: 900; 
-            margin: 0; 
-            text-transform: uppercase; 
-            animation: breathe 6s ease-in-out infinite;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            font-size: clamp(1.4rem, 5vw, 2.5rem); font-weight: 900; 
+            text-transform: uppercase; animation: breathe 6s ease-in-out infinite;
         }
 
         @keyframes breathe {
@@ -56,38 +45,18 @@
             50% { transform: scale(1.03); opacity: 1; text-shadow: 0 0 20px var(--btc); }
         }
 
-        .audio-control {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            z-index: 100;
-        }
+        .audio-control { position: fixed; bottom: 25px; right: 25px; z-index: 100; }
         .btn-audio {
-            background: rgba(0,0,0,0.7);
-            border: 2px solid var(--cyan);
-            color: var(--cyan);
-            padding: 12px 20px;
-            border-radius: 50px;
-            cursor: pointer;
-            backdrop-filter: blur(10px);
-            font-size: 0.8rem;
-            font-weight: 900;
-            box-shadow: 0 0 15px rgba(0, 242, 255, 0.4);
+            background: rgba(0,0,0,0.7); border: 2px solid var(--cyan);
+            color: var(--cyan); padding: 12px 20px; border-radius: 50px;
+            cursor: pointer; backdrop-filter: blur(10px); font-weight: 900;
         }
 
-        main { 
-            max-width: 850px; 
-            margin: auto; 
-            padding-top: 85vh; 
-            padding-bottom: 60px;
-        }
+        main { max-width: 850px; margin: auto; padding-top: 85vh; padding-bottom: 60px; }
 
         .content-wrap {
-            background: transparent; 
-            border: 2px solid var(--cyan);
-            border-radius: 40px;
-            padding: 40px 20px;
-            text-align: center;
+            border: 2px solid var(--cyan); border-radius: 40px;
+            padding: 40px 20px; text-align: center;
             box-shadow: 0 0 20px rgba(0, 242, 255, 0.2);
             animation: neonPulse 4s ease-in-out infinite;
         }
@@ -98,81 +67,61 @@
         }
 
         .impact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: 15px;
-            margin: 0 auto 30px auto;
-            max-width: 95%; 
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 15px; margin-bottom: 30px;
         }
         .card {
-            background: rgba(0, 0, 0, 0.6); 
-            border: 1px solid var(--border);
-            padding: 20px 10px;
-            border-radius: 20px;
-            backdrop-filter: blur(8px);
+            background: rgba(0, 0, 0, 0.6); border: 1px solid var(--border);
+            padding: 20px 10px; border-radius: 20px; backdrop-filter: blur(8px);
+            cursor: pointer; transition: 0.3s;
         }
-        .card b { display: block; color: var(--btc); font-size: 1.1rem; margin-bottom: 5px; }
-        .card span { font-size: 0.85rem; font-weight: 600; color: #fff; }
-        .card i { display: block; font-style: normal; font-size: 0.75rem; color: var(--cyan); opacity: 0.9; }
+        .card:hover { transform: translateY(-5px); border-color: var(--btc); background: rgba(247, 147, 26, 0.1); }
+        .card b { display: block; color: var(--btc); font-size: 1.1rem; }
+        .card span { font-size: 0.85rem; font-weight: 600; }
 
         .btn-grid-main {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            max-width: 500px;
-            margin: 30px auto 0 auto;
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 15px; max-width: 500px; margin: 30px auto 0 auto;
         }
 
         .btn {
-            border: none; padding: 15px 10px;
-            border-radius: 14px; font-weight: 900;
-            cursor: pointer; font-size: 0.85rem;
-            text-decoration: none; text-align: center;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-transform: uppercase;
-            gap: 8px;
+            border: none; padding: 18px 10px; border-radius: 16px; font-weight: 900;
+            cursor: pointer; text-decoration: none; text-align: center;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex; align-items: center; justify-content: center;
+            text-transform: uppercase; gap: 8px; font-size: 0.9rem;
         }
 
+        /* Hover Effekte für alle Buttons */
+        .btn:hover { transform: scale(1.08) translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.4); }
+
         .btn-copy { background: var(--btc); color: #000; }
+        .btn-copy:hover { box-shadow: 0 0 20px rgba(247, 147, 26, 0.6); }
+
+        .btn-paypal { background: var(--paypal-blue); color: #fff; }
+        .btn-paypal:hover { background: var(--paypal-light); box-shadow: 0 0 20px rgba(0, 112, 186, 0.6); }
+        
         .btn-wallet { background: #fff; color: #000; }
-        
-        .btn-paypal { 
-            background: var(--paypal-blue); 
-            color: #fff;
-        }
-        .btn-paypal:hover {
-            background: var(--paypal-light);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 112, 186, 0.4);
-        }
-        
+        .btn-wallet:hover { box-shadow: 0 0 20px rgba(255, 255, 255, 0.6); }
+
         .btn-tiktok { 
-            background: #000; 
-            color: #fff; 
-            border: 1px solid #fff;
-            box-shadow: 2px 0 0 var(--cyan), -2px 0 0 var(--tiktok-red);
+            background: #000; color: #fff; border: 1px solid #fff;
+            box-shadow: 3px 0 0 var(--cyan), -3px 0 0 var(--tiktok-red);
         }
-        .btn-tiktok:hover { transform: scale(1.05); }
+        .btn-tiktok:hover { box-shadow: 5px 0 0 var(--cyan), -5px 0 0 var(--tiktok-red); }
 
         .qr-wrap img {
             background: #fff; padding: 12px; border-radius: 15px;
-            margin-top: 35px; width: 140px;
-            border: 4px solid var(--cyan);
+            margin-top: 35px; width: 140px; border: 4px solid var(--cyan);
         }
 
         .legal-footer { 
-            margin-top: 50px;
-            padding: 20px;
-            border-top: 1px solid rgba(255,255,255,0.2);
-            font-size: 0.75rem;
-            line-height: 1.6;
-            opacity: 0.9;
-            text-align: center;
-            background: rgba(0,0,0,0.7);
-            border-radius: 0 0 40px 40px;
+            margin-top: 50px; padding: 20px; border-top: 1px solid rgba(255,255,255,0.2);
+            font-size: 0.75rem; opacity: 0.9; text-align: center; background: rgba(0,0,0,0.7);
+        }
+        
+        .amount-hint {
+            font-size: 0.7rem; color: var(--cyan); margin-top: 10px; font-weight: bold;
         }
     </style>
 </head>
@@ -184,69 +133,75 @@
 
 <div class="audio-control">
     <button class="btn-audio" onclick="tM()" id="mB"><i class="fa-solid fa-music"></i> PLAY MUSIC</button>
-    <audio id="mG" loop preload="auto">
-        <source src="sad-piano.mp3" type="audio/mpeg">
-    </audio>
+    <audio id="mG" loop preload="auto"><source src="sad-piano.mp3" type="audio/mpeg"></audio>
 </div>
 
 <header>
     <h1>Bitcoin saves lives.</h1>
-    <p style="color: var(--cyan); letter-spacing: 4px; font-weight: bold; font-size: 0.75rem; margin-top: 5px;">PRIVATE INITIATIVE</p>
+    <p style="color: var(--cyan); letter-spacing: 4px; font-weight: bold; font-size: 0.75rem;">PRIVATE INITIATIVE</p>
 </header>
 
 <main>
     <div class="content-wrap">
+        <p style="margin-bottom: 15px; font-weight: bold; color: var(--cyan);">Select an impact to set PayPal amount:</p>
         <div class="impact-grid">
-            <div class="card">
+            <div class="card" onclick="setPP(15)">
                 <b id="p1">... BTC</b>
                 <span>Food (1 week)</span>
-                <i id="u1">~ $15.00</i>
+                <i>$15.00</i>
             </div>
-            <div class="card">
+            <div class="card" onclick="setPP(80)">
                 <b id="p2">... BTC</b>
                 <span>Vaccines</span>
-                <i id="u2">~ $80.00</i>
+                <i>$80.00</i>
             </div>
-            <div class="card">
+            <div class="card" onclick="setPP(300)">
                 <b id="p3">... BTC</b>
-                <span>Emergency Surgery</span>
-                <i id="u3">~ $300.00</i>
+                <span>Surgery</span>
+                <i>$300.00</i>
             </div>
         </div>
 
         <div class="btn-grid-main">
             <button class="btn btn-copy" id="cBn" onclick="cT()"><i class="fa-regular fa-copy"></i> COPY BTC</button>
-            <a href="https://www.paypal.com/paypalme/givemeorg/15" target="_blank" class="btn btn-paypal"><i class="fa-brands fa-paypal"></i> PAYPAL</a>
-            
+            <a href="https://www.paypal.com/paypalme/givemeorg" target="_blank" class="btn btn-paypal" id="ppBtn">
+                <i class="fa-brands fa-paypal"></i> PAYPAL <span id="ppAmt"></span>
+            </a>
             <a href="bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed" class="btn btn-wallet"><i class="fa-brands fa-bitcoin"></i> WALLET</a>
             <a href="https://www.tiktok.com/@giveme.org" target="_blank" class="btn btn-tiktok"><i class="fa-brands fa-tiktok"></i> TIKTOK</a>
         </div>
+        <p class="amount-hint" id="ppHint">Tip: Click a card above to pre-set PayPal amount</p>
         
         <div class="qr-wrap">
             <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed" alt="QR">
         </div>
 
         <div class="legal-footer">
-            <strong>Legal Disclaimer:</strong> Purely private, non-commercial initiative. Not a registered organization. No donation receipts. Person-to-person support.
-            <br><br>
-            © 2026 give-me.org
+            Legal Disclaimer: Purely private initiative. No registered org. No donation receipts.
+            <br>© 2026 give-me.org
         </div>
     </div>
 </main>
 
 <script>
-    const video = document.getElementById("v");
-    video.playbackRate = 0.7;
-
     const audio = document.getElementById("mG");
     audio.volume = 0.5;
+
+    // PayPal Betrag setzen
+    function setPP(amt) {
+        const btn = document.getElementById("ppBtn");
+        const display = document.getElementById("ppAmt");
+        btn.href = `https://www.paypal.com/paypalme/givemeorg/${amt}`;
+        display.innerText = `($${amt})`;
+        btn.style.transform = "scale(1.1)";
+        setTimeout(() => btn.style.transform = "scale(1)", 200);
+        document.getElementById("ppHint").innerText = `PayPal amount set to $${amt}!`;
+    }
 
     function tM() {
         const b = document.getElementById("mB");
         if (audio.paused) {
-            audio.play().then(() => {
-                b.innerHTML = '<i class="fa-solid fa-pause"></i> PAUSE';
-            }).catch(e => console.log("Audio play error"));
+            audio.play().then(() => b.innerHTML = '<i class="fa-solid fa-pause"></i> PAUSE');
         } else {
             audio.pause();
             b.innerHTML = '<i class="fa-solid fa-music"></i> PLAY MUSIC';
@@ -259,24 +214,17 @@
             const d = await r.json();
             const p = d.bitcoin.usd;
             [15, 80, 300].forEach((usd, i) => {
-                const b = (usd / p).toFixed(6);
-                document.getElementById(`p${i+1}`).innerText = `~ ${b} BTC`;
-                document.getElementById(`u${i+1}`).innerText = `~ $${usd.toFixed(2)}`;
+                document.getElementById(`p${i+1}`).innerText = `~ ${(usd / p).toFixed(6)} BTC`;
             });
         } catch (e) {}
     }
 
     function cT() {
-        // Adresse wird hier direkt im Script gehalten
         const a = "bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed";
         const b = document.getElementById("cBn");
         navigator.clipboard.writeText(a).then(() => {
             b.innerHTML = '<i class="fa-solid fa-check"></i> COPIED!';
-            b.style.background = "#fff";
-            setTimeout(() => { 
-                b.innerHTML = '<i class="fa-regular fa-copy"></i> COPY BTC'; 
-                b.style.background = "#f7931a"; 
-            }, 2000);
+            setTimeout(() => b.innerHTML = '<i class="fa-regular fa-copy"></i> COPY BTC', 2000);
         });
     }
     uP();
