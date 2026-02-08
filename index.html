@@ -30,7 +30,7 @@
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             object-fit: cover; z-index: -2;
-            filter: brightness(0.8); /* Video ist nun heller */
+            filter: brightness(0.8);
         }
 
         header { 
@@ -115,25 +115,12 @@
         .card span { font-size: 0.85rem; font-weight: 600; color: #fff; }
         .card i { display: block; font-style: normal; font-size: 0.75rem; color: var(--cyan); opacity: 0.9; }
 
-        .address-box {
-            background: rgba(0,0,0,0.85);
-            border: 2px solid var(--cyan);
-            border-radius: 12px;
-            padding: 15px;
-            font-family: monospace;
-            font-size: 0.85rem;
-            color: var(--cyan);
-            word-break: break-all;
-            margin-bottom: 25px;
-        }
-        
-        /* 2x2 Layout */
         .btn-grid-main {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 12px;
             max-width: 500px;
-            margin: 0 auto;
+            margin: 30px auto 0 auto;
         }
 
         .btn {
@@ -152,12 +139,9 @@
         .btn-copy { background: var(--btc); color: #000; }
         .btn-wallet { background: #fff; color: #000; }
         
-        /* PayPal Animation */
         .btn-paypal { 
             background: var(--paypal-blue); 
             color: #fff;
-            position: relative;
-            overflow: hidden;
         }
         .btn-paypal:hover {
             background: var(--paypal-light);
@@ -230,13 +214,11 @@
             </div>
         </div>
 
-        <div class="address-box" id="btc">bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed</div>
-        
         <div class="btn-grid-main">
             <button class="btn btn-copy" id="cBn" onclick="cT()"><i class="fa-regular fa-copy"></i> COPY BTC</button>
-            <a href="bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed" class="btn btn-wallet"><i class="fa-brands fa-bitcoin"></i> WALLET</a>
+            <a href="https://www.paypal.com/paypalme/givemeorg/15" target="_blank" class="btn btn-paypal"><i class="fa-brands fa-paypal"></i> PAYPAL</a>
             
-            <a href="mailto:give-me.org@gmx.net" class="btn btn-paypal"><i class="fa-brands fa-paypal"></i> PAYPAL</a>
+            <a href="bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed" class="btn btn-wallet"><i class="fa-brands fa-bitcoin"></i> WALLET</a>
             <a href="https://www.tiktok.com/@giveme.org" target="_blank" class="btn btn-tiktok"><i class="fa-brands fa-tiktok"></i> TIKTOK</a>
         </div>
         
@@ -285,12 +267,16 @@
     }
 
     function cT() {
-        const a = document.getElementById("btc").innerText;
+        // Adresse wird hier direkt im Script gehalten
+        const a = "bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed";
         const b = document.getElementById("cBn");
         navigator.clipboard.writeText(a).then(() => {
             b.innerHTML = '<i class="fa-solid fa-check"></i> COPIED!';
             b.style.background = "#fff";
-            setTimeout(() => { b.innerHTML = '<i class="fa-regular fa-copy"></i> COPY BTC'; b.style.background = "#f7931a"; }, 2000);
+            setTimeout(() => { 
+                b.innerHTML = '<i class="fa-regular fa-copy"></i> COPY BTC'; 
+                b.style.background = "#f7931a"; 
+            }, 2000);
         });
     }
     uP();
