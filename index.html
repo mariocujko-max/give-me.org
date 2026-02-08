@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <title>Bitcoin saves lives | Private Initiative</title>
@@ -23,7 +23,6 @@
             color: #fff; background: #000; overflow-x: hidden;
         }
 
-        /* Hintergrund Video - Helligkeit auf 0.8 angepasst */
         .bg-video {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             object-fit: cover; z-index: -2; filter: brightness(0.8);
@@ -48,10 +47,9 @@
 
         .audio-control { position: fixed; bottom: 20px; right: 20px; z-index: 100; }
         .btn-audio {
-            background: rgba(0,0,0,0.7); border: 2px solid var(--cyan);
+            background: rgba(0,0,0,0.6); border: 2px solid var(--cyan);
             color: var(--cyan); padding: 10px 15px; border-radius: 50px;
             cursor: pointer; backdrop-filter: blur(10px); font-weight: 900; font-size: 0.75rem;
-            transition: 0.3s;
         }
 
         main { max-width: 500px; margin: auto; padding-top: 85vh; padding-bottom: 60px; padding-left: 15px; padding-right: 15px; }
@@ -61,8 +59,8 @@
             padding: 30px 15px; text-align: center;
             box-shadow: 0 0 20px rgba(0, 242, 255, 0.2);
             animation: neonPulse 4s ease-in-out infinite;
-            background: rgba(0,0,0,0.3);
-            backdrop-filter: blur(8px);
+            background: rgba(0,0,0,0.4);
+            backdrop-filter: blur(10px);
         }
 
         @keyframes neonPulse {
@@ -70,22 +68,21 @@
             50% { box-shadow: 0 0 35px rgba(0, 242, 255, 0.6); border-color: var(--cyan); }
         }
 
-        /* Impact Liste übereinander */
         .impact-list {
             display: flex; flex-direction: column; gap: 12px; margin-bottom: 30px;
         }
         .card {
-            background: rgba(0, 0, 0, 0.7); border: 1px solid var(--border);
+            background: rgba(0, 0, 0, 0.6); border: 1px solid var(--border);
             padding: 15px; border-radius: 20px; backdrop-filter: blur(10px);
-            cursor: pointer; transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer; transition: 0.3s;
             display: flex; justify-content: space-between; align-items: center; text-align: left;
+            opacity: 0.9;
         }
-        .card:hover { transform: scale(1.03); border-color: var(--btc); background: rgba(247, 147, 26, 0.15); }
+        .card:hover { transform: scale(1.03); border-color: var(--btc); opacity: 1; background: rgba(247, 147, 26, 0.2); }
         .card .info b { color: var(--btc); font-size: 1.1rem; display: block; }
         .card .info span { font-size: 0.9rem; font-weight: 600; }
         .card .price { font-weight: 900; color: var(--cyan); font-size: 1.2rem; }
 
-        /* Button Grid */
         .btn-grid-main {
             display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px;
         }
@@ -96,9 +93,10 @@
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex; align-items: center; justify-content: center;
             text-transform: uppercase; gap: 8px; font-size: 0.85rem;
+            opacity: 0.85; /* Button Transparenz */
         }
 
-        .btn:hover { transform: scale(1.08) translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
+        .btn:hover { transform: scale(1.08) translateY(-3px); opacity: 1; box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
 
         .btn-copy { background: var(--btc); color: #000; }
         .btn-paypal { background: var(--paypal-blue); color: #fff; }
@@ -111,12 +109,12 @@
         .qr-wrap img {
             background: #fff; padding: 10px; border-radius: 15px;
             margin-top: 30px; width: 130px; border: 3px solid var(--cyan);
-            box-shadow: 0 0 20px rgba(0, 242, 255, 0.2);
+            opacity: 0.9;
         }
 
         .legal-footer { 
             margin-top: 40px; padding: 20px; border-top: 1px solid rgba(255,255,255,0.2);
-            font-size: 0.7rem; opacity: 0.8; text-align: center;
+            font-size: 0.7rem; opacity: 0.7; text-align: center;
         }
         
         .amount-hint {
@@ -131,7 +129,7 @@
 </video>
 
 <div class="audio-control">
-    <button class="btn-audio" onclick="tM()" id="mB"><i class="fa-solid fa-music"></i> PLAY MUSIC</button>
+    <button class="btn-audio" onclick="tM()" id="mB"><i class="fa-solid fa-music"></i> MUSIK AN</button>
     <audio id="mG" loop preload="auto"><source src="sad-piano.mp3" type="audio/mpeg"></audio>
 </div>
 
@@ -142,53 +140,51 @@
 
 <main>
     <div class="content-wrap">
-        <p style="margin-bottom: 20px; font-weight: bold; color: #fff; font-size: 0.9rem; text-transform: uppercase;">Choose an impact to set PayPal:</p>
+        <p style="margin-bottom: 20px; font-weight: bold; color: #fff; font-size: 0.9rem; text-transform: uppercase;">Wähle ein Ziel für PayPal:</p>
         
         <div class="impact-list">
             <div class="card" onclick="setPP(15)">
                 <div class="info">
                     <b id="p1">... BTC</b>
-                    <span>Food (1 week)</span>
+                    <span>Futter (1 Woche)</span>
                 </div>
-                <div class="price">$15</div>
+                <div class="price">15€</div>
             </div>
             
             <div class="card" onclick="setPP(80)">
                 <div class="info">
                     <b id="p2">... BTC</b>
-                    <span>Vaccines & Care</span>
+                    <span>Impfungen & Pflege</span>
                 </div>
-                <div class="price">$80</div>
+                <div class="price">80€</div>
             </div>
             
             <div class="card" onclick="setPP(300)">
                 <div class="info">
                     <b id="p3">... BTC</b>
-                    <span>Emergency Surgery</span>
+                    <span>Notfall OP</span>
                 </div>
-                <div class="price">$300</div>
+                <div class="price">300€</div>
             </div>
         </div>
 
         <div class="btn-grid-main">
             <button class="btn btn-copy" id="cBn" onclick="cT()"><i class="fa-regular fa-copy"></i> COPY BTC</button>
-            
-            <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=give-me.org@gmx.net&currency_code=USD&no_note=0&cn=Add%20a%20message%20for%20the%20animals" target="_blank" class="btn btn-paypal" id="ppBtn">
+            <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=give-me.org@gmx.net&currency_code=EUR&no_note=0&cn=Nachricht%20an%20die%20Initiative" target="_blank" class="btn btn-paypal" id="ppBtn">
                 <i class="fa-brands fa-paypal"></i> PAYPAL <span id="ppAmt"></span>
             </a>
-            
             <a href="bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed" class="btn btn-wallet"><i class="fa-brands fa-bitcoin"></i> WALLET</a>
             <a href="https://www.tiktok.com/@giveme.org" target="_blank" class="btn btn-tiktok"><i class="fa-brands fa-tiktok"></i> TIKTOK</a>
         </div>
         
-        <div class="amount-hint" id="ppHint">Select a card to pre-set amount</div>
+        <div class="amount-hint" id="ppHint">Klicke eine Karte für den Betrag</div>
         
         <div class="qr-wrap">
             <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed" alt="QR Code">
         </div>
 
         <div class="legal-footer">
-            Legal Disclaimer: Purely private, non-commercial initiative. No registered organization. No donation receipts. Person-to-person support.
+            Rechtlicher Hinweis: Rein private, nicht-kommerzielle Initiative. Kein eingetragener Verein. Keine Spendenquittungen. Privat-zu-Privat Unterstützung.
             <br><br>
             © 2026 give-me.org
         </div>
@@ -199,57 +195,50 @@
     const audio = document.getElementById("mG");
     audio.volume = 0.5;
 
-    // Funktion: PayPal Betrag setzen + Nachricht erlauben
     function setPP(amt) {
         const btn = document.getElementById("ppBtn");
         const display = document.getElementById("ppAmt");
         const hint = document.getElementById("ppHint");
         
-        // Link-Parameter: business=Email, amount=Betrag, no_note=0 (erlaubt Nachricht), cn=Label für Nachricht
-        btn.href = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=give-me.org@gmx.net&amount=${amt}&currency_code=USD&item_name=Support%20Private%20Initiative&no_note=0&cn=Add%20a%20message%20for%20the%20animals`;
+        // Link auf Euro (EUR) umgestellt
+        btn.href = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=give-me.org@gmx.net&amount=${amt}&currency_code=EUR&item_name=Unterstützung%20Private%20Initiative&no_note=0&cn=Nachricht%20an%20die%20Initiative`;
         
-        display.innerText = `($${amt})`;
-        
-        // Feedback Animation
+        display.innerText = `(${amt}€)`;
         btn.style.transform = "scale(1.15)";
         setTimeout(() => btn.style.transform = "scale(1)", 200);
         
-        hint.innerHTML = `<i class="fa-solid fa-check"></i> Amount set to $${amt} (Message enabled)`;
+        hint.innerHTML = `<i class="fa-solid fa-check"></i> Betrag auf ${amt}€ gesetzt`;
         hint.style.color = "var(--btc)";
     }
 
-    // Musik Steuerung
     function tM() {
         const b = document.getElementById("mB");
         if (audio.paused) {
-            audio.play().then(() => {
-                b.innerHTML = '<i class="fa-solid fa-pause"></i> PAUSE';
-            }).catch(e => console.log("Audio Error"));
+            audio.play().then(() => b.innerHTML = '<i class="fa-solid fa-pause"></i> PAUSE');
         } else {
             audio.pause();
-            b.innerHTML = '<i class="fa-solid fa-music"></i> PLAY MUSIC';
+            b.innerHTML = '<i class="fa-solid fa-music"></i> MUSIK AN';
         }
     }
 
-    // Bitcoin Preis Update
     async function uP() {
         try {
-            const r = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd');
+            // Abfrage auf EUR geändert
+            const r = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=eur');
             const d = await r.json();
-            const p = d.bitcoin.usd;
-            [15, 80, 300].forEach((usd, i) => {
-                const b = (usd / p).toFixed(6);
+            const p = d.bitcoin.eur;
+            [15, 80, 300].forEach((eur, i) => {
+                const b = (eur / p).toFixed(6);
                 document.getElementById(`p${i+1}`).innerText = `~ ${b} BTC`;
             });
         } catch (e) {}
     }
 
-    // BTC Adresse kopieren
     function cT() {
         const a = "bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed";
         const b = document.getElementById("cBn");
         navigator.clipboard.writeText(a).then(() => {
-            b.innerHTML = '<i class="fa-solid fa-check"></i> COPIED!';
+            b.innerHTML = '<i class="fa-solid fa-check"></i> KOPIERT!';
             b.style.background = "#fff";
             setTimeout(() => { 
                 b.innerHTML = '<i class="fa-regular fa-copy"></i> COPY BTC'; 
@@ -260,8 +249,6 @@
 
     uP();
     setInterval(uP, 300000);
-    
-    // Video Geschwindigkeit leicht drosseln für Atmosphäre
     document.getElementById("v").playbackRate = 0.8;
 </script>
 </body>
