@@ -28,27 +28,30 @@
             object-fit: cover; z-index: -2; filter: brightness(0.8);
         }
 
-        /* Header Fix: Hide on scroll to prevent blocking buttons */
+        /* HEADER: Slower transition & Stronger Glow */
         header { 
             position: fixed; top: 0; left: 0; width: 100%;
-            text-align: center; padding: 25px 20px; z-index: 5;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, transparent 100%);
-            transition: opacity 0.4s ease, visibility 0.4s;
+            text-align: center; padding: 40px 20px; z-index: 5;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, transparent 100%);
+            /* Slow fade out (1.2 seconds) */
+            transition: opacity 1.2s ease-in-out, visibility 1.2s;
         }
 
-        /* Special class to hide header via JavaScript */
         .header-hidden { opacity: 0; visibility: hidden; }
 
         h1 { 
-            font-size: clamp(1.4rem, 5vw, 2.5rem); font-weight: 900; 
-            text-transform: uppercase; animation: breathe 6s ease-in-out infinite;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            font-size: clamp(1.6rem, 6vw, 2.8rem); font-weight: 900; 
+            text-transform: uppercase; 
+            animation: breathe 4s ease-in-out infinite;
+            /* Strong Neon Glow */
+            text-shadow: 0 0 10px rgba(247, 147, 26, 0.5), 0 0 20px rgba(247, 147, 26, 0.3);
             margin: 0;
+            letter-spacing: 2px;
         }
 
         @keyframes breathe {
-            0%, 100% { transform: scale(1); opacity: 0.9; }
-            50% { transform: scale(1.03); opacity: 1; text-shadow: 0 0 20px var(--btc); }
+            0%, 100% { transform: scale(1); opacity: 0.9; text-shadow: 0 0 10px var(--btc); }
+            50% { transform: scale(1.05); opacity: 1; text-shadow: 0 0 30px var(--btc), 0 0 50px var(--btc); }
         }
 
         .audio-control { position: fixed; bottom: 20px; right: 20px; z-index: 100; }
@@ -58,7 +61,7 @@
             cursor: pointer; backdrop-filter: blur(10px); font-weight: 900; font-size: 0.75rem;
         }
 
-        main { max-width: 500px; margin: auto; padding-top: 85vh; padding-bottom: 60px; padding-left: 15px; padding-right: 15px; }
+        main { max-width: 500px; margin: auto; padding-top: 80vh; padding-bottom: 60px; padding-left: 15px; padding-right: 15px; }
 
         .content-wrap {
             border: 2px solid var(--cyan); border-radius: 40px;
@@ -141,7 +144,7 @@
 
 <header id="mainHeader">
     <h1>Bitcoin saves lives.</h1>
-    <p style="color: var(--cyan); letter-spacing: 4px; font-weight: bold; font-size: 0.75rem; margin-top: 5px;">PRIVATE INITIATIVE</p>
+    <p style="color: var(--cyan); letter-spacing: 4px; font-weight: bold; font-size: 0.75rem; margin-top: 10px;">PRIVATE INITIATIVE</p>
 </header>
 
 <main>
@@ -202,9 +205,9 @@
     const header = document.getElementById("mainHeader");
     audio.volume = 0.5;
 
-    // Scroll Logic: Hide Header when scrolling down
+    // Scroll Logic: Hide Header gently when scrolling down
     window.onscroll = function() {
-        if (window.scrollY > 100) {
+        if (window.scrollY > 80) {
             header.classList.add("header-hidden");
         } else {
             header.classList.remove("header-hidden");
