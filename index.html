@@ -28,12 +28,10 @@
             object-fit: cover; z-index: -2; filter: brightness(0.8);
         }
 
-        /* HEADER: Slower transition & Stronger Glow */
         header { 
             position: fixed; top: 0; left: 0; width: 100%;
             text-align: center; padding: 40px 20px; z-index: 5;
             background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, transparent 100%);
-            /* Slow fade out (1.2 seconds) */
             transition: opacity 1.2s ease-in-out, visibility 1.2s;
         }
 
@@ -43,7 +41,6 @@
             font-size: clamp(1.6rem, 6vw, 2.8rem); font-weight: 900; 
             text-transform: uppercase; 
             animation: breathe 4s ease-in-out infinite;
-            /* Strong Neon Glow */
             text-shadow: 0 0 10px rgba(247, 147, 26, 0.5), 0 0 20px rgba(247, 147, 26, 0.3);
             margin: 0;
             letter-spacing: 2px;
@@ -203,15 +200,24 @@
 <script>
     const audio = document.getElementById("mG");
     const header = document.getElementById("mainHeader");
+    let lastScrollTop = 0;
     audio.volume = 0.5;
 
-    // Scroll Logic: Hide Header gently when scrolling down
+    // Advanced Scroll Logic
     window.onscroll = function() {
-        if (window.scrollY > 80) {
+        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+        // Hide only after 180px scroll down
+        if (scrollTop > 180) {
             header.classList.add("header-hidden");
-        } else {
+        } 
+        
+        // Show immediately when scrolling UP or when at the top
+        if (scrollTop < lastScrollTop || scrollTop <= 10) {
             header.classList.remove("header-hidden");
         }
+
+        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
     };
 
     function setPP(amt) {
