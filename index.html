@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>You can help | give-me.org</title>
@@ -101,7 +101,8 @@
 
         .qr-wrap img { 
             background: #fff; padding: 10px; border-radius: 20px; 
-            margin-top: 40px; width: 140px; box-shadow: 0 0 15px var(--glow-color);
+            margin-top: 40px; width: 140px; box-shadow: 0 0 20px var(--btc);
+            border: 2px solid var(--btc);
         }
 
         .legal-footer { margin-top: 45px; padding: 20px; border-top: 1px solid rgba(255, 255, 255, 0.1); font-size: 0.7rem; opacity: 0.7; }
@@ -118,7 +119,7 @@
     <source src="video.mp4" type="video/mp4">
 </video>
 
-<audio id="clickSound" src="https://www.soundjay.com/buttons/button-16.mp3" preload="auto"></audio>
+<audio id="clickSound" src="click.mp3" preload="auto"></audio>
 
 <div class="audio-control">
     <button class="btn-audio" onclick="tM(); playClick();" id="mB"><i class="fa-solid fa-volume-xmark"></i> SOUND ON</button>
@@ -131,6 +132,8 @@
 
 <main>
     <div class="content-wrap">
+        <p style="margin-bottom: 25px; font-weight: 900; color: #fff; font-size: 0.85rem; text-transform: uppercase;">Support Private Initiative</p>
+        
         <div class="impact-list">
             <div class="card" onclick="setPP(15, this); playClick();">
                 <div class="info">
@@ -165,16 +168,16 @@
         </div>
         
         <div class="qr-wrap">
-            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed" alt="QR Code">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed&color=f7931a" alt="QR Code">
         </div>
         <div class="legal-footer">Private initiative. Not a registered charity. © 2026 give-me.org</div>
     </div>
 </main>
 
 <div id="thankYouBox">
-    <h2 style="color: var(--btc); font-weight: 900; text-transform: uppercase;">Danke!</h2>
-    <p>Deine Unterstützung hilft direkt und rettet Leben. Du machst heute einen echten Unterschied.</p>
-    <button style="background: var(--btc); border:none; padding:12px 25px; border-radius:50px; font-weight:900; cursor:pointer; margin-top: 15px;" onclick="document.getElementById('thankYouBox').style.display='none'; playClick();">SCHLIESSEN</button>
+    <h2 style="color: var(--btc); font-weight: 900; text-transform: uppercase;">Thank you!</h2>
+    <p>Your support helps directly and saves lives. You are making a real difference today.</p>
+    <button style="background: var(--btc); border:none; padding:12px 25px; border-radius:50px; font-weight:900; cursor:pointer; margin-top: 15px;" onclick="document.getElementById('thankYouBox').style.display='none'; playClick();">CLOSE</button>
 </div>
 
 <script>
@@ -190,8 +193,8 @@
 
     function playClick() {
         clickSound.currentTime = 0;
-        clickSound.volume = 1.0; // Lautstärke auf Maximum gesetzt
-        clickSound.play().catch(e => {}); 
+        clickSound.volume = 1.0; 
+        clickSound.play().catch(e => { console.log("click.mp3 not found or blocked"); }); 
     }
 
     function tM() {
@@ -225,7 +228,7 @@
         const display = document.getElementById("ppAmt");
         document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
         element.classList.add('active');
-        btn.href = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=give-me.org@gmx.net&amount=${amt}&currency_code=EUR&item_name=Spende%20give-me.org`;
+        btn.href = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=give-me.org@gmx.net&amount=${amt}&currency_code=EUR&item_name=Donation%20give-me.org`;
         display.innerText = `(${amt}€)`;
     }
 
@@ -250,7 +253,7 @@
 
     function cT() {
         navigator.clipboard.writeText("bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed").then(() => {
-            document.getElementById("cBn").innerHTML = '<i class="fa-solid fa-check"></i> KOPIERT';
+            document.getElementById("cBn").innerHTML = '<i class="fa-solid fa-check"></i> COPIED';
             document.getElementById('thankYouBox').style.display = 'block';
             setTimeout(() => {
                 document.getElementById("cBn").innerHTML = '<i class="fa-regular fa-copy"></i> COPY BTC';
