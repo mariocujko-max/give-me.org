@@ -1,8 +1,4 @@
-Hier ist dein finaler, sauber strukturierter Code. Er enthält alle Funktionen: den **Klick-Sound**, den **sanften Audio-Fade**, die **give-me.org** Anpassung und das optimierte Layout.
 
-Kopiere diesen gesamten Block in deine `index.html`:
-
-```html
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -135,8 +131,6 @@ Kopiere diesen gesamten Block in deine `index.html`:
 
 <main>
     <div class="content-wrap">
-        <p style="margin-bottom: 25px; font-weight: 900; color: #fff; font-size: 0.85rem; text-transform: uppercase;">Support Private Initiative</p>
-        
         <div class="impact-list">
             <div class="card" onclick="setPP(15, this); playClick();">
                 <div class="info">
@@ -190,11 +184,13 @@ Kopiere diesen gesamten Block in deine `index.html`:
 
     window.addEventListener('scroll', () => {
         let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        header.style.opacity = 1 - (scrollTop / 500);
+        let opacity = 1 - (scrollTop / 500);
+        header.style.opacity = opacity < 0 ? 0 : opacity;
     }, { passive: true });
 
     function playClick() {
         clickSound.currentTime = 0;
+        clickSound.volume = 1.0; // Lautstärke auf Maximum gesetzt
         clickSound.play().catch(e => {}); 
     }
 
@@ -225,10 +221,12 @@ Kopiere diesen gesamten Block in deine `index.html`:
     }
 
     function setPP(amt, element) {
+        const btn = document.getElementById("ppBtn");
+        const display = document.getElementById("ppAmt");
         document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
         element.classList.add('active');
-        document.getElementById("ppBtn").href = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=give-me.org@gmx.net&amount=${amt}&currency_code=EUR&item_name=Spende%20give-me.org`;
-        document.getElementById("ppAmt").innerText = `(${amt}€)`;
+        btn.href = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=give-me.org@gmx.net&amount=${amt}&currency_code=EUR&item_name=Spende%20give-me.org`;
+        display.innerText = `(${amt}€)`;
     }
 
     function showThanks() {
@@ -243,8 +241,9 @@ Kopiere diesen gesamten Block in deine `index.html`:
             const d = await r.json();
             const p = d.bitcoin.eur;
             [15, 80, 300].forEach((eur, i) => {
+                const b = (eur / p).toFixed(6);
                 const el = document.getElementById(`p${i+1}`);
-                if(el) el.innerText = `${(eur / p).toFixed(6)} BTC`;
+                if(el) el.innerText = `${b} BTC`;
             });
         } catch (e) {}
     }
@@ -263,4 +262,3 @@ Kopiere diesen gesamten Block in deine `index.html`:
 </body>
 </html>
 
-```
