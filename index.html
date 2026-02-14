@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <title>You can help | Private Initiative</title>
@@ -25,11 +25,12 @@
         .bg-video {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             object-fit: cover; z-index: -2; filter: brightness(0.8);
+            background-color: #000; /* Fallback falls Video lädt */
         }
 
         header { 
             position: fixed; top: 0; left: 0; width: 100%;
-            text-align: center; padding: 70px 20px; z-index: 100;
+            text-align: center; padding: 60px 20px; z-index: 100;
             background: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, transparent 100%);
             transition: opacity 0.4s ease;
             pointer-events: none;
@@ -100,17 +101,6 @@
         .btn-wallet { background: #fff; color: #000; }
         .btn-tiktok { background: #000; color: #fff; box-shadow: -3px 0 0 var(--tiktok-red), 3px 0 0 var(--cyan); }
 
-        .btn:hover { transform: scale(1.03); filter: brightness(1.1); border-color: #fff; }
-
-        .amount-hint { font-size: 0.85rem; color: #fff; margin-top: 20px; font-weight: 900; text-shadow: 0 0 8px var(--cyan); }
-        
-        .qr-wrap img { 
-            background: #fff; padding: 10px; border-radius: 18px; 
-            margin-top: 35px; width: 130px; 
-            border: 2px solid var(--glow-color);
-            box-shadow: 0 0 10px var(--glow-color);
-        }
-
         #thankYouBox {
             display: none;
             position: fixed;
@@ -124,8 +114,7 @@
             backdrop-filter: blur(20px);
             width: 85%; max-width: 350px;
         }
-        #thankYouBox h2 { color: var(--btc); margin-top: 0; text-transform: uppercase; }
-        #thankYouBox p { font-size: 0.9rem; line-height: 1.4; color: #fff; }
+        #thankYouBox h2 { color: var(--btc); margin-top: 0; }
         #thankYouBox .close-btn { 
             margin-top: 20px; background: var(--btc); border: none; 
             padding: 12px 25px; border-radius: 50px; font-weight: 900; cursor: pointer; 
@@ -139,8 +128,8 @@
 </head>
 <body>
 
-<video id="v" class="bg-video" autoplay muted playsinline>
-    <source src="video.mp4" type="image/mp4">
+<video id="v" class="bg-video" autoplay muted playsinline preload="auto">
+    <source src="video.mp4" type="video/mp4">
 </video>
 
 <audio id="clickSound" src="https://www.soundjay.com/buttons/button-16.mp3" preload="auto"></audio>
@@ -159,24 +148,15 @@
         <p style="margin-bottom: 25px; font-weight: 900; color: #fff; font-size: 0.8rem; text-transform: uppercase;">Support our Mission</p>
         <div class="impact-list">
             <div class="card" onclick="setPP(15, this); playClick();">
-                <div class="info">
-                    <b id="p1">... BTC</b>
-                    <span>Food (1 Week)</span>
-                </div>
+                <div class="info"><b id="p1">... BTC</b><span>Food (1 Week)</span></div>
                 <div class="price">15€</div>
             </div>
             <div class="card" onclick="setPP(80, this); playClick();">
-                <div class="info">
-                    <b id="p2">... BTC</b>
-                    <span>Vaccines & Care</span>
-                </div>
+                <div class="info"><b id="p2">... BTC</b><span>Vaccines & Care</span></div>
                 <div class="price">80€</div>
             </div>
             <div class="card" onclick="setPP(300, this); playClick();">
-                <div class="info">
-                    <b id="p3">... BTC</b>
-                    <span>Emergency Surgery</span>
-                </div>
+                <div class="info"><b id="p3">... BTC</b><span>Emergency Surgery</span></div>
                 <div class="price">300€</div>
             </div>
         </div>
@@ -189,9 +169,7 @@
             <a href="bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed" class="btn btn-wallet" onclick="playClick();"><i class="fa-brands fa-bitcoin"></i> WALLET</a>
             <a href="https://www.tiktok.com/@giveme.org" target="_blank" class="btn btn-tiktok" onclick="playClick();"><i class="fa-brands fa-tiktok"></i> TIKTOK</a>
         </div>
-        <div class="amount-hint" id="ppHint">Select a donation goal</div>
         <div class="qr-wrap"><img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed" alt="QR Code"></div>
-        <div class="legal-footer">Private initiative. Not a registered charity. © 2026 give-me.org</div>
     </div>
 </main>
 
@@ -203,39 +181,32 @@
 
 <script>
     const video = document.getElementById("v");
-    const header = document.getElementById("mainHeader");
     const clickSound = document.getElementById("clickSound");
 
-    // --- VERBESSERTER PING-PONG LOOP ---
-    let direction = 1; // 1 = vorwärts, -1 = rückwärts
-
+    // Ping-Pong Video Loop Logik
+    let direction = 1;
     function loopVideo() {
+        if (!video.duration) { requestAnimationFrame(loopVideo); return; }
+        
         if (direction === 1) {
-            // Wenn Video fast am Ende (0.3s Puffer), umschalten auf rückwärts
-            if (video.currentTime >= video.duration - 0.3) {
+            if (video.currentTime >= video.duration - 0.4) {
                 direction = -1;
                 video.pause();
             }
         } else {
-            // Rückwärts-Schritt
-            video.currentTime -= 0.03; 
-            // Wenn Video fast am Anfang, umschalten auf vorwärts
-            if (video.currentTime <= 0.3) {
+            video.currentTime -= 0.03;
+            if (video.currentTime <= 0.4) {
                 direction = 1;
                 video.play();
             }
         }
         requestAnimationFrame(loopVideo);
     }
-
-    // Startet den Loop, sobald das Video geladen ist
-    video.onloadedmetadata = () => {
-        requestAnimationFrame(loopVideo);
-    };
+    video.onplay = () => { if(direction === 1) requestAnimationFrame(loopVideo); };
 
     function playClick() {
         clickSound.currentTime = 0;
-        clickSound.play().catch(e => {}); 
+        clickSound.play().catch(() => {}); 
     }
 
     function tM() {
@@ -243,25 +214,14 @@
         if (video.muted) {
             video.muted = false; video.volume = 0;
             let fade = setInterval(() => {
-                if (video.volume < 0.5) video.volume = Math.min(video.volume + 0.05, 0.5);
+                if (video.volume < 0.5) video.volume += 0.05;
                 else clearInterval(fade);
             }, 50);
             b.innerHTML = '<i class="fa-solid fa-volume-high"></i> SOUND ON';
         } else {
-            let fade = setInterval(() => {
-                if (video.volume > 0.05) video.volume -= 0.05;
-                else { clearInterval(fade); video.muted = true; b.innerHTML = '<i class="fa-solid fa-volume-xmark"></i> SOUND OFF'; }
-            }, 50);
+            video.muted = true;
+            b.innerHTML = '<i class="fa-solid fa-volume-xmark"></i> SOUND OFF';
         }
-    }
-
-    window.addEventListener('scroll', () => {
-        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        header.style.opacity = 1 - (scrollTop / 500);
-    }, { passive: true });
-
-    function showThanks() {
-        setTimeout(() => document.getElementById('thankYouBox').style.display = 'block', 800);
     }
 
     function setPP(amt, element) {
@@ -269,7 +229,10 @@
         element.classList.add('active');
         document.getElementById("ppBtn").href = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=give-me.org@gmx.net&amount=${amt}&currency_code=EUR&item_name=Support%20Mission`;
         document.getElementById("ppAmt").innerText = `(${amt}€)`;
-        document.getElementById("ppHint").innerHTML = `<i class="fa-solid fa-check"></i> Goal: ${amt}€ selected`;
+    }
+
+    function showThanks() {
+        setTimeout(() => document.getElementById('thankYouBox').style.display = 'block', 800);
     }
 
     async function uP() {
@@ -287,7 +250,7 @@
     function cT() {
         navigator.clipboard.writeText("bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed").then(() => {
             document.getElementById("cBn").innerHTML = '<i class="fa-solid fa-check"></i> COPIED';
-            document.getElementById('thankYouBox').style.display = 'block';
+            showThanks();
             setTimeout(() => document.getElementById("cBn").innerHTML = '<i class="fa-regular fa-copy"></i> COPY BTC', 2000);
         });
     }
