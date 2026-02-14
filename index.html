@@ -11,7 +11,7 @@
         :root {
             --btc: #f7931a;
             --cyan: #00f2ff;
-            --tiktok: #ff0050;
+            --white: rgba(255, 255, 255, 0.9);
         }
 
         * { box-sizing: border-box; }
@@ -22,13 +22,13 @@
 
         .bg-video {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            object-fit: cover; z-index: -2; filter: brightness(0.5);
+            object-fit: cover; z-index: -2; filter: brightness(0.6);
         }
 
         header { 
             position: fixed; top: 0; left: 0; width: 100%;
             text-align: center; padding: 60px 20px; z-index: 100;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, transparent 100%);
+            background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, transparent 100%);
             transition: opacity 0.4s ease;
             pointer-events: none;
         }
@@ -41,51 +41,52 @@
         }
 
         @keyframes breathe {
-            0%, 100% { transform: scale(1); text-shadow: 0 0 15px var(--btc); }
-            50% { transform: scale(1.03); text-shadow: 0 0 35px var(--btc), 0 0 50px var(--btc); }
+            0%, 100% { transform: scale(1); text-shadow: 0 0 20px var(--btc); }
+            50% { transform: scale(1.03); text-shadow: 0 0 40px var(--btc); }
         }
 
         .audio-control { position: fixed; bottom: 25px; right: 25px; z-index: 1000; }
         .btn-audio {
-            background: rgba(0,0,0,0.3); border: 2px solid var(--cyan);
+            background: rgba(255, 255, 255, 0.1); border: 2px solid var(--cyan);
             color: var(--cyan); padding: 12px 20px; border-radius: 50px;
-            cursor: pointer; backdrop-filter: blur(8px); font-weight: 900; font-size: 0.8rem;
+            cursor: pointer; backdrop-filter: blur(5px); font-weight: 900; font-size: 0.8rem;
             transition: 0.3s; pointer-events: auto;
-            box-shadow: 0 0 15px rgba(0, 242, 255, 0.2);
+            box-shadow: 0 0 15px var(--cyan);
         }
 
         main { max-width: 500px; margin: auto; padding-top: 85vh; padding-bottom: 100px; padding-left: 20px; padding-right: 20px; }
 
+        /* Scroll-Bereich: Heller & Transparenter */
         .content-wrap {
-            border: 2px solid rgba(0, 242, 255, 0.3); border-radius: 40px;
+            border: 2px solid var(--white); border-radius: 40px;
             padding: 35px 20px; text-align: center;
-            background: rgba(0,0,0,0.4);
-            backdrop-filter: blur(15px);
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
             position: relative; z-index: 10;
-            box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
         }
 
         .impact-list { display: flex; flex-direction: column; gap: 15px; margin-bottom: 35px; }
         
         .card {
-            background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(255, 255, 255, 0.2);
             padding: 20px; border-radius: 26px; cursor: pointer; 
             transition: all 0.3s ease;
             display: flex; justify-content: space-between; align-items: center; text-align: left;
         }
-        .card:hover { border-color: var(--cyan); transform: translateY(-3px); background: rgba(0, 242, 255, 0.05); }
+        .card:hover { border-color: var(--cyan); background: rgba(255, 255, 255, 0.1); }
         .card.active {
             border-color: var(--btc);
-            background: rgba(247, 147, 26, 0.1);
-            box-shadow: 0 0 20px rgba(247, 147, 26, 0.2);
+            background: rgba(247, 147, 26, 0.2);
+            box-shadow: 0 0 20px var(--btc);
         }
 
         .btn-grid-main { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 25px; }
         
-        /* Die neuen transparenten Buttons mit Rand-Effekt */
+        /* Einheitlich helle & große Ränder für alle Buttons */
         .btn {
-            background: rgba(0,0,0,0.2); 
-            border: 2px solid rgba(255,255,255,0.2);
+            background: rgba(255, 255, 255, 0.1); 
+            border: 2px solid var(--white);
             color: #fff; padding: 20px 10px; border-radius: 22px; font-weight: 900;
             cursor: pointer; text-decoration: none; text-align: center;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -93,38 +94,37 @@
             text-transform: uppercase; gap: 10px; font-size: 0.8rem;
             backdrop-filter: blur(5px);
             animation: float 4s ease-in-out infinite;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
         }
 
         @keyframes float {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-6px); }
+            50% { transform: translateY(-8px); }
         }
-        .btn:nth-child(2) { animation-delay: 0.7s; }
-        .btn:nth-child(3) { animation-delay: 1.4s; }
-        .btn:nth-child(4) { animation-delay: 2.1s; }
+        .btn:nth-child(2) { animation-delay: 0.8s; }
+        .btn:nth-child(3) { animation-delay: 1.6s; }
+        .btn:nth-child(4) { animation-delay: 2.4s; }
 
         .btn:hover { 
-            transform: scale(1.05) translateY(-2px);
-            box-shadow: 0 0 25px currentColor;
-            background: rgba(255, 255, 255, 0.05);
+            transform: scale(1.05);
+            border-color: var(--cyan);
+            box-shadow: 0 0 25px var(--cyan);
+            color: var(--cyan);
         }
 
-        /* Farbspezifische Ränder */
-        .btn-copy { border-color: var(--btc); color: var(--btc); }
-        .btn-paypal { border-color: var(--cyan); color: var(--cyan); }
-        .btn-wallet { border-color: #fff; color: #fff; }
-        .btn-tiktok { border-color: var(--tiktok); color: var(--tiktok); }
+        /* PayPal & Copy Spezial-Hover */
+        .btn-copy:hover { border-color: var(--btc); color: var(--btc); box-shadow: 0 0 25px var(--btc); }
 
-        .btn-pulse { animation: pop-pulse 0.5s ease-out; border-width: 3px; }
+        .btn-pulse { animation: pop-pulse 0.5s ease-out; border-width: 3px; border-color: var(--cyan) !important; }
         @keyframes pop-pulse {
             0% { transform: scale(1); }
             50% { transform: scale(1.15); }
             100% { transform: scale(1); }
         }
 
-        .amount-hint { font-size: 0.9rem; color: var(--cyan); margin-top: 22px; font-weight: bold; text-shadow: 0 0 10px var(--cyan); }
-        .qr-wrap img { background: #fff; padding: 10px; border-radius: 18px; margin-top: 45px; width: 135px; opacity: 0.85; border: 2px solid var(--cyan); }
-        .legal-footer { margin-top: 55px; padding: 20px; border-top: 1px solid rgba(255, 255, 255, 0.1); font-size: 0.7rem; opacity: 0.5; }
+        .amount-hint { font-size: 0.9rem; color: var(--cyan); margin-top: 22px; font-weight: 900; text-shadow: 0 0 15px var(--cyan); }
+        .qr-wrap img { background: #fff; padding: 10px; border-radius: 18px; margin-top: 45px; width: 140px; border: 3px solid var(--white); box-shadow: 0 0 20px var(--white); }
+        .legal-footer { margin-top: 55px; padding: 20px; border-top: 2px solid rgba(255, 255, 255, 0.1); font-size: 0.75rem; font-weight: bold; opacity: 0.7; }
     </style>
 </head>
 <body>
@@ -139,12 +139,12 @@
 
 <header id="mainHeader">
     <h1>Bitcoin saves lives.</h1>
-    <p style="color: var(--cyan); letter-spacing: 5px; font-weight: 900; font-size: 0.7rem; margin-top: 12px;">PRIVATE INITIATIVE</p>
+    <p style="color: var(--cyan); letter-spacing: 5px; font-weight: 900; font-size: 0.75rem; margin-top: 12px; text-shadow: 0 0 10px var(--cyan);">PRIVATE INITIATIVE</p>
 </header>
 
 <main>
     <div class="content-wrap">
-        <p style="margin-bottom: 25px; font-weight: 900; color: rgba(255,255,255,0.8); font-size: 0.8rem; text-transform: uppercase;">Help us feed them:</p>
+        <p style="margin-bottom: 25px; font-weight: 900; color: #fff; font-size: 0.85rem; text-transform: uppercase;">Help us feed them:</p>
         <div class="impact-list">
             <div class="card" onclick="setPP(15, this)">
                 <div class="info"><b id="p1">... BTC</b><span>Food (1 Week)</span></div>
@@ -180,7 +180,7 @@
 
     window.addEventListener('scroll', () => {
         let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        let opacity = 1 - (scrollTop / 450);
+        let opacity = 1 - (scrollTop / 500);
         header.style.opacity = opacity < 0 ? 0 : opacity;
     }, { passive: true });
 
@@ -192,7 +192,7 @@
         element.classList.add('active');
         btn.href = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=give-me.org@gmx.net&amount=${amt}&currency_code=EUR&item_name=Support%20Private%20Initiative`;
         display.innerText = `(${amt}€)`;
-        hint.innerHTML = `<i class="fa-solid fa-check"></i> Goal: ${amt}€ set`;
+        hint.innerHTML = `<i class="fa-solid fa-check"></i> Goal: ${amt}€ selected`;
         btn.classList.remove('btn-pulse');
         void btn.offsetWidth; 
         btn.classList.add('btn-pulse');
