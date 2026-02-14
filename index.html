@@ -22,7 +22,7 @@
 
         .bg-video {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            object-fit: cover; z-index: -2; filter: brightness(0.65);
+            object-fit: cover; z-index: -2; filter: brightness(0.6);
         }
 
         header { 
@@ -43,62 +43,54 @@
             to { transform: rotate(360deg); }
         }
 
-        /* DEZENTER NEON SOUND BUTTON */
+        /* NEON SOUND BUTTON */
         .audio-control { position: fixed; bottom: 25px; right: 25px; z-index: 1000; }
-        
         .neon-wrapper-small {
             position: relative; padding: 1.5px; border-radius: 50px;
             overflow: hidden; display: flex; background: transparent;
         }
-
         .neon-wrapper-small::before {
             content: ''; position: absolute; width: 200%; height: 200%; top: -50%; left: -50%;
-            /* Dezenterer Verlauf durch transparent-Anteile */
             background: conic-gradient(transparent, var(--cyan), transparent, var(--btc), transparent);
-            animation: rotateNeon 6s linear infinite;
+            animation: rotateNeon 4s linear infinite;
         }
-
         .btn-audio {
             position: relative; background: #000; border: none; color: var(--cyan);
             padding: 10px 20px; border-radius: 50px; cursor: pointer;
-            backdrop-filter: blur(15px); font-weight: 900; font-size: 0.8rem; z-index: 1;
-            margin: 2px; /* 100% Transparenz-Lücke */
-            opacity: 0.9;
+            backdrop-filter: blur(15px); font-weight: 900; font-size: 0.8rem; z-index: 1; margin: 2px;
         }
 
-        /* DEZENTER NEON MAIN BOX RAND */
+        /* MAIN BOX MIT ROTIERENDEM RAND - INNEN NUR TRANSPARENT */
         main { max-width: 500px; margin: auto; padding-top: 75vh; padding-bottom: 80px; padding-left: 15px; padding-right: 15px; }
 
         .neon-outer-wrap {
             position: relative; padding: 1.5px; border-radius: 42px;
             overflow: hidden; background: transparent;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.8);
         }
 
         .neon-outer-wrap::before {
             content: ''; position: absolute; width: 150%; height: 150%; top: -25%; left: -25%;
-            /* Dezenterer Verlauf */
             background: conic-gradient(transparent, var(--cyan), transparent, var(--btc), transparent);
-            animation: rotateNeon 10s linear infinite;
+            animation: rotateNeon 8s linear infinite;
         }
 
         .content-wrap {
             position: relative; border-radius: 40px; padding: 35px 18px;
             text-align: center; z-index: 10;
-            background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(15px);
-            margin: 4px; /* 100% Transparenz-Lücke zum Rand */
+            background: rgba(0, 0, 0, 0.45); backdrop-filter: blur(15px);
+            margin: 4px; /* 100% Transparenz zum rotierenden Rahmen */
+            border: 1px solid rgba(255,255,255,0.05);
         }
 
-        /* INTERAKTIVE ELEMENTE */
+        /* CARDS & BUTTONS */
         .impact-list { display: flex; flex-direction: column; gap: 14px; margin-bottom: 30px; }
         .card {
             background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);
             padding: 18px 22px; border-radius: 25px; cursor: pointer; 
             transition: 0.3s; display: flex; justify-content: space-between; align-items: center;
         }
-        .card:active { transform: scale(0.97); }
-        .card.active { border-color: var(--btc); background: rgba(226, 138, 26, 0.1); }
-
+        .card.active { border-color: var(--btc); background: rgba(226, 138, 26, 0.15); box-shadow: 0 0 15px var(--btc); }
         .info b { color: var(--btc); font-size: 1.1rem; font-weight: 900; }
         .price { font-weight: 900; font-size: 1.2rem; color: var(--cyan); }
 
@@ -112,17 +104,15 @@
         .btn:active { transform: scale(0.95); }
         .btn-copy { background: var(--btc); color: #000; }
         .btn-paypal { background: var(--paypal); color: #fff; }
-        .btn-wallet { background: #fff; color: #000; }
-        .btn-tiktok { background: rgba(0,0,0,0.5); color: #fff; }
 
         #thankYouBox {
             display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            background: rgba(0, 0, 0, 0.9); border: 1px solid var(--btc); padding: 35px; 
+            background: rgba(0, 0, 0, 0.95); border: 1px solid var(--btc); padding: 35px; 
             border-radius: 35px; z-index: 2000; text-align: center; backdrop-filter: blur(30px);
             width: 85%; max-width: 380px;
         }
 
-        .qr-wrap img { background: #fff; padding: 12px; border-radius: 20px; margin-top: 40px; width: 145px; border: 1px solid var(--btc); }
+        .qr-wrap img { background: #fff; padding: 10px; border-radius: 20px; margin-top: 40px; width: 140px; border: 1px solid var(--btc); }
         .legal-footer { margin-top: 45px; padding: 20px; border-top: 1px solid rgba(255, 255, 255, 0.05); font-size: 0.7rem; opacity: 0.4; }
     </style>
 </head>
@@ -182,54 +172,37 @@
 
 <div id="thankYouBox">
     <h2 style="color: var(--btc); font-weight: 900; text-transform: uppercase;">Thank you!</h2>
-    <p>Your support helps directly and saves lives. You are making a real difference today.</p>
+    <p>Your support helps directly and saves lives.</p>
     <button style="background: var(--btc); border:none; padding:12px 30px; border-radius:50px; font-weight:900; cursor:pointer; margin-top: 15px; color: #000;" onclick="document.getElementById('thankYouBox').style.display='none'; playClick();">CLOSE</button>
 </div>
 
 <script>
     const video = document.getElementById("v");
-    const header = document.getElementById("mainHeader");
     const clickSound = document.getElementById("clickSound");
 
-    window.addEventListener('scroll', () => {
-        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        header.style.opacity = 1 - (scrollTop / 450);
-    }, { passive: true });
-
     function playClick() {
-        clickSound.currentTime = 0;
-        clickSound.volume = 0.2; 
-        clickSound.play().catch(e => {}); 
+        if(clickSound) { clickSound.currentTime = 0; clickSound.volume = 0.2; clickSound.play().catch(e => {}); }
     }
 
     function tM() {
         const b = document.getElementById("mB");
         if (video.muted) {
-            video.muted = false;
-            video.volume = 0;
-            const fadeIn = setInterval(() => {
-                if (video.volume < 0.4) video.volume += 0.05;
-                else clearInterval(fadeIn);
-            }, 50);
+            video.muted = false; video.volume = 0.4;
             b.innerHTML = '<i class="fa-solid fa-volume-high"></i> SOUND ON';
         } else {
-            const fadeOut = setInterval(() => {
-                if (video.volume > 0.05) video.volume -= 0.05;
-                else { video.muted = true; clearInterval(fadeOut); b.innerHTML = '<i class="fa-solid fa-volume-xmark"></i> SOUND OFF'; }
-            }, 50);
+            video.muted = true;
+            b.innerHTML = '<i class="fa-solid fa-volume-xmark"></i> SOUND OFF';
         }
     }
 
     function setPP(amt, element) {
         document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
         element.classList.add('active');
-        document.getElementById("ppBtn").href = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=give-me.org@gmx.net&amount=${amt}&currency_code=EUR&item_name=Donation%20give-me.org`;
+        document.getElementById("ppBtn").href = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=give-me.org@gmx.net&amount=${amt}&currency_code=EUR`;
         document.getElementById("ppAmt").innerText = `(${amt}€)`;
     }
 
-    function showThanks() {
-        setTimeout(() => document.getElementById('thankYouBox').style.display = 'block', 800);
-    }
+    function showThanks() { document.getElementById('thankYouBox').style.display = 'block'; }
 
     async function uP() {
         try {
@@ -238,18 +211,16 @@
             const p = d.bitcoin.eur;
             [15, 80, 300].forEach((eur, i) => {
                 const b = (eur / p).toFixed(6);
-                const el = document.getElementById(`p${i+1}`);
-                if(el) el.innerText = `${b} BTC`;
+                document.getElementById(`p${i+1}`).innerText = `${b} BTC`;
             });
         } catch (e) {}
     }
 
     function cT() {
-        navigator.clipboard.writeText("bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed").then(() => {
-            document.getElementById("cBn").innerHTML = '<i class="fa-solid fa-check"></i> COPIED';
-            document.getElementById('thankYouBox').style.display = 'block';
-            setTimeout(() => document.getElementById("cBn").innerHTML = '<i class="fa-regular fa-copy"></i> COPY BTC', 2000);
-        });
+        navigator.clipboard.writeText("bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed");
+        document.getElementById("cBn").innerText = "COPIED";
+        showThanks();
+        setTimeout(() => { document.getElementById("cBn").innerText = "COPY BTC"; }, 2000);
     }
     uP(); setInterval(uP, 300000);
 </script>
