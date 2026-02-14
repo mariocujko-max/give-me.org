@@ -40,41 +40,80 @@
             color: #fff; text-shadow: 0 4px 15px rgba(0,0,0,0.8);
         }
 
+        /* GEMEINSAME ANIMATION FÜR NEON */
+        @keyframes rotateNeon {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* NEON SOUND BUTTON */
         .audio-control { position: fixed; bottom: 25px; right: 25px; z-index: 1000; }
+        
+        .neon-wrapper-small {
+            position: relative;
+            padding: 2px;
+            border-radius: 50px;
+            overflow: hidden;
+            display: flex;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .neon-wrapper-small::before {
+            content: ''; position: absolute; width: 200%; height: 200%; top: -50%; left: -50%;
+            background: conic-gradient(transparent, var(--cyan), transparent, var(--btc), transparent);
+            animation: rotateNeon 4s linear infinite;
+        }
+
         .btn-audio {
-            background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.15);
-            color: var(--cyan); padding: 12px 22px; border-radius: 50px;
-            cursor: pointer; backdrop-filter: blur(15px); font-weight: 900;
-            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.3s;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            position: relative; background: #000; border: none; color: var(--cyan);
+            padding: 10px 20px; border-radius: 50px; cursor: pointer;
+            backdrop-filter: blur(15px); font-weight: 900; font-size: 0.8rem; z-index: 1;
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         .btn-audio:active { transform: scale(0.9); }
 
-        /* Scroll-Bereich auf 75vh korrigiert */
+        /* NEON MAIN CONTAINER (CONTENT WRAP) */
         main { max-width: 500px; margin: auto; padding-top: 75vh; padding-bottom: 80px; padding-left: 15px; padding-right: 15px; }
 
-        .content-wrap {
-            border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 40px;
-            padding: 35px 18px; text-align: center;
-            background: rgba(0, 0, 0, 0.15); backdrop-filter: blur(5px);
-            position: relative; z-index: 10; box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+        .neon-outer-wrap {
+            position: relative;
+            padding: 2px; /* Dicke des Neon-Rahmens */
+            border-radius: 42px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.8);
         }
 
+        .neon-outer-wrap::before {
+            content: ''; position: absolute; width: 150%; height: 150%; top: -25%; left: -25%;
+            background: conic-gradient(transparent, var(--cyan), transparent, var(--btc), transparent);
+            animation: rotateNeon 8s linear infinite; /* Etwas langsamer als der Button */
+        }
+
+        .content-wrap {
+            position: relative;
+            background: rgba(0, 0, 0, 0.35); 
+            backdrop-filter: blur(25px);
+            border-radius: 40px;
+            padding: 35px 18px;
+            text-align: center;
+            z-index: 10;
+        }
+
+        /* BUTTONS & CARDS */
         .impact-list { display: flex; flex-direction: column; gap: 14px; margin-bottom: 30px; }
         
         .card {
-            background: rgba(255, 255, 255, 0.13); border: 1px solid rgba(255, 255, 255, 0.18);
+            background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08);
             padding: 18px 22px; border-radius: 25px; cursor: pointer; 
             transition: all 0.3s ease; display: flex; justify-content: space-between; align-items: center;
         }
-        .card:hover { border-color: rgba(0, 242, 255, 0.5); background: rgba(255, 255, 255, 0.06); }
-        .card:active { transform: scale(0.96); background: rgba(255, 255, 255, 0.3); }
+        .card:hover { border-color: rgba(0, 242, 255, 0.5); }
+        .card:active { transform: scale(0.96); background: rgba(255, 255, 255, 0.12); }
         .card.active { border-color: var(--btc); background: rgba(226, 138, 26, 0.1); box-shadow: 0 0 20px var(--glow-color); }
 
         .info { display: flex; flex-direction: column; gap: 3px; text-align: left;}
         .info b { color: var(--btc); font-size: 1.1rem; font-weight: 900; }
         .info span { color: rgba(255, 255, 255, 0.5); font-size: 0.75rem; text-transform: uppercase; font-weight: 700; }
-        
         .price { font-weight: 900; font-size: 1.2rem; color: var(--cyan); }
 
         .btn-grid-main { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 25px; }
@@ -87,9 +126,9 @@
             display: flex; align-items: center; justify-content: center;
             text-transform: uppercase; gap: 10px; font-size: 0.75rem;
         }
-        .btn:active { transform: scale(0.92); filter: brightness(1.2); }
+        .btn:active { transform: scale(0.92); }
 
-        .btn-copy { background: var(--btc); color: #000; box-shadow: 0 4px 15px rgba(226, 138, 26, 0.3); }
+        .btn-copy { background: var(--btc); color: #000; }
         .btn-paypal { background: var(--paypal); color: #fff; }
         .btn-wallet { background: #fff; color: #000; }
         .btn-tiktok { background: rgba(0,0,0,0.4); color: #fff; border: 1px solid rgba(255,255,255,0.15); }
@@ -104,16 +143,12 @@
 
         .qr-wrap img { 
             background: #fff; padding: 12px; border-radius: 20px; 
-            margin-top: 40px; width: 145px; box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-            border: 1px solid var(--btc);
+            margin-top: 40px; width: 145px; border: 1px solid var(--btc);
         }
 
         .legal-footer { margin-top: 45px; padding: 20px; border-top: 1px solid rgba(255, 255, 255, 0.05); font-size: 0.7rem; opacity: 0.4; }
 
-        @media (max-width: 400px) {
-            h1 { font-size: 1.8rem; }
-            .btn { font-size: 0.65rem; }
-        }
+        @media (max-width: 400px) { h1 { font-size: 1.8rem; } .btn { font-size: 0.65rem; } }
     </style>
 </head>
 <body>
@@ -125,7 +160,9 @@
 <audio id="clickSound" src="click.mp3" preload="auto"></audio>
 
 <div class="audio-control">
-    <button class="btn-audio" onclick="tM(); playClick();" id="mB"><i class="fa-solid fa-volume-xmark"></i> SOUND ON</button>
+    <div class="neon-wrapper-small">
+        <button class="btn-audio" onclick="tM(); playClick();" id="mB"><i class="fa-solid fa-volume-xmark"></i> SOUND ON</button>
+    </div>
 </div>
 
 <header id="mainHeader">
@@ -134,44 +171,48 @@
 </header>
 
 <main>
-    <div class="content-wrap">
-        <div class="impact-list">
-            <div class="card" onclick="setPP(15, this); playClick();">
-                <div class="info">
-                    <b id="p1">... BTC</b>
-                    <span>Food (1 Week)</span>
+    <div class="neon-outer-wrap">
+        <div class="content-wrap">
+            <div class="impact-list">
+                <div class="card" onclick="setPP(15, this); playClick();">
+                    <div class="info">
+                        <b id="p1">... BTC</b>
+                        <span>Food (1 Week)</span>
+                    </div>
+                    <div class="price">15€</div>
                 </div>
-                <div class="price">15€</div>
-            </div>
-            <div class="card" onclick="setPP(80, this); playClick();">
-                <div class="info">
-                    <b id="p2">... BTC</b>
-                    <span>Vaccines & Care</span>
+                <div class="impact-list">
+                    <div class="card" onclick="setPP(80, this); playClick();">
+                        <div class="info">
+                            <b id="p2">... BTC</b>
+                            <span>Vaccines & Care</span>
+                        </div>
+                        <div class="price">80€</div>
+                    </div>
+                    <div class="card" onclick="setPP(300, this); playClick();">
+                        <div class="info">
+                            <b id="p3">... BTC</b>
+                            <span>Emergency Surgery</span>
+                        </div>
+                        <div class="price">300€</div>
+                    </div>
                 </div>
-                <div class="price">80€</div>
             </div>
-            <div class="card" onclick="setPP(300, this); playClick();">
-                <div class="info">
-                    <b id="p3">... BTC</b>
-                    <span>Emergency Surgery</span>
-                </div>
-                <div class="price">300€</div>
-            </div>
-        </div>
 
-        <div class="btn-grid-main">
-            <button class="btn btn-copy" id="cBn" onclick="cT(); playClick();"><i class="fa-regular fa-copy"></i> COPY BTC</button>
-            <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=give-me.org@gmx.net&currency_code=EUR" target="_blank" class="btn btn-paypal" id="ppBtn" onclick="showThanks(); playClick();">
-                <i class="fa-brands fa-paypal"></i> PAYPAL <span id="ppAmt"></span>
-            </a>
-            <a href="bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed" class="btn btn-wallet" onclick="playClick();"><i class="fa-brands fa-bitcoin"></i> WALLET</a>
-            <a href="https://www.tiktok.com/@giveme.org" target="_blank" class="btn btn-tiktok" onclick="playClick();"><i class="fa-brands fa-tiktok"></i> TIKTOK</a>
+            <div class="btn-grid-main">
+                <button class="btn btn-copy" id="cBn" onclick="cT(); playClick();"><i class="fa-regular fa-copy"></i> COPY BTC</button>
+                <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=give-me.org@gmx.net&currency_code=EUR" target="_blank" class="btn btn-paypal" id="ppBtn" onclick="showThanks(); playClick();">
+                    <i class="fa-brands fa-paypal"></i> PAYPAL <span id="ppAmt"></span>
+                </a>
+                <a href="bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed" class="btn btn-wallet" onclick="playClick();"><i class="fa-brands fa-bitcoin"></i> WALLET</a>
+                <a href="https://www.tiktok.com/@giveme.org" target="_blank" class="btn btn-tiktok" onclick="playClick();"><i class="fa-brands fa-tiktok"></i> TIKTOK</a>
+            </div>
+            
+            <div class="qr-wrap">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed&color=e28a1a" alt="QR Code">
+            </div>
+            <div class="legal-footer">Private initiative. Not a registered charity. © 2026 give-me.org</div>
         </div>
-        
-        <div class="qr-wrap">
-            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed&color=e28a1a" alt="QR Code">
-        </div>
-        <div class="legal-footer">Private initiative. Not a registered charity. © 2026 give-me.org</div>
     </div>
 </main>
 
@@ -203,22 +244,14 @@
             video.muted = false;
             video.volume = 0;
             const fadeIn = setInterval(() => {
-                if (video.volume < 0.4) {
-                    video.volume += 0.05;
-                } else {
-                    clearInterval(fadeIn);
-                }
+                if (video.volume < 0.4) video.volume += 0.05;
+                else clearInterval(fadeIn);
             }, 50);
             b.innerHTML = '<i class="fa-solid fa-volume-high"></i> SOUND ON';
         } else {
             const fadeOut = setInterval(() => {
-                if (video.volume > 0.05) {
-                    video.volume -= 0.05;
-                } else {
-                    video.muted = true;
-                    clearInterval(fadeOut);
-                    b.innerHTML = '<i class="fa-solid fa-volume-xmark"></i> SOUND OFF';
-                }
+                if (video.volume > 0.05) video.volume -= 0.05;
+                else { video.muted = true; clearInterval(fadeOut); b.innerHTML = '<i class="fa-solid fa-volume-xmark"></i> SOUND OFF'; }
             }, 50);
         }
     }
@@ -231,9 +264,7 @@
     }
 
     function showThanks() {
-        setTimeout(() => {
-            document.getElementById('thankYouBox').style.display = 'block';
-        }, 800);
+        setTimeout(() => document.getElementById('thankYouBox').style.display = 'block', 800);
     }
 
     async function uP() {
@@ -253,9 +284,7 @@
         navigator.clipboard.writeText("bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed").then(() => {
             document.getElementById("cBn").innerHTML = '<i class="fa-solid fa-check"></i> COPIED';
             document.getElementById('thankYouBox').style.display = 'block';
-            setTimeout(() => {
-                document.getElementById("cBn").innerHTML = '<i class="fa-regular fa-copy"></i> COPY BTC';
-            }, 2000);
+            setTimeout(() => document.getElementById("cBn").innerHTML = '<i class="fa-regular fa-copy"></i> COPY BTC', 2000);
         });
     }
     uP(); setInterval(uP, 300000);
