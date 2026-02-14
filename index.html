@@ -1,8 +1,13 @@
+Hier ist dein finaler, sauber strukturierter Code. Er enthält alle Funktionen: den **Klick-Sound**, den **sanften Audio-Fade**, die **give-me.org** Anpassung und das optimierte Layout.
+
+Kopiere diesen gesamten Block in deine `index.html`:
+
+```html
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>You can help | Private Initiative</title>
+    <title>You can help | give-me.org</title>
     <link rel="icon" type="image/jpeg" href="favicon.jpg">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -36,107 +41,74 @@
         }
 
         h1 { 
-            font-size: clamp(2rem, 8vw, 3.5rem); font-weight: 900; 
-            text-transform: uppercase; 
-            margin: 0; letter-spacing: 3px;
-            color: #fff;
-            text-shadow: 2px 2px 15px rgba(0,0,0,0.6);
+            font-size: clamp(2.2rem, 8vw, 3.8rem); font-weight: 900; 
+            text-transform: uppercase; margin: 0; letter-spacing: 4px;
+            color: #fff; text-shadow: 2px 2px 20px rgba(0,0,0,0.7);
         }
 
         .audio-control { position: fixed; bottom: 25px; right: 25px; z-index: 1000; }
         .btn-audio {
             background: rgba(0,0,0,0.5); border: 2px solid var(--glow-color);
-            color: var(--cyan); padding: 12px 20px; border-radius: 50px;
-            cursor: pointer; backdrop-filter: blur(10px); font-weight: 900; font-size: 0.8rem;
-            transition: 0.3s; pointer-events: auto;
-            box-shadow: 0 0 10px var(--glow-color);
+            color: var(--cyan); padding: 12px 22px; border-radius: 50px;
+            cursor: pointer; backdrop-filter: blur(10px); font-weight: 900;
+            transition: 0.3s; box-shadow: 0 0 15px var(--glow-color);
         }
 
         main { max-width: 500px; margin: auto; padding-top: 85vh; padding-bottom: 100px; padding-left: 15px; padding-right: 15px; }
 
         .content-wrap {
             border: 2px solid var(--glow-color); border-radius: 40px;
-            padding: 30px 15px; text-align: center;
-            background: rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(15px);
-            position: relative; z-index: 10;
-            box-shadow: 0 0 20px var(--glow-color);
+            padding: 35px 18px; text-align: center;
+            background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(15px);
+            position: relative; z-index: 10; box-shadow: 0 0 25px var(--glow-color);
         }
 
-        .impact-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 30px; }
+        .impact-list { display: flex; flex-direction: column; gap: 14px; margin-bottom: 35px; }
         
         .card {
             background: rgba(0, 0, 0, 0.5); border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 15px 20px; border-radius: 22px; cursor: pointer; 
-            transition: all 0.3s ease;
-            display: flex; justify-content: space-between; align-items: center; text-align: left;
+            padding: 18px 22px; border-radius: 25px; cursor: pointer; 
+            transition: 0.3s; display: flex; justify-content: space-between; align-items: center;
         }
-        .card:hover { border-color: var(--cyan); }
-        .card.active {
-            border-color: var(--btc);
-            background: rgba(247, 147, 26, 0.15);
-            box-shadow: 0 0 15px var(--btc);
-        }
+        .card:hover { border-color: var(--cyan); transform: translateY(-2px); }
+        .card.active { border-color: var(--btc); background: rgba(247, 147, 26, 0.15); box-shadow: 0 0 15px var(--btc); }
 
-        .info { display: flex; flex-direction: column; gap: 2px; }
-        .info b { color: var(--btc); font-size: 1rem; font-weight: 900; letter-spacing: 0.5px; }
-        .info span { color: rgba(255, 255, 255, 0.7); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; }
+        .info { display: flex; flex-direction: column; gap: 3px; text-align: left;}
+        .info b { color: var(--btc); font-size: 1.1rem; font-weight: 900; }
+        .info span { color: rgba(255, 255, 255, 0.7); font-size: 0.75rem; text-transform: uppercase; font-weight: 700; }
         
-        .price { font-weight: 900; font-size: 1.1rem; color: var(--cyan); padding-left: 10px; }
+        .price { font-weight: 900; font-size: 1.2rem; color: var(--cyan); }
 
-        .btn-grid-main { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 25px; }
+        .btn-grid-main { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 25px; }
         
         .btn {
             border: 2px solid rgba(255,255,255,0.2);
-            color: #fff; padding: 18px 5px; border-radius: 20px; font-weight: 900;
+            color: #fff; padding: 18px 5px; border-radius: 22px; font-weight: 900;
             cursor: pointer; text-decoration: none; text-align: center;
-            transition: 0.3s ease;
-            display: flex; align-items: center; justify-content: center;
-            text-transform: uppercase; gap: 8px; font-size: 0.75rem;
+            transition: 0.3s; display: flex; align-items: center; justify-content: center;
+            text-transform: uppercase; gap: 10px; font-size: 0.75rem;
         }
-
         .btn-copy { background: var(--btc); color: #000; }
         .btn-paypal { background: var(--paypal); color: #fff; }
         .btn-wallet { background: #fff; color: #000; }
-        .btn-tiktok { background: #000; color: #fff; box-shadow: -3px 0 0 var(--tiktok-red), 3px 0 0 var(--cyan); }
+        .btn-tiktok { background: #000; color: #fff; box-shadow: -3px 0 0 #ff0050, 3px 0 0 #00f2ff; }
 
-        .btn:hover { transform: scale(1.03); filter: brightness(1.1); border-color: #fff; }
+        .btn:hover { transform: scale(1.04); filter: brightness(1.1); border-color: #fff; }
 
-        .amount-hint { font-size: 0.85rem; color: #fff; margin-top: 20px; font-weight: 900; text-shadow: 0 0 8px var(--cyan); }
-        
+        #thankYouBox {
+            display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.95); border: 2px solid var(--btc);
+            padding: 35px; border-radius: 35px; z-index: 2000; text-align: center;
+            box-shadow: 0 0 60px rgba(247, 147, 26, 0.6); backdrop-filter: blur(25px);
+            width: 85%; max-width: 380px;
+        }
+
         .qr-wrap img { 
-            background: #fff; padding: 10px; border-radius: 18px; 
-            margin-top: 35px; width: 130px; 
-            border: 2px solid var(--glow-color);
-            box-shadow: 0 0 10px var(--glow-color);
+            background: #fff; padding: 10px; border-radius: 20px; 
+            margin-top: 40px; width: 140px; box-shadow: 0 0 15px var(--glow-color);
         }
 
         .legal-footer { margin-top: 45px; padding: 20px; border-top: 1px solid rgba(255, 255, 255, 0.1); font-size: 0.7rem; opacity: 0.7; }
-
-        /* DANKE BOX STYLING */
-        #thankYouBox {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(0, 0, 0, 0.95);
-            border: 2px solid var(--btc);
-            padding: 30px;
-            border-radius: 30px;
-            z-index: 2000;
-            text-align: center;
-            box-shadow: 0 0 50px rgba(247, 147, 26, 0.5);
-            backdrop-filter: blur(20px);
-            width: 85%;
-            max-width: 350px;
-        }
-        #thankYouBox h2 { color: var(--btc); margin-top: 0; text-transform: uppercase; }
-        #thankYouBox p { font-size: 0.9rem; line-height: 1.4; color: #fff; }
-        #thankYouBox .close-btn { 
-            margin-top: 20px; background: var(--btc); border: none; 
-            padding: 12px 25px; border-radius: 50px; font-weight: 900; cursor: pointer; 
-        }
 
         @media (max-width: 400px) {
             h1 { font-size: 1.8rem; }
@@ -146,38 +118,41 @@
 </head>
 <body>
 
-<video id="v" class="bg-video" autoplay muted loop playsinline>
+<video id="v" class="bg-video" autoplay muted loop playsinline preload="auto">
     <source src="video.mp4" type="video/mp4">
 </video>
 
+<audio id="clickSound" src="https://www.soundjay.com/buttons/button-16.mp3" preload="auto"></audio>
+
 <div class="audio-control">
-    <button class="btn-audio" onclick="tM()" id="mB"><i class="fa-solid fa-volume-xmark"></i> SOUND ON</button>
+    <button class="btn-audio" onclick="tM(); playClick();" id="mB"><i class="fa-solid fa-volume-xmark"></i> SOUND ON</button>
 </div>
 
 <header id="mainHeader">
     <h1>You can help</h1>
-    <p style="color: var(--cyan); letter-spacing: 5px; font-weight: 900; font-size: 0.8rem; margin-top: 12px; opacity: 0.9;">PRIVATE INITIATIVE</p>
+    <p style="color: var(--cyan); letter-spacing: 5px; font-weight: 900; font-size: 0.8rem; margin-top: 12px; opacity: 0.9;">GIVE-ME.ORG</p>
 </header>
 
 <main>
     <div class="content-wrap">
-        <p style="margin-bottom: 25px; font-weight: 900; color: #fff; font-size: 0.8rem; text-transform: uppercase;">Support our Mission</p>
+        <p style="margin-bottom: 25px; font-weight: 900; color: #fff; font-size: 0.85rem; text-transform: uppercase;">Support Private Initiative</p>
+        
         <div class="impact-list">
-            <div class="card" onclick="setPP(15, this)">
+            <div class="card" onclick="setPP(15, this); playClick();">
                 <div class="info">
                     <b id="p1">... BTC</b>
                     <span>Food (1 Week)</span>
                 </div>
                 <div class="price">15€</div>
             </div>
-            <div class="card" onclick="setPP(80, this)">
+            <div class="card" onclick="setPP(80, this); playClick();">
                 <div class="info">
                     <b id="p2">... BTC</b>
                     <span>Vaccines & Care</span>
                 </div>
                 <div class="price">80€</div>
             </div>
-            <div class="card" onclick="setPP(300, this)">
+            <div class="card" onclick="setPP(300, this); playClick();">
                 <div class="info">
                     <b id="p3">... BTC</b>
                     <span>Emergency Surgery</span>
@@ -187,56 +162,79 @@
         </div>
 
         <div class="btn-grid-main">
-            <button class="btn btn-copy" id="cBn" onclick="cT()"><i class="fa-regular fa-copy"></i> COPY BTC</button>
-            <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=give-me.org@gmx.net&currency_code=EUR" target="_blank" class="btn btn-paypal" id="ppBtn" onclick="showThanks()">
+            <button class="btn btn-copy" id="cBn" onclick="cT(); playClick();"><i class="fa-regular fa-copy"></i> COPY BTC</button>
+            <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=give-me.org@gmx.net&currency_code=EUR" target="_blank" class="btn btn-paypal" id="ppBtn" onclick="showThanks(); playClick();">
                 <i class="fa-brands fa-paypal"></i> PAYPAL <span id="ppAmt"></span>
             </a>
-            <a href="bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed" class="btn btn-wallet"><i class="fa-brands fa-bitcoin"></i> WALLET</a>
-            <a href="https://www.tiktok.com/@giveme.org" target="_blank" class="btn btn-tiktok"><i class="fa-brands fa-tiktok"></i> TIKTOK</a>
+            <a href="bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed" class="btn btn-wallet" onclick="playClick();"><i class="fa-brands fa-bitcoin"></i> WALLET</a>
+            <a href="https://www.tiktok.com/@giveme.org" target="_blank" class="btn btn-tiktok" onclick="playClick();"><i class="fa-brands fa-tiktok"></i> TIKTOK</a>
         </div>
-        <div class="amount-hint" id="ppHint">Select a donation goal</div>
-        <div class="qr-wrap"><img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed" alt="QR Code"></div>
+        
+        <div class="qr-wrap">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed" alt="QR Code">
+        </div>
         <div class="legal-footer">Private initiative. Not a registered charity. © 2026 give-me.org</div>
     </div>
 </main>
 
 <div id="thankYouBox">
-    <h2>Thank You!</h2>
-    <p>Your support means the world. You are making a real difference today.</p>
-    <button class="close-btn" onclick="document.getElementById('thankYouBox').style.display='none'">CLOSE</button>
+    <h2 style="color: var(--btc); font-weight: 900; text-transform: uppercase;">Danke!</h2>
+    <p>Deine Unterstützung hilft direkt und rettet Leben. Du machst heute einen echten Unterschied.</p>
+    <button style="background: var(--btc); border:none; padding:12px 25px; border-radius:50px; font-weight:900; cursor:pointer; margin-top: 15px;" onclick="document.getElementById('thankYouBox').style.display='none'; playClick();">SCHLIESSEN</button>
 </div>
 
 <script>
     const video = document.getElementById("v");
     const header = document.getElementById("mainHeader");
+    const clickSound = document.getElementById("clickSound");
 
     window.addEventListener('scroll', () => {
         let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        let opacity = 1 - (scrollTop / 500);
-        header.style.opacity = opacity < 0 ? 0 : opacity;
+        header.style.opacity = 1 - (scrollTop / 500);
     }, { passive: true });
+
+    function playClick() {
+        clickSound.currentTime = 0;
+        clickSound.play().catch(e => {}); 
+    }
+
+    function tM() {
+        const b = document.getElementById("mB");
+        if (video.muted) {
+            video.muted = false;
+            video.volume = 0;
+            const fadeIn = setInterval(() => {
+                if (video.volume < 0.45) {
+                    video.volume += 0.05;
+                } else {
+                    clearInterval(fadeIn);
+                }
+            }, 50);
+            b.innerHTML = '<i class="fa-solid fa-volume-high"></i> SOUND ON';
+        } else {
+            const fadeOut = setInterval(() => {
+                if (video.volume > 0.05) {
+                    video.volume -= 0.05;
+                } else {
+                    video.muted = true;
+                    clearInterval(fadeOut);
+                    b.innerHTML = '<i class="fa-solid fa-volume-xmark"></i> SOUND OFF';
+                }
+            }, 50);
+        }
+    }
+
+    function setPP(amt, element) {
+        document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
+        element.classList.add('active');
+        document.getElementById("ppBtn").href = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=give-me.org@gmx.net&amount=${amt}&currency_code=EUR&item_name=Spende%20give-me.org`;
+        document.getElementById("ppAmt").innerText = `(${amt}€)`;
+    }
 
     function showThanks() {
         setTimeout(() => {
             document.getElementById('thankYouBox').style.display = 'block';
         }, 800);
-    }
-
-    function setPP(amt, element) {
-        const btn = document.getElementById("ppBtn");
-        const display = document.getElementById("ppAmt");
-        const hint = document.getElementById("ppHint");
-        document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
-        element.classList.add('active');
-        btn.href = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=give-me.org@gmx.net&amount=${amt}&currency_code=EUR&item_name=Support%20Mission`;
-        display.innerText = `(${amt}€)`;
-        hint.innerHTML = `<i class="fa-solid fa-check"></i> Goal: ${amt}€ selected`;
-    }
-
-    function tM() {
-        const b = document.getElementById("mB");
-        if (video.muted) { video.muted = false; video.volume = 0.5; b.innerHTML = '<i class="fa-solid fa-volume-high"></i> SOUND ON'; }
-        else { video.muted = true; b.innerHTML = '<i class="fa-solid fa-volume-xmark"></i> SOUND OFF'; }
     }
 
     async function uP() {
@@ -245,23 +243,24 @@
             const d = await r.json();
             const p = d.bitcoin.eur;
             [15, 80, 300].forEach((eur, i) => {
-                const b = (eur / p).toFixed(6);
                 const el = document.getElementById(`p${i+1}`);
-                if(el) el.innerText = `${b} BTC`;
+                if(el) el.innerText = `${(eur / p).toFixed(6)} BTC`;
             });
         } catch (e) {}
     }
 
     function cT() {
-        const a = "bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed";
-        const b = document.getElementById("cBn");
-        navigator.clipboard.writeText(a).then(() => {
-            b.innerHTML = '<i class="fa-solid fa-check"></i> COPIED';
+        navigator.clipboard.writeText("bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed").then(() => {
+            document.getElementById("cBn").innerHTML = '<i class="fa-solid fa-check"></i> KOPIERT';
             document.getElementById('thankYouBox').style.display = 'block';
-            setTimeout(() => { b.innerHTML = '<i class="fa-regular fa-copy"></i> COPY BTC'; }, 2000);
+            setTimeout(() => {
+                document.getElementById("cBn").innerHTML = '<i class="fa-regular fa-copy"></i> COPY BTC';
+            }, 2000);
         });
     }
     uP(); setInterval(uP, 300000);
 </script>
 </body>
 </html>
+
+```
