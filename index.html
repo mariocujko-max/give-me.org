@@ -13,7 +13,8 @@
             --paypal: #0070ba;
             --cyan: #00f2ff;
             --tiktok-red: #ff0050;
-            --bg-dark: rgba(10, 10, 10, 0.9);
+            --white: rgba(255, 255, 255, 0.8);
+            --cyan-dim: rgba(0, 242, 255, 0.5);
         }
 
         * { box-sizing: border-box; }
@@ -43,93 +44,91 @@
         }
 
         @keyframes breathe {
-            0%, 100% { transform: scale(1); text-shadow: 0 0 20px var(--btc); }
-            50% { transform: scale(1.03); text-shadow: 0 0 40px var(--btc); }
+            0%, 100% { transform: scale(1); text-shadow: 0 0 15px var(--btc); }
+            50% { transform: scale(1.03); text-shadow: 0 0 35px var(--btc); }
         }
 
-        /* Sound Button als Design-Vorlage */
+        /* Sound Button Design-Basis */
         .audio-control { position: fixed; bottom: 25px; right: 25px; z-index: 1000; }
         .btn-audio {
-            background: #000; border: 2px solid var(--cyan);
+            background: rgba(0,0,0,0.6); border: 2px solid var(--cyan-dim);
             color: var(--cyan); padding: 12px 20px; border-radius: 50px;
-            cursor: pointer; font-weight: 900; font-size: 0.8rem;
+            cursor: pointer; backdrop-filter: blur(10px); font-weight: 900; font-size: 0.8rem;
             transition: 0.3s; pointer-events: auto;
-            box-shadow: 0 0 15px var(--cyan);
+            box-shadow: 0 0 10px rgba(0, 242, 255, 0.2);
         }
 
         main { max-width: 500px; margin: auto; padding-top: 85vh; padding-bottom: 100px; padding-left: 20px; padding-right: 20px; }
 
-        /* Hauptbox mit Cyan-Rahmen und Glow */
+        /* Rahmen Transparent & Weniger grelle Ränder */
         .content-wrap {
-            border: 2px solid var(--cyan); border-radius: 40px;
+            border: 2px solid var(--cyan-dim); border-radius: 40px;
             padding: 35px 20px; text-align: center;
-            background: var(--bg-dark);
-            backdrop-filter: blur(15px);
+            background: rgba(0,0,0,0.5); /* Mehr Transparenz für das Video */
+            backdrop-filter: blur(12px);
             position: relative; z-index: 10;
-            box-shadow: 0 0 25px var(--cyan);
+            box-shadow: 0 0 20px rgba(0, 242, 255, 0.15);
         }
 
         .impact-list { display: flex; flex-direction: column; gap: 15px; margin-bottom: 35px; }
         
         .card {
-            background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(0, 242, 255, 0.3);
+            background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);
             padding: 20px; border-radius: 26px; cursor: pointer; 
             transition: all 0.3s ease;
             display: flex; justify-content: space-between; align-items: center; text-align: left;
         }
-        .card:hover { border-color: var(--cyan); box-shadow: 0 0 10px var(--cyan); }
+        .card:hover { border-color: var(--cyan); background: rgba(0, 242, 255, 0.05); }
         .card.active {
             border-color: var(--btc);
             background: rgba(247, 147, 26, 0.15);
-            box-shadow: 0 0 20px var(--btc);
+            box-shadow: 0 0 15px var(--btc);
         }
 
         .btn-grid-main { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 25px; }
         
-        /* Alle Buttons mit Cyan-Rahmen & Glow Effekt */
+        /* Solide Buttons mit sanftem Cyan-Rahmen */
         .btn {
-            background: #000; 
-            border: 2px solid var(--cyan);
+            border: 2px solid var(--cyan-dim);
             color: #fff; padding: 20px 10px; border-radius: 22px; font-weight: 900;
             cursor: pointer; text-decoration: none; text-align: center;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex; align-items: center; justify-content: center;
             text-transform: uppercase; gap: 10px; font-size: 0.8rem;
-            box-shadow: 0 0 12px var(--cyan);
             animation: float 4s ease-in-out infinite;
+            box-shadow: 0 0 8px rgba(0, 242, 255, 0.1);
         }
 
         @keyframes float {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
+            50% { transform: translateY(-7px); }
         }
         .btn:nth-child(2) { animation-delay: 0.8s; }
         .btn:nth-child(3) { animation-delay: 1.6s; }
         .btn:nth-child(4) { animation-delay: 2.4s; }
 
-        /* Hover-Effekt: Verstärkter Glow */
+        /* Solide Hintergrundfarben für Buttons */
+        .btn-copy { background: var(--btc); color: #000; }
+        .btn-paypal { background: var(--paypal); color: #fff; }
+        .btn-wallet { background: #fff; color: #000; }
+        .btn-tiktok { background: #000; color: #fff; border-color: var(--cyan-dim); }
+
         .btn:hover { 
             transform: scale(1.05);
-            box-shadow: 0 0 25px var(--cyan);
-            background: rgba(0, 242, 255, 0.1);
-            color: var(--cyan);
+            border-color: var(--cyan);
+            box-shadow: 0 0 20px var(--cyan);
         }
 
-        /* Spezifische Icons/Textfarben */
-        .btn-copy i { color: var(--btc); }
-        .btn-paypal i { color: var(--paypal); }
-        .btn-tiktok i { color: var(--tiktok-red); }
-
-        .btn-pulse { animation: pop-pulse 0.5s ease-out; border-width: 3px; border-color: #fff !important; }
+        .btn-pulse { animation: pop-pulse 0.5s ease-out; border-color: #fff !important; }
         @keyframes pop-pulse {
             0% { transform: scale(1); }
             50% { transform: scale(1.15); }
             100% { transform: scale(1); }
         }
 
-        .amount-hint { font-size: 0.9rem; color: var(--cyan); margin-top: 22px; font-weight: 900; text-shadow: 0 0 15px var(--cyan); }
-        .qr-wrap img { background: #fff; padding: 10px; border-radius: 18px; margin-top: 45px; width: 140px; border: 2px solid var(--cyan); box-shadow: 0 0 15px var(--cyan); }
-        .legal-footer { margin-top: 55px; padding: 20px; border-top: 1px solid var(--cyan); font-size: 0.75rem; opacity: 0.6; }
+        .amount-hint { font-size: 0.9rem; color: var(--cyan); margin-top: 22px; font-weight: 900; text-shadow: 0 0 10px var(--cyan); }
+        .qr-wrap img { background: #fff; padding: 10px; border-radius: 18px; margin-top: 45px; width: 140px; border: 2px solid var(--cyan-dim); }
+        .legal-footer { margin-top: 55px; padding: 20px; border-top: 1px solid var(--cyan-dim); font-size: 0.75rem; opacity: 0.5; }
     </style>
 </head>
 <body>
@@ -144,7 +143,7 @@
 
 <header id="mainHeader">
     <h1>Bitcoin saves lives.</h1>
-    <p style="color: var(--cyan); letter-spacing: 5px; font-weight: 900; font-size: 0.75rem; margin-top: 12px; text-shadow: 0 0 10px var(--cyan);">PRIVATE INITIATIVE</p>
+    <p style="color: var(--cyan); letter-spacing: 5px; font-weight: 900; font-size: 0.75rem; margin-top: 12px; opacity: 0.8;">PRIVATE INITIATIVE</p>
 </header>
 
 <main>
@@ -197,7 +196,7 @@
         element.classList.add('active');
         btn.href = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=give-me.org@gmx.net&amount=${amt}&currency_code=EUR&item_name=Support%20Private%20Initiative`;
         display.innerText = `(${amt}€)`;
-        hint.innerHTML = `<i class="fa-solid fa-check"></i> Goal: ${amt}€ selected`;
+        hint.innerHTML = `<i class="fa-solid fa-check"></i> Goal: ${amt}€ set`;
         btn.classList.remove('btn-pulse');
         void btn.offsetWidth; 
         btn.classList.add('btn-pulse');
