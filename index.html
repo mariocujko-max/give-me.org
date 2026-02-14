@@ -20,25 +20,18 @@
             color: #fff; background: #000; overflow-x: hidden;
         }
 
-        /* Hintergrund-Video */
         .bg-video {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            object-fit: cover; z-index: -2; filter: brightness(0.55);
+            object-fit: cover; z-index: -2; filter: brightness(0.5);
         }
 
-        /* Header Logik */
+        /* Fester Header, der nur am Anfang sichtbar ist */
         header { 
             position: fixed; top: 0; left: 0; width: 100%;
-            text-align: center; padding: 45px 20px; z-index: 100;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.85) 0%, transparent 100%);
-            transition: opacity 0.7s ease, transform 0.7s ease;
-            pointer-events: auto;
-        }
-
-        .header-hidden { 
-            opacity: 0; 
-            transform: translateY(-30px);
-            pointer-events: none;
+            text-align: center; padding: 60px 20px; z-index: 100;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, transparent 100%);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            pointer-events: none; /* Verhindert Überlappungs-Probleme beim Klicken */
         }
 
         h1 { 
@@ -53,28 +46,26 @@
             50% { transform: scale(1.03); text-shadow: 0 0 35px var(--btc), 0 0 50px var(--btc); }
         }
 
-        /* Audio Control */
         .audio-control { position: fixed; bottom: 25px; right: 25px; z-index: 1000; }
         .btn-audio {
             background: rgba(0,0,0,0.7); border: 2px solid var(--cyan);
             color: var(--cyan); padding: 12px 20px; border-radius: 50px;
             cursor: pointer; backdrop-filter: blur(15px); font-weight: 900; font-size: 0.8rem;
-            transition: 0.3s;
+            transition: 0.3s; pointer-events: auto;
         }
-        .btn-audio:hover { background: var(--cyan); color: #000; }
 
-        main { max-width: 500px; margin: auto; padding-top: 85vh; padding-bottom: 80px; padding-left: 20px; padding-right: 20px; }
+        /* Der Main-Bereich startet weit unten, damit Platz für die Überschrift ist */
+        main { max-width: 500px; margin: auto; padding-top: 85vh; padding-bottom: 100px; padding-left: 20px; padding-right: 20px; }
 
         .content-wrap {
             border: 1px solid var(--border); border-radius: 40px;
             padding: 35px 20px; text-align: center;
-            background: rgba(0,0,0,0.7);
+            background: rgba(0,0,0,0.75);
             backdrop-filter: blur(30px);
             position: relative; z-index: 10;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.9);
+            box-shadow: 0 20px 50px rgba(0,0,0,1);
         }
 
-        /* Spenden-Karten */
         .impact-list { display: flex; flex-direction: column; gap: 15px; margin-bottom: 35px; }
         
         .card {
@@ -83,60 +74,40 @@
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex; justify-content: space-between; align-items: center; text-align: left;
         }
-
-        .card:hover { transform: translateY(-4px); background: rgba(255, 255, 255, 0.08); }
-
+        .card:hover { transform: translateY(-5px); background: rgba(255, 255, 255, 0.1); }
         .card.active {
             border-color: var(--btc);
-            background: rgba(247, 147, 26, 0.18);
-            box-shadow: 0 0 25px rgba(247, 147, 26, 0.25);
-            transform: scale(1.04);
+            background: rgba(247, 147, 26, 0.2);
+            box-shadow: 0 0 25px rgba(247, 147, 26, 0.3);
+            transform: scale(1.05);
         }
 
-        .card .info b { color: var(--btc); font-size: 1.15rem; display: block; margin-bottom: 2px; }
-        .card .price { font-weight: 900; color: var(--cyan); font-size: 1.4rem; }
-
-        /* Buttons & Animation */
+        /* Button Animationen */
         .btn-grid-main { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 25px; }
-
         .btn {
             border: none; padding: 20px 10px; border-radius: 22px; font-weight: 900;
             cursor: pointer; text-decoration: none; text-align: center;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Sanftere Transition für alle Buttons */
-            display: flex; align-items: center; justify-content: center;
+            transition: all 0.3s ease; display: flex; align-items: center; justify-content: center;
             text-transform: uppercase; gap: 10px; font-size: 0.8rem;
-            opacity: 0.85; /* Etwas dezenter im Normalzustand */
         }
-        /* Hover-Effekt für alle Buttons */
-        .btn:hover { transform: translateY(-3px) scale(1.02); opacity: 1; box-shadow: 0 10px 20px rgba(0,0,0,0.4); }
-
+        .btn:hover { transform: translateY(-3px); filter: brightness(1.2); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+        .btn:active { transform: scale(0.95); }
 
         .btn-copy { background: var(--btc); color: #000; }
         .btn-paypal { background: #0070ba; color: #fff; }
         .btn-wallet { background: #fff; color: #000; }
         .btn-tiktok { background: #000; color: #fff; border: 1px solid rgba(255,255,255,0.3); }
-        .btn-tiktok:hover { box-shadow: 2px 0 0 var(--cyan), -2px 0 0 #ff0050; /* TikTok spezifischer Hover-Effekt */ }
 
-        /* PayPal Animation */
-        .btn-pulse {
-            animation: pop-pulse 0.5s ease-out;
-            box-shadow: 0 0 35px var(--cyan) !important;
-            border: 2px solid #fff;
-        }
-
+        /* Pulsieren für PayPal bei Auswahl */
+        .btn-pulse { animation: pop-pulse 0.5s ease-out; box-shadow: 0 0 35px var(--cyan) !important; }
         @keyframes pop-pulse {
             0% { transform: scale(1); }
-            50% { transform: scale(1.15); }
+            50% { transform: scale(1.1); }
             100% { transform: scale(1); }
         }
 
-        .amount-hint { font-size: 0.9rem; color: var(--cyan); margin-top: 22px; font-weight: bold; min-height: 24px; }
-
-        .qr-wrap img {
-            background: #fff; padding: 12px; border-radius: 20px;
-            margin-top: 45px; width: 145px; filter: drop-shadow(0 0 15px var(--cyan));
-        }
-
+        .amount-hint { font-size: 0.9rem; color: var(--cyan); margin-top: 22px; font-weight: bold; }
+        .qr-wrap img { background: #fff; padding: 12px; border-radius: 20px; margin-top: 45px; width: 145px; }
         .legal-footer { margin-top: 55px; padding: 20px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.7rem; opacity: 0.4; }
     </style>
 </head>
@@ -152,35 +123,23 @@
 
 <header id="mainHeader">
     <h1>Bitcoin saves lives.</h1>
-    <p style="color: var(--cyan); letter-spacing: 5px; font-weight: 900; font-size: 0.7rem; margin-top: 12px; opacity: 0.85;">PRIVATE INITIATIVE</p>
+    <p style="color: var(--cyan); letter-spacing: 5px; font-weight: 900; font-size: 0.7rem; margin-top: 12px;">PRIVATE INITIATIVE</p>
 </header>
 
 <main>
     <div class="content-wrap">
-        <p style="margin-bottom: 25px; font-weight: 900; color: #fff; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">Support via PayPal:</p>
-        
+        <p style="margin-bottom: 25px; font-weight: 900; color: #fff; font-size: 0.9rem; text-transform: uppercase;">Support via PayPal:</p>
         <div class="impact-list">
             <div class="card" onclick="setPP(15, this)">
-                <div class="info">
-                    <b id="p1">... BTC</b>
-                    <span>Food (1 Week)</span>
-                </div>
+                <div class="info"><b id="p1">... BTC</b><span>Food (1 Week)</span></div>
                 <div class="price">15€</div>
             </div>
-            
             <div class="card" onclick="setPP(80, this)">
-                <div class="info">
-                    <b id="p2">... BTC</b>
-                    <span>Vaccines & Care</span>
-                </div>
+                <div class="info"><b id="p2">... BTC</b><span>Vaccines & Care</span></div>
                 <div class="price">80€</div>
             </div>
-            
             <div class="card" onclick="setPP(300, this)">
-                <div class="info">
-                    <b id="p3">... BTC</b>
-                    <span>Emergency Surgery</span>
-                </div>
+                <div class="info"><b id="p3">... BTC</b><span>Emergency Surgery</span></div>
                 <div class="price">300€</div>
             </div>
         </div>
@@ -193,79 +152,46 @@
             <a href="bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed" class="btn btn-wallet"><i class="fa-brands fa-bitcoin"></i> WALLET</a>
             <a href="https://www.tiktok.com/@giveme.org" target="_blank" class="btn btn-tiktok"><i class="fa-brands fa-tiktok"></i> TIKTOK</a>
         </div>
-        
         <div class="amount-hint" id="ppHint">Select a donation goal</div>
-        
-        <div class="qr-wrap">
-            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed" alt="QR Code">
-        </div>
-
-        <div class="legal-footer">
-            Legal Disclaimer: Purely private initiative. Not a registered charity. No tax receipts. Support from person to person.
-            <br><br>
-            © 2026 give-me.org
-        </div>
+        <div class="qr-wrap"><img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed" alt="QR Code"></div>
+        <div class="legal-footer">Legal Disclaimer: Purely private initiative. © 2026 give-me.org</div>
     </div>
 </main>
 
 <script>
     const video = document.getElementById("v");
     const header = document.getElementById("mainHeader");
-    let lastScrollTop = 0;
 
-    // Header Logik (Ein/Ausblenden bei ca. der Hälfte der Seite)
+    // Überschrift ausblenden, BEVOR sie den Content berührt
     window.addEventListener('scroll', () => {
         let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        let windowHeight = window.innerHeight;
-        let documentHeight = document.documentElement.scrollHeight;
-        let scrollMidpoint = documentHeight / 2 - windowHeight / 2; // Mitte der scrollbaren Seite
-
-        // Der Header blendet ein/aus, wenn man um die Mitte der Seite scrollt
-        if (scrollTop > scrollMidpoint - 100 && scrollTop < scrollMidpoint + 100) {
-            // Innerhalb des "Mittelbereichs" - Header ausblenden
-            header.classList.add("header-hidden");
-        } else {
-            // Außerhalb des "Mittelbereichs" - Header einblenden
-            header.classList.remove("header-hidden");
-        }
-        
-        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+        // Ab 200px Scrollweg beginnt das Ausblenden, bei 500px ist sie weg
+        let opacity = 1 - (scrollTop / 400);
+        if (opacity < 0) opacity = 0;
+        header.style.opacity = opacity;
+        header.style.transform = `translateY(-${scrollTop * 0.2}px)`; // Leichter Parallax-Effekt
     }, { passive: true });
 
-    // PayPal Betrag & Card Animation
     function setPP(amt, element) {
         const btn = document.getElementById("ppBtn");
         const display = document.getElementById("ppAmt");
         const hint = document.getElementById("ppHint");
-        
         document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
         element.classList.add('active');
-
         btn.href = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=give-me.org@gmx.net&amount=${amt}&currency_code=EUR&item_name=Support%20Private%20Initiative`;
         display.innerText = `(${amt}€)`;
-        hint.innerHTML = `<i class="fa-solid fa-check"></i> Amount set to ${amt}€`;
-        hint.style.color = "var(--btc)";
-
-        // PayPal Button Animation
+        hint.innerHTML = `<i class="fa-solid fa-check"></i> Goal set: ${amt}€`;
         btn.classList.remove('btn-pulse');
         void btn.offsetWidth; 
         btn.classList.add('btn-pulse');
     }
 
-    // Audio Toggle
     function tM() {
         const b = document.getElementById("mB");
-        if (video.muted) {
-            video.muted = false;
-            video.volume = 0.6;
-            b.innerHTML = '<i class="fa-solid fa-volume-high"></i> SOUND ON';
-        } else {
-            video.muted = true;
-            b.innerHTML = '<i class="fa-solid fa-volume-xmark"></i> SOUND OFF';
-        }
+        if (video.muted) { video.muted = false; b.innerHTML = '<i class="fa-solid fa-volume-high"></i> SOUND ON'; }
+        else { video.muted = true; b.innerHTML = '<i class="fa-solid fa-volume-xmark"></i> SOUND OFF'; }
     }
 
-    // Live BTC Preis
     async function uP() {
         try {
             const r = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=eur');
@@ -273,32 +199,21 @@
             const p = d.bitcoin.eur;
             [15, 80, 300].forEach((eur, i) => {
                 const b = (eur / p).toFixed(6);
-                const el = document.getElementById(`p${i+1}`);
-                if(el) el.innerText = `~ ${b} BTC`;
+                document.getElementById(`p${i+1}`).innerText = `~ ${b} BTC`;
             });
         } catch (e) {}
     }
 
-    // Copy BTC Adresse - Animation wiederhergestellt
     function cT() {
         const a = "bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed";
         const b = document.getElementById("cBn");
         navigator.clipboard.writeText(a).then(() => {
             b.innerHTML = '<i class="fa-solid fa-check"></i> COPIED';
-            b.style.background = "#fff"; // Temporär weiße Farbe
-            b.style.color = "#000";     // Textfarbe anpassen
-            b.style.transform = "scale(1.05)"; // Leichter Pop
-            setTimeout(() => { 
-                b.innerHTML = '<i class="fa-regular fa-copy"></i> COPY BTC'; 
-                b.style.background = "var(--btc)"; // Zurück zur BTC-Farbe
-                b.style.color = "#000";             // Textfarbe zurück
-                b.style.transform = "scale(1)";     // Zurück zur Normalgröße
-            }, 2000);
+            b.style.background = "#fff";
+            setTimeout(() => { b.innerHTML = '<i class="fa-regular fa-copy"></i> COPY BTC'; b.style.background = "var(--btc)"; }, 2000);
         });
     }
-
-    uP();
-    setInterval(uP, 300000);
+    uP(); setInterval(uP, 300000);
 </script>
 </body>
 </html>
