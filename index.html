@@ -25,7 +25,7 @@
         .bg-video {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             object-fit: cover; z-index: -2; filter: brightness(0.8);
-            background-color: #000; /* Fallback falls Video lädt */
+            background-color: #000;
         }
 
         header { 
@@ -38,10 +38,8 @@
 
         h1 { 
             font-size: clamp(2rem, 8vw, 3.5rem); font-weight: 900; 
-            text-transform: uppercase; 
-            margin: 0; letter-spacing: 3px;
-            color: #fff;
-            text-shadow: 2px 2px 15px rgba(0,0,0,0.6);
+            text-transform: uppercase; margin: 0; letter-spacing: 3px;
+            color: #fff; text-shadow: 2px 2px 15px rgba(0,0,0,0.6);
         }
 
         .audio-control { position: fixed; bottom: 25px; right: 25px; z-index: 1000; }
@@ -58,8 +56,7 @@
         .content-wrap {
             border: 2px solid var(--glow-color); border-radius: 40px;
             padding: 30px 15px; text-align: center;
-            background: rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(15px);
+            background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(15px);
             position: relative; z-index: 10;
             box-shadow: 0 0 20px var(--glow-color);
         }
@@ -80,10 +77,10 @@
         }
 
         .info { display: flex; flex-direction: column; gap: 2px; }
-        .info b { color: var(--btc); font-size: 1rem; font-weight: 900; letter-spacing: 0.5px; }
-        .info span { color: rgba(255, 255, 255, 0.7); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; }
+        .info b { color: var(--btc); font-size: 1rem; font-weight: 900; }
+        .info span { color: rgba(255, 255, 255, 0.7); font-size: 0.7rem; text-transform: uppercase; }
         
-        .price { font-weight: 900; font-size: 1.1rem; color: var(--cyan); padding-left: 10px; }
+        .price { font-weight: 900; font-size: 1.1rem; color: var(--cyan); }
 
         .btn-grid-main { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 25px; }
         
@@ -91,8 +88,7 @@
             border: 2px solid rgba(255,255,255,0.2);
             color: #fff; padding: 18px 5px; border-radius: 20px; font-weight: 900;
             cursor: pointer; text-decoration: none; text-align: center;
-            transition: 0.3s ease;
-            display: flex; align-items: center; justify-content: center;
+            transition: 0.3s ease; display: flex; align-items: center; justify-content: center;
             text-transform: uppercase; gap: 8px; font-size: 0.75rem;
         }
 
@@ -102,16 +98,11 @@
         .btn-tiktok { background: #000; color: #fff; box-shadow: -3px 0 0 var(--tiktok-red), 3px 0 0 var(--cyan); }
 
         #thankYouBox {
-            display: none;
-            position: fixed;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(0, 0, 0, 0.95);
-            border: 2px solid var(--btc);
-            padding: 30px; border-radius: 30px;
-            z-index: 2000; text-align: center;
-            box-shadow: 0 0 50px rgba(247, 147, 26, 0.5);
-            backdrop-filter: blur(20px);
+            display: none; position: fixed;
+            top: 50%; left: 50%; transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.95); border: 2px solid var(--btc);
+            padding: 30px; border-radius: 30px; z-index: 2000; text-align: center;
+            box-shadow: 0 0 50px rgba(247, 147, 26, 0.5); backdrop-filter: blur(20px);
             width: 85%; max-width: 350px;
         }
         #thankYouBox h2 { color: var(--btc); margin-top: 0; }
@@ -120,10 +111,7 @@
             padding: 12px 25px; border-radius: 50px; font-weight: 900; cursor: pointer; 
         }
 
-        @media (max-width: 400px) {
-            h1 { font-size: 1.8rem; }
-            .btn { font-size: 0.65rem; }
-        }
+        @media (max-width: 400px) { h1 { font-size: 1.8rem; } .btn { font-size: 0.65rem; } }
     </style>
 </head>
 <body>
@@ -182,27 +170,43 @@
 <script>
     const video = document.getElementById("v");
     const clickSound = document.getElementById("clickSound");
-
-    // Ping-Pong Video Loop Logik
     let direction = 1;
-    function loopVideo() {
-        if (!video.duration) { requestAnimationFrame(loopVideo); return; }
-        
+
+    // --- ROBULSTER PING-PONG LOOP ---
+    function performLoop() {
+        if (!video.duration) {
+            requestAnimationFrame(performLoop);
+            return;
+        }
+
+        const endTime = video.duration - 0.5; // Stoppe 0.5s vor echtem Ende
+        const startTime = 0.5;               // Stoppe 0.5s vor echtem Anfang
+
         if (direction === 1) {
-            if (video.currentTime >= video.duration - 0.4) {
+            if (video.currentTime >= endTime) {
                 direction = -1;
                 video.pause();
             }
         } else {
-            video.currentTime -= 0.03;
-            if (video.currentTime <= 0.4) {
+            // Wir springen in kleinen Schritten zurück
+            video.currentTime -= 0.05; 
+            if (video.currentTime <= startTime) {
                 direction = 1;
                 video.play();
             }
         }
-        requestAnimationFrame(loopVideo);
+        // requestAnimationFrame sorgt für flüssigen Lauf passend zur Monitor-Rate
+        requestAnimationFrame(performLoop);
     }
-    video.onplay = () => { if(direction === 1) requestAnimationFrame(loopVideo); };
+
+    // Startet die Überprüfung
+    requestAnimationFrame(performLoop);
+
+    // Verhindert, dass der Browser das Video nach dem Laden stoppt
+    video.addEventListener('ended', () => {
+        direction = -1;
+        video.pause();
+    });
 
     function playClick() {
         clickSound.currentTime = 0;
