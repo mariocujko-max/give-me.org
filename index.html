@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Bitcoin saves lives | Private Initiative</title>
-    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="icon" type="image/jpeg" href="favicon.jpg">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -11,8 +11,6 @@
         :root {
             --btc: #f7931a;
             --cyan: #00f2ff;
-            --tiktok-red: #ff0050;
-            --paypal-blue: #0070ba;
             --border: rgba(0, 242, 255, 0.4);
         }
 
@@ -22,22 +20,24 @@
             color: #fff; background: #000; overflow-x: hidden;
         }
 
+        /* Hintergrund-Video */
         .bg-video {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            object-fit: cover; z-index: -2; filter: brightness(0.7);
+            object-fit: cover; z-index: -2; filter: brightness(0.55);
         }
 
+        /* Header Logik */
         header { 
             position: fixed; top: 0; left: 0; width: 100%;
-            text-align: center; padding: 50px 20px; z-index: 100;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, transparent 100%);
-            /* Sanfter Übergang für Deckkraft und Transform */
-            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            text-align: center; padding: 45px 20px; z-index: 100;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.85) 0%, transparent 100%);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+            pointer-events: auto;
         }
 
         .header-hidden { 
             opacity: 0; 
-            transform: translateY(-20px);
+            transform: translateY(-30px);
             pointer-events: none;
         }
 
@@ -45,8 +45,7 @@
             font-size: clamp(1.8rem, 7vw, 3rem); font-weight: 900; 
             text-transform: uppercase; 
             animation: breathe 4s ease-in-out infinite;
-            margin: 0;
-            letter-spacing: 2px;
+            margin: 0; letter-spacing: 2px;
         }
 
         @keyframes breathe {
@@ -54,70 +53,85 @@
             50% { transform: scale(1.03); text-shadow: 0 0 35px var(--btc), 0 0 50px var(--btc); }
         }
 
+        /* Audio Control */
         .audio-control { position: fixed; bottom: 25px; right: 25px; z-index: 1000; }
         .btn-audio {
             background: rgba(0,0,0,0.7); border: 2px solid var(--cyan);
             color: var(--cyan); padding: 12px 20px; border-radius: 50px;
             cursor: pointer; backdrop-filter: blur(15px); font-weight: 900; font-size: 0.8rem;
-            transition: all 0.3s;
+            transition: 0.3s;
         }
-        .btn-audio:hover { transform: scale(1.05); background: var(--cyan); color: #000; }
+        .btn-audio:hover { background: var(--cyan); color: #000; }
 
         main { max-width: 500px; margin: auto; padding-top: 85vh; padding-bottom: 80px; padding-left: 20px; padding-right: 20px; }
 
         .content-wrap {
             border: 1px solid var(--border); border-radius: 40px;
             padding: 35px 20px; text-align: center;
-            background: rgba(0,0,0,0.6);
-            backdrop-filter: blur(15px);
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(30px);
             position: relative; z-index: 10;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.9);
         }
 
+        /* Spenden-Karten */
         .impact-list { display: flex; flex-direction: column; gap: 15px; margin-bottom: 35px; }
         
         .card {
             background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255,255,255,0.1);
-            padding: 18px; border-radius: 24px; cursor: pointer; transition: 0.4s;
+            padding: 20px; border-radius: 26px; cursor: pointer; 
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex; justify-content: space-between; align-items: center; text-align: left;
         }
-        .card:hover { 
-            transform: translateY(-5px); 
-            border-color: var(--btc); 
-            background: rgba(247, 147, 26, 0.15);
-            box-shadow: 0 10px 20px rgba(247, 147, 26, 0.2);
-        }
-        .card .info b { color: var(--btc); font-size: 1.1rem; display: block; margin-bottom: 2px; }
-        .card .info span { font-size: 0.9rem; opacity: 0.8; }
-        .card .price { font-weight: 900; color: var(--cyan); font-size: 1.3rem; }
 
+        .card:hover { transform: translateY(-4px); background: rgba(255, 255, 255, 0.08); }
+
+        .card.active {
+            border-color: var(--btc);
+            background: rgba(247, 147, 26, 0.18);
+            box-shadow: 0 0 25px rgba(247, 147, 26, 0.25);
+            transform: scale(1.04);
+        }
+
+        .card .info b { color: var(--btc); font-size: 1.15rem; display: block; margin-bottom: 2px; }
+        .card .price { font-weight: 900; color: var(--cyan); font-size: 1.4rem; }
+
+        /* Button Layout & Animation */
         .btn-grid-main { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 25px; }
 
         .btn {
-            border: none; padding: 20px 10px; border-radius: 20px; font-weight: 900;
+            border: none; padding: 20px 10px; border-radius: 22px; font-weight: 900;
             cursor: pointer; text-decoration: none; text-align: center;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            display: flex; align-items: center; justify-content: center;
+            transition: 0.3s; display: flex; align-items: center; justify-content: center;
             text-transform: uppercase; gap: 10px; font-size: 0.8rem;
         }
-        .btn:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 10px 20px rgba(0,0,0,0.4); }
 
         .btn-copy { background: var(--btc); color: #000; }
-        .btn-paypal { background: var(--paypal-blue); color: #fff; }
+        .btn-paypal { background: #0070ba; color: #fff; }
         .btn-wallet { background: #fff; color: #000; }
         .btn-tiktok { background: #000; color: #fff; border: 1px solid rgba(255,255,255,0.3); }
 
-        .amount-hint { font-size: 0.8rem; color: var(--cyan); margin-top: 20px; font-weight: bold; min-height: 20px; }
+        /* PayPal Animation */
+        .btn-pulse {
+            animation: pop-pulse 0.5s ease-out;
+            box-shadow: 0 0 35px var(--cyan) !important;
+            border: 2px solid #fff;
+        }
+
+        @keyframes pop-pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+            100% { transform: scale(1); }
+        }
+
+        .amount-hint { font-size: 0.9rem; color: var(--cyan); margin-top: 22px; font-weight: bold; min-height: 24px; }
 
         .qr-wrap img {
             background: #fff; padding: 12px; border-radius: 20px;
-            margin-top: 40px; width: 140px; filter: drop-shadow(0 0 15px var(--cyan));
+            margin-top: 45px; width: 145px; filter: drop-shadow(0 0 15px var(--cyan));
         }
 
-        .legal-footer { 
-            margin-top: 50px; padding: 20px; border-top: 1px solid rgba(255,255,255,0.1);
-            font-size: 0.7rem; opacity: 0.5; line-height: 1.6;
-        }
+        .legal-footer { margin-top: 55px; padding: 20px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.7rem; opacity: 0.4; }
     </style>
 </head>
 <body>
@@ -132,15 +146,15 @@
 
 <header id="mainHeader">
     <h1>Bitcoin saves lives.</h1>
-    <p style="color: var(--cyan); letter-spacing: 5px; font-weight: 900; font-size: 0.7rem; margin-top: 12px; opacity: 0.8;">PRIVATE INITIATIVE</p>
+    <p style="color: var(--cyan); letter-spacing: 5px; font-weight: 900; font-size: 0.7rem; margin-top: 12px; opacity: 0.85;">PRIVATE INITIATIVE</p>
 </header>
 
 <main>
     <div class="content-wrap">
-        <p style="margin-bottom: 25px; font-weight: 900; color: #fff; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;">Support via PayPal:</p>
+        <p style="margin-bottom: 25px; font-weight: 900; color: #fff; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">Support via PayPal:</p>
         
         <div class="impact-list">
-            <div class="card" onclick="setPP(15)">
+            <div class="card" onclick="setPP(15, this)">
                 <div class="info">
                     <b id="p1">... BTC</b>
                     <span>Food (1 Week)</span>
@@ -148,7 +162,7 @@
                 <div class="price">15€</div>
             </div>
             
-            <div class="card" onclick="setPP(80)">
+            <div class="card" onclick="setPP(80, this)">
                 <div class="info">
                     <b id="p2">... BTC</b>
                     <span>Vaccines & Care</span>
@@ -156,7 +170,7 @@
                 <div class="price">80€</div>
             </div>
             
-            <div class="card" onclick="setPP(300)">
+            <div class="card" onclick="setPP(300, this)">
                 <div class="info">
                     <b id="p3">... BTC</b>
                     <span>Emergency Surgery</span>
@@ -174,14 +188,14 @@
             <a href="https://www.tiktok.com/@giveme.org" target="_blank" class="btn btn-tiktok"><i class="fa-brands fa-tiktok"></i> TIKTOK</a>
         </div>
         
-        <div class="amount-hint" id="ppHint">Select an option above</div>
+        <div class="amount-hint" id="ppHint">Select a donation goal</div>
         
         <div class="qr-wrap">
             <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed" alt="QR Code">
         </div>
 
         <div class="legal-footer">
-            Legal Disclaimer: Purely private, non-commercial initiative. Not a registered charity. No tax receipts.
+            Legal Disclaimer: Purely private initiative. Not a registered charity. No tax receipts. Support from person to person.
             <br><br>
             © 2026 give-me.org
         </div>
@@ -193,34 +207,42 @@
     const header = document.getElementById("mainHeader");
     let lastScrollTop = 0;
 
-    // Sanfte Scroll-Logik für den Header
+    // Header Logik (Sanftes Ein/Ausblenden & Klickbarkeit)
     window.addEventListener('scroll', () => {
         let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        
-        if (scrollTop > 100) {
-            header.classList.add("header-hidden");
+        if (scrollTop > 60) {
+            if (scrollTop > lastScrollTop) {
+                header.classList.add("header-hidden");
+            } else {
+                header.classList.remove("header-hidden");
+            }
         } else {
             header.classList.remove("header-hidden");
         }
-        
-        // Sofort wieder einblenden beim Hochscrollen
-        if (scrollTop < lastScrollTop && scrollTop > 50) {
-             header.classList.remove("header-hidden");
-        }
-
         lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
     }, { passive: true });
 
-    function setPP(amt) {
+    // PayPal Betrag & Card Animation
+    function setPP(amt, element) {
         const btn = document.getElementById("ppBtn");
         const display = document.getElementById("ppAmt");
         const hint = document.getElementById("ppHint");
+        
+        document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
+        element.classList.add('active');
+
         btn.href = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=give-me.org@gmx.net&amount=${amt}&currency_code=EUR&item_name=Support%20Private%20Initiative`;
         display.innerText = `(${amt}€)`;
         hint.innerHTML = `<i class="fa-solid fa-check"></i> Amount set to ${amt}€`;
         hint.style.color = "var(--btc)";
+
+        // PayPal Button Animation
+        btn.classList.remove('btn-pulse');
+        void btn.offsetWidth; 
+        btn.classList.add('btn-pulse');
     }
 
+    // Audio Toggle
     function tM() {
         const b = document.getElementById("mB");
         if (video.muted) {
@@ -233,6 +255,7 @@
         }
     }
 
+    // Live BTC Preis
     async function uP() {
         try {
             const r = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=eur');
@@ -246,18 +269,22 @@
         } catch (e) {}
     }
 
+    // Copy BTC Adresse
     function cT() {
         const a = "bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed";
         const b = document.getElementById("cBn");
         navigator.clipboard.writeText(a).then(() => {
             b.innerHTML = '<i class="fa-solid fa-check"></i> COPIED';
-            setTimeout(() => { b.innerHTML = '<i class="fa-regular fa-copy"></i> COPY BTC'; }, 2000);
+            b.style.background = "#fff";
+            setTimeout(() => { 
+                b.innerHTML = '<i class="fa-regular fa-copy"></i> COPY BTC'; 
+                b.style.background = "#f7931a";
+            }, 2000);
         });
     }
 
     uP();
     setInterval(uP, 300000);
-    // Video-Speed ist jetzt Standard (1.0)
 </script>
 </body>
 </html>
