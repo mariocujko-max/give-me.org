@@ -29,7 +29,7 @@
 
         header { 
             position: fixed; top: 0; left: 0; width: 100%;
-            text-align: center; padding: 60px 20px; z-index: 100;
+            text-align: center; padding: 70px 20px; z-index: 100;
             background: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, transparent 100%);
             transition: opacity 0.4s ease;
             pointer-events: none;
@@ -111,8 +111,6 @@
             box-shadow: 0 0 10px var(--glow-color);
         }
 
-        .legal-footer { margin-top: 45px; padding: 20px; border-top: 1px solid rgba(255, 255, 255, 0.1); font-size: 0.7rem; opacity: 0.7; }
-
         #thankYouBox {
             display: none;
             position: fixed;
@@ -142,10 +140,10 @@
 <body>
 
 <video id="v" class="bg-video" autoplay muted playsinline>
-    <source src="video.mp4" type="video/mp4">
+    <source src="video.mp4" type="image/mp4">
 </video>
 
-<audio id="clickSound" src="click.mp3" preload="auto"></audio>
+<audio id="clickSound" src="https://www.soundjay.com/buttons/button-16.mp3" preload="auto"></audio>
 
 <div class="audio-control">
     <button class="btn-audio" onclick="tM(); playClick();" id="mB"><i class="fa-solid fa-volume-xmark"></i> SOUND ON</button>
@@ -208,82 +206,70 @@
     const header = document.getElementById("mainHeader");
     const clickSound = document.getElementById("clickSound");
 
-    // --- PING-PONG VIDEO LOOP ---
-    let direction = 1;
-    video.addEventListener('timeupdate', function() {
-        if (video.currentTime >= video.duration - 0.1 && direction === 1) {
-            direction = -1;
-            video.pause();
-            reverseVideo();
-        }
-        if (video.currentTime <= 0.1 && direction === -1) {
-            direction = 1;
-            video.play();
-        }
-    });
+    // --- VERBESSERTER PING-PONG LOOP ---
+    let direction = 1; // 1 = vorwärts, -1 = rückwärts
 
-    function reverseVideo() {
-        if (direction === -1) {
-            video.currentTime -= 0.04;
-            if (video.currentTime > 0) requestAnimationFrame(reverseVideo);
+    function loopVideo() {
+        if (direction === 1) {
+            // Wenn Video fast am Ende (0.3s Puffer), umschalten auf rückwärts
+            if (video.currentTime >= video.duration - 0.3) {
+                direction = -1;
+                video.pause();
+            }
+        } else {
+            // Rückwärts-Schritt
+            video.currentTime -= 0.03; 
+            // Wenn Video fast am Anfang, umschalten auf vorwärts
+            if (video.currentTime <= 0.3) {
+                direction = 1;
+                video.play();
+            }
         }
+        requestAnimationFrame(loopVideo);
     }
 
-    // --- KLICKSOUND FUNKTION ---
+    // Startet den Loop, sobald das Video geladen ist
+    video.onloadedmetadata = () => {
+        requestAnimationFrame(loopVideo);
+    };
+
     function playClick() {
         clickSound.currentTime = 0;
-        clickSound.play().catch(e => {}); // Catch falls Browser Autoplay blockt
+        clickSound.play().catch(e => {}); 
     }
 
-    // --- SANFTER AUDIO ÜBERGANG (FADE IN/OUT) ---
     function tM() {
         const b = document.getElementById("mB");
         if (video.muted) {
-            video.muted = false;
-            video.volume = 0; // Start bei 0 für Fade-in
+            video.muted = false; video.volume = 0;
             let fade = setInterval(() => {
-                if (video.volume < 0.5) {
-                    video.volume = Math.min(video.volume + 0.05, 0.5);
-                } else {
-                    clearInterval(fade);
-                }
+                if (video.volume < 0.5) video.volume = Math.min(video.volume + 0.05, 0.5);
+                else clearInterval(fade);
             }, 50);
             b.innerHTML = '<i class="fa-solid fa-volume-high"></i> SOUND ON';
         } else {
             let fade = setInterval(() => {
-                if (video.volume > 0.05) {
-                    video.volume -= 0.05;
-                } else {
-                    clearInterval(fade);
-                    video.muted = true;
-                    b.innerHTML = '<i class="fa-solid fa-volume-xmark"></i> SOUND OFF';
-                }
+                if (video.volume > 0.05) video.volume -= 0.05;
+                else { clearInterval(fade); video.muted = true; b.innerHTML = '<i class="fa-solid fa-volume-xmark"></i> SOUND OFF'; }
             }, 50);
         }
     }
 
-    // --- RESTLICHE LOGIK ---
     window.addEventListener('scroll', () => {
         let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        let opacity = 1 - (scrollTop / 500);
-        header.style.opacity = opacity < 0 ? 0 : opacity;
+        header.style.opacity = 1 - (scrollTop / 500);
     }, { passive: true });
 
     function showThanks() {
-        setTimeout(() => {
-            document.getElementById('thankYouBox').style.display = 'block';
-        }, 800);
+        setTimeout(() => document.getElementById('thankYouBox').style.display = 'block', 800);
     }
 
     function setPP(amt, element) {
-        const btn = document.getElementById("ppBtn");
-        const display = document.getElementById("ppAmt");
-        const hint = document.getElementById("ppHint");
         document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
         element.classList.add('active');
-        btn.href = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=give-me.org@gmx.net&amount=${amt}&currency_code=EUR&item_name=Support%20Mission`;
-        display.innerText = `(${amt}€)`;
-        hint.innerHTML = `<i class="fa-solid fa-check"></i> Goal: ${amt}€ selected`;
+        document.getElementById("ppBtn").href = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=give-me.org@gmx.net&amount=${amt}&currency_code=EUR&item_name=Support%20Mission`;
+        document.getElementById("ppAmt").innerText = `(${amt}€)`;
+        document.getElementById("ppHint").innerHTML = `<i class="fa-solid fa-check"></i> Goal: ${amt}€ selected`;
     }
 
     async function uP() {
@@ -292,20 +278,17 @@
             const d = await r.json();
             const p = d.bitcoin.eur;
             [15, 80, 300].forEach((eur, i) => {
-                const b = (eur / p).toFixed(6);
                 const el = document.getElementById(`p${i+1}`);
-                if(el) el.innerText = `${b} BTC`;
+                if(el) el.innerText = `${(eur / p).toFixed(6)} BTC`;
             });
         } catch (e) {}
     }
 
     function cT() {
-        const a = "bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed";
-        const b = document.getElementById("cBn");
-        navigator.clipboard.writeText(a).then(() => {
-            b.innerHTML = '<i class="fa-solid fa-check"></i> COPIED';
+        navigator.clipboard.writeText("bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed").then(() => {
+            document.getElementById("cBn").innerHTML = '<i class="fa-solid fa-check"></i> COPIED';
             document.getElementById('thankYouBox').style.display = 'block';
-            setTimeout(() => { b.innerHTML = '<i class="fa-regular fa-copy"></i> COPY BTC'; }, 2000);
+            setTimeout(() => document.getElementById("cBn").innerHTML = '<i class="fa-regular fa-copy"></i> COPY BTC', 2000);
         });
     }
     uP(); setInterval(uP, 300000);
