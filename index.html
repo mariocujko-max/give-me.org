@@ -113,23 +113,18 @@
 
         .legal-footer { margin-top: 45px; padding: 20px; border-top: 1px solid rgba(255, 255, 255, 0.1); font-size: 0.7rem; opacity: 0.7; }
 
-        /* DANKE BOX STYLING */
         #thankYouBox {
             display: none;
             position: fixed;
-            top: 50%;
-            left: 50%;
+            top: 50%; left: 50%;
             transform: translate(-50%, -50%);
             background: rgba(0, 0, 0, 0.95);
             border: 2px solid var(--btc);
-            padding: 30px;
-            border-radius: 30px;
-            z-index: 2000;
-            text-align: center;
+            padding: 30px; border-radius: 30px;
+            z-index: 2000; text-align: center;
             box-shadow: 0 0 50px rgba(247, 147, 26, 0.5);
             backdrop-filter: blur(20px);
-            width: 85%;
-            max-width: 350px;
+            width: 85%; max-width: 350px;
         }
         #thankYouBox h2 { color: var(--btc); margin-top: 0; text-transform: uppercase; }
         #thankYouBox p { font-size: 0.9rem; line-height: 1.4; color: #fff; }
@@ -146,12 +141,14 @@
 </head>
 <body>
 
-<video id="v" class="bg-video" autoplay muted loop playsinline>
+<video id="v" class="bg-video" autoplay muted playsinline>
     <source src="video.mp4" type="video/mp4">
 </video>
 
+<audio id="clickSound" src="click.mp3" preload="auto"></audio>
+
 <div class="audio-control">
-    <button class="btn-audio" onclick="tM()" id="mB"><i class="fa-solid fa-volume-xmark"></i> SOUND ON</button>
+    <button class="btn-audio" onclick="tM(); playClick();" id="mB"><i class="fa-solid fa-volume-xmark"></i> SOUND ON</button>
 </div>
 
 <header id="mainHeader">
@@ -163,21 +160,21 @@
     <div class="content-wrap">
         <p style="margin-bottom: 25px; font-weight: 900; color: #fff; font-size: 0.8rem; text-transform: uppercase;">Support our Mission</p>
         <div class="impact-list">
-            <div class="card" onclick="setPP(15, this)">
+            <div class="card" onclick="setPP(15, this); playClick();">
                 <div class="info">
                     <b id="p1">... BTC</b>
                     <span>Food (1 Week)</span>
                 </div>
                 <div class="price">15€</div>
             </div>
-            <div class="card" onclick="setPP(80, this)">
+            <div class="card" onclick="setPP(80, this); playClick();">
                 <div class="info">
                     <b id="p2">... BTC</b>
                     <span>Vaccines & Care</span>
                 </div>
                 <div class="price">80€</div>
             </div>
-            <div class="card" onclick="setPP(300, this)">
+            <div class="card" onclick="setPP(300, this); playClick();">
                 <div class="info">
                     <b id="p3">... BTC</b>
                     <span>Emergency Surgery</span>
@@ -187,12 +184,12 @@
         </div>
 
         <div class="btn-grid-main">
-            <button class="btn btn-copy" id="cBn" onclick="cT()"><i class="fa-regular fa-copy"></i> COPY BTC</button>
-            <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=give-me.org@gmx.net&currency_code=EUR" target="_blank" class="btn btn-paypal" id="ppBtn" onclick="showThanks()">
+            <button class="btn btn-copy" id="cBn" onclick="cT(); playClick();"><i class="fa-regular fa-copy"></i> COPY BTC</button>
+            <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=give-me.org@gmx.net&currency_code=EUR" target="_blank" class="btn btn-paypal" id="ppBtn" onclick="showThanks(); playClick();">
                 <i class="fa-brands fa-paypal"></i> PAYPAL <span id="ppAmt"></span>
             </a>
-            <a href="bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed" class="btn btn-wallet"><i class="fa-brands fa-bitcoin"></i> WALLET</a>
-            <a href="https://www.tiktok.com/@giveme.org" target="_blank" class="btn btn-tiktok"><i class="fa-brands fa-tiktok"></i> TIKTOK</a>
+            <a href="bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed" class="btn btn-wallet" onclick="playClick();"><i class="fa-brands fa-bitcoin"></i> WALLET</a>
+            <a href="https://www.tiktok.com/@giveme.org" target="_blank" class="btn btn-tiktok" onclick="playClick();"><i class="fa-brands fa-tiktok"></i> TIKTOK</a>
         </div>
         <div class="amount-hint" id="ppHint">Select a donation goal</div>
         <div class="qr-wrap"><img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed" alt="QR Code"></div>
@@ -203,13 +200,69 @@
 <div id="thankYouBox">
     <h2>Thank You!</h2>
     <p>Your support means the world. You are making a real difference today.</p>
-    <button class="close-btn" onclick="document.getElementById('thankYouBox').style.display='none'">CLOSE</button>
+    <button class="close-btn" onclick="document.getElementById('thankYouBox').style.display='none'; playClick();">CLOSE</button>
 </div>
 
 <script>
     const video = document.getElementById("v");
     const header = document.getElementById("mainHeader");
+    const clickSound = document.getElementById("clickSound");
 
+    // --- PING-PONG VIDEO LOOP ---
+    let direction = 1;
+    video.addEventListener('timeupdate', function() {
+        if (video.currentTime >= video.duration - 0.1 && direction === 1) {
+            direction = -1;
+            video.pause();
+            reverseVideo();
+        }
+        if (video.currentTime <= 0.1 && direction === -1) {
+            direction = 1;
+            video.play();
+        }
+    });
+
+    function reverseVideo() {
+        if (direction === -1) {
+            video.currentTime -= 0.04;
+            if (video.currentTime > 0) requestAnimationFrame(reverseVideo);
+        }
+    }
+
+    // --- KLICKSOUND FUNKTION ---
+    function playClick() {
+        clickSound.currentTime = 0;
+        clickSound.play().catch(e => {}); // Catch falls Browser Autoplay blockt
+    }
+
+    // --- SANFTER AUDIO ÜBERGANG (FADE IN/OUT) ---
+    function tM() {
+        const b = document.getElementById("mB");
+        if (video.muted) {
+            video.muted = false;
+            video.volume = 0; // Start bei 0 für Fade-in
+            let fade = setInterval(() => {
+                if (video.volume < 0.5) {
+                    video.volume = Math.min(video.volume + 0.05, 0.5);
+                } else {
+                    clearInterval(fade);
+                }
+            }, 50);
+            b.innerHTML = '<i class="fa-solid fa-volume-high"></i> SOUND ON';
+        } else {
+            let fade = setInterval(() => {
+                if (video.volume > 0.05) {
+                    video.volume -= 0.05;
+                } else {
+                    clearInterval(fade);
+                    video.muted = true;
+                    b.innerHTML = '<i class="fa-solid fa-volume-xmark"></i> SOUND OFF';
+                }
+            }, 50);
+        }
+    }
+
+    // --- RESTLICHE LOGIK ---
     window.addEventListener('scroll', () => {
         let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         let opacity = 1 - (scrollTop / 500);
@@ -231,12 +284,6 @@
         btn.href = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=give-me.org@gmx.net&amount=${amt}&currency_code=EUR&item_name=Support%20Mission`;
         display.innerText = `(${amt}€)`;
         hint.innerHTML = `<i class="fa-solid fa-check"></i> Goal: ${amt}€ selected`;
-    }
-
-    function tM() {
-        const b = document.getElementById("mB");
-        if (video.muted) { video.muted = false; video.volume = 0.5; b.innerHTML = '<i class="fa-solid fa-volume-high"></i> SOUND ON'; }
-        else { video.muted = true; b.innerHTML = '<i class="fa-solid fa-volume-xmark"></i> SOUND OFF'; }
     }
 
     async function uP() {
