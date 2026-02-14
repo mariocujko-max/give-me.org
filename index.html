@@ -10,11 +10,10 @@
 
     <style>
         :root {
-            --btc: #f7931a;
+            --btc: #e28a1a; /* Sanfteres Gold-Orange */
             --paypal: #0070ba;
             --cyan: #00f2ff;
-            --tiktok-red: #ff0050;
-            --glow-color: rgba(0, 242, 255, 0.3); 
+            --glow-color: rgba(226, 138, 26, 0.2); 
         }
 
         * { box-sizing: border-box; }
@@ -25,13 +24,13 @@
 
         .bg-video {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            object-fit: cover; z-index: -2; filter: brightness(0.8);
+            object-fit: cover; z-index: -2; filter: brightness(0.7);
         }
 
         header { 
             position: fixed; top: 0; left: 0; width: 100%;
             text-align: center; padding: 60px 20px; z-index: 100;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, transparent 100%);
+            background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, transparent 100%);
             transition: opacity 0.4s ease;
             pointer-events: none;
         }
@@ -39,12 +38,12 @@
         h1 { 
             font-size: clamp(2.2rem, 8vw, 3.8rem); font-weight: 900; 
             text-transform: uppercase; margin: 0; letter-spacing: 4px;
-            color: #fff; text-shadow: 2px 2px 20px rgba(0,0,0,0.7);
+            color: #fff; text-shadow: 2px 2px 20px rgba(0,0,0,0.8);
         }
 
         .audio-control { position: fixed; bottom: 25px; right: 25px; z-index: 1000; }
         .btn-audio {
-            background: rgba(0,0,0,0.5); border: 2px solid var(--glow-color);
+            background: rgba(0,0,0,0.5); border: 1px solid var(--glow-color);
             color: var(--cyan); padding: 12px 22px; border-radius: 50px;
             cursor: pointer; backdrop-filter: blur(10px); font-weight: 900;
             transition: 0.3s; box-shadow: 0 0 15px var(--glow-color);
@@ -53,32 +52,32 @@
         main { max-width: 500px; margin: auto; padding-top: 85vh; padding-bottom: 100px; padding-left: 15px; padding-right: 15px; }
 
         .content-wrap {
-            border: 2px solid var(--glow-color); border-radius: 40px;
+            border: 1px solid var(--glow-color); border-radius: 40px;
             padding: 35px 18px; text-align: center;
-            background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(15px);
-            position: relative; z-index: 10; box-shadow: 0 0 25px var(--glow-color);
+            background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(20px);
+            position: relative; z-index: 10; box-shadow: 0 0 30px rgba(0,0,0,0.5);
         }
 
         .impact-list { display: flex; flex-direction: column; gap: 14px; margin-bottom: 35px; }
         
         .card {
-            background: rgba(0, 0, 0, 0.5); border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1);
             padding: 18px 22px; border-radius: 25px; cursor: pointer; 
             transition: 0.3s; display: flex; justify-content: space-between; align-items: center;
         }
         .card:hover { border-color: var(--cyan); transform: translateY(-2px); }
-        .card.active { border-color: var(--btc); background: rgba(247, 147, 26, 0.15); box-shadow: 0 0 15px var(--btc); }
+        .card.active { border-color: var(--btc); background: rgba(226, 138, 26, 0.1); box-shadow: 0 0 15px var(--glow-color); }
 
         .info { display: flex; flex-direction: column; gap: 3px; text-align: left;}
         .info b { color: var(--btc); font-size: 1.1rem; font-weight: 900; }
-        .info span { color: rgba(255, 255, 255, 0.7); font-size: 0.75rem; text-transform: uppercase; font-weight: 700; }
+        .info span { color: rgba(255, 255, 255, 0.6); font-size: 0.75rem; text-transform: uppercase; font-weight: 700; }
         
         .price { font-weight: 900; font-size: 1.2rem; color: var(--cyan); }
 
         .btn-grid-main { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 25px; }
         
         .btn {
-            border: 2px solid rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.1);
             color: #fff; padding: 18px 5px; border-radius: 22px; font-weight: 900;
             cursor: pointer; text-decoration: none; text-align: center;
             transition: 0.3s; display: flex; align-items: center; justify-content: center;
@@ -87,25 +86,23 @@
         .btn-copy { background: var(--btc); color: #000; }
         .btn-paypal { background: var(--paypal); color: #fff; }
         .btn-wallet { background: #fff; color: #000; }
-        .btn-tiktok { background: #000; color: #fff; box-shadow: -3px 0 0 #ff0050, 3px 0 0 #00f2ff; }
-
-        .btn:hover { transform: scale(1.04); filter: brightness(1.1); border-color: #fff; }
+        .btn-tiktok { background: #000; color: #fff; border: 1px solid rgba(255,255,255,0.3); }
 
         #thankYouBox {
             display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            background: rgba(0, 0, 0, 0.95); border: 2px solid var(--btc);
+            background: rgba(0, 0, 0, 0.96); border: 1px solid var(--btc);
             padding: 35px; border-radius: 35px; z-index: 2000; text-align: center;
-            box-shadow: 0 0 60px rgba(247, 147, 26, 0.6); backdrop-filter: blur(25px);
+            box-shadow: 0 0 60px rgba(0,0,0,0.9); backdrop-filter: blur(25px);
             width: 85%; max-width: 380px;
         }
 
         .qr-wrap img { 
             background: #fff; padding: 10px; border-radius: 20px; 
-            margin-top: 40px; width: 140px; box-shadow: 0 0 20px var(--btc);
-            border: 2px solid var(--btc);
+            margin-top: 40px; width: 140px; box-shadow: 0 0 15px rgba(0,0,0,0.5);
+            border: 1px solid var(--btc);
         }
 
-        .legal-footer { margin-top: 45px; padding: 20px; border-top: 1px solid rgba(255, 255, 255, 0.1); font-size: 0.7rem; opacity: 0.7; }
+        .legal-footer { margin-top: 45px; padding: 20px; border-top: 1px solid rgba(255, 255, 255, 0.05); font-size: 0.7rem; opacity: 0.5; }
 
         @media (max-width: 400px) {
             h1 { font-size: 1.8rem; }
@@ -132,8 +129,6 @@
 
 <main>
     <div class="content-wrap">
-        <p style="margin-bottom: 25px; font-weight: 900; color: #fff; font-size: 0.85rem; text-transform: uppercase;">Support Private Initiative</p>
-        
         <div class="impact-list">
             <div class="card" onclick="setPP(15, this); playClick();">
                 <div class="info">
@@ -168,7 +163,7 @@
         </div>
         
         <div class="qr-wrap">
-            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed&color=f7931a" alt="QR Code">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed&color=e28a1a" alt="QR Code">
         </div>
         <div class="legal-footer">Private initiative. Not a registered charity. © 2026 give-me.org</div>
     </div>
@@ -187,14 +182,13 @@
 
     window.addEventListener('scroll', () => {
         let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        let opacity = 1 - (scrollTop / 500);
-        header.style.opacity = opacity < 0 ? 0 : opacity;
+        header.style.opacity = 1 - (scrollTop / 500);
     }, { passive: true });
 
     function playClick() {
         clickSound.currentTime = 0;
-        clickSound.volume = 1.0; 
-        clickSound.play().catch(e => { console.log("click.mp3 not found or blocked"); }); 
+        clickSound.volume = 0.3; // Lautstärke auf 30% reduziert
+        clickSound.play().catch(e => {}); 
     }
 
     function tM() {
@@ -203,7 +197,7 @@
             video.muted = false;
             video.volume = 0;
             const fadeIn = setInterval(() => {
-                if (video.volume < 0.45) {
+                if (video.volume < 0.4) {
                     video.volume += 0.05;
                 } else {
                     clearInterval(fadeIn);
@@ -224,12 +218,10 @@
     }
 
     function setPP(amt, element) {
-        const btn = document.getElementById("ppBtn");
-        const display = document.getElementById("ppAmt");
         document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
         element.classList.add('active');
-        btn.href = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=give-me.org@gmx.net&amount=${amt}&currency_code=EUR&item_name=Donation%20give-me.org`;
-        display.innerText = `(${amt}€)`;
+        document.getElementById("ppBtn").href = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=give-me.org@gmx.net&amount=${amt}&currency_code=EUR&item_name=Donation%20give-me.org`;
+        document.getElementById("ppAmt").innerText = `(${amt}€)`;
     }
 
     function showThanks() {
