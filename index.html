@@ -96,20 +96,26 @@
         .card .info b { color: var(--btc); font-size: 1.15rem; display: block; margin-bottom: 2px; }
         .card .price { font-weight: 900; color: var(--cyan); font-size: 1.4rem; }
 
-        /* Button Layout & Animation */
+        /* Buttons & Animation */
         .btn-grid-main { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 25px; }
 
         .btn {
             border: none; padding: 20px 10px; border-radius: 22px; font-weight: 900;
             cursor: pointer; text-decoration: none; text-align: center;
-            transition: 0.3s; display: flex; align-items: center; justify-content: center;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Sanftere Transition für alle Buttons */
+            display: flex; align-items: center; justify-content: center;
             text-transform: uppercase; gap: 10px; font-size: 0.8rem;
+            opacity: 0.85; /* Etwas dezenter im Normalzustand */
         }
+        /* Hover-Effekt für alle Buttons */
+        .btn:hover { transform: translateY(-3px) scale(1.02); opacity: 1; box-shadow: 0 10px 20px rgba(0,0,0,0.4); }
+
 
         .btn-copy { background: var(--btc); color: #000; }
         .btn-paypal { background: #0070ba; color: #fff; }
         .btn-wallet { background: #fff; color: #000; }
         .btn-tiktok { background: #000; color: #fff; border: 1px solid rgba(255,255,255,0.3); }
+        .btn-tiktok:hover { box-shadow: 2px 0 0 var(--cyan), -2px 0 0 #ff0050; /* TikTok spezifischer Hover-Effekt */ }
 
         /* PayPal Animation */
         .btn-pulse {
@@ -207,18 +213,22 @@
     const header = document.getElementById("mainHeader");
     let lastScrollTop = 0;
 
-    // Header Logik (Sanftes Ein/Ausblenden & Klickbarkeit)
+    // Header Logik (Ein/Ausblenden bei ca. der Hälfte der Seite)
     window.addEventListener('scroll', () => {
         let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        if (scrollTop > 60) {
-            if (scrollTop > lastScrollTop) {
-                header.classList.add("header-hidden");
-            } else {
-                header.classList.remove("header-hidden");
-            }
+        let windowHeight = window.innerHeight;
+        let documentHeight = document.documentElement.scrollHeight;
+        let scrollMidpoint = documentHeight / 2 - windowHeight / 2; // Mitte der scrollbaren Seite
+
+        // Der Header blendet ein/aus, wenn man um die Mitte der Seite scrollt
+        if (scrollTop > scrollMidpoint - 100 && scrollTop < scrollMidpoint + 100) {
+            // Innerhalb des "Mittelbereichs" - Header ausblenden
+            header.classList.add("header-hidden");
         } else {
+            // Außerhalb des "Mittelbereichs" - Header einblenden
             header.classList.remove("header-hidden");
         }
+        
         lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
     }, { passive: true });
 
@@ -269,16 +279,20 @@
         } catch (e) {}
     }
 
-    // Copy BTC Adresse
+    // Copy BTC Adresse - Animation wiederhergestellt
     function cT() {
         const a = "bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed";
         const b = document.getElementById("cBn");
         navigator.clipboard.writeText(a).then(() => {
             b.innerHTML = '<i class="fa-solid fa-check"></i> COPIED';
-            b.style.background = "#fff";
+            b.style.background = "#fff"; // Temporär weiße Farbe
+            b.style.color = "#000";     // Textfarbe anpassen
+            b.style.transform = "scale(1.05)"; // Leichter Pop
             setTimeout(() => { 
                 b.innerHTML = '<i class="fa-regular fa-copy"></i> COPY BTC'; 
-                b.style.background = "#f7931a";
+                b.style.background = "var(--btc)"; // Zurück zur BTC-Farbe
+                b.style.color = "#000";             // Textfarbe zurück
+                b.style.transform = "scale(1)";     // Zurück zur Normalgröße
             }, 2000);
         });
     }
