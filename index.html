@@ -11,7 +11,7 @@
         :root {
             --btc: #f7931a;
             --cyan: #00f2ff;
-            --border: rgba(0, 242, 255, 0.4);
+            --tiktok: #ff0050;
         }
 
         * { box-sizing: border-box; }
@@ -45,76 +45,77 @@
             50% { transform: scale(1.03); text-shadow: 0 0 35px var(--btc), 0 0 50px var(--btc); }
         }
 
-        /* Sound & Controls Design-Basis */
         .audio-control { position: fixed; bottom: 25px; right: 25px; z-index: 1000; }
         .btn-audio {
-            background: rgba(0,0,0,0.6); border: 2px solid var(--cyan);
+            background: rgba(0,0,0,0.3); border: 2px solid var(--cyan);
             color: var(--cyan); padding: 12px 20px; border-radius: 50px;
-            cursor: pointer; backdrop-filter: blur(15px); font-weight: 900; font-size: 0.8rem;
+            cursor: pointer; backdrop-filter: blur(8px); font-weight: 900; font-size: 0.8rem;
             transition: 0.3s; pointer-events: auto;
             box-shadow: 0 0 15px rgba(0, 242, 255, 0.2);
         }
 
         main { max-width: 500px; margin: auto; padding-top: 85vh; padding-bottom: 100px; padding-left: 20px; padding-right: 20px; }
 
-        /* Scroll-Bereich angepasst an Sound-Button-Farben */
         .content-wrap {
-            border: 2px solid var(--cyan); border-radius: 40px;
+            border: 2px solid rgba(0, 242, 255, 0.3); border-radius: 40px;
             padding: 35px 20px; text-align: center;
-            background: rgba(0,0,0,0.75);
-            backdrop-filter: blur(30px);
+            background: rgba(0,0,0,0.4);
+            backdrop-filter: blur(15px);
             position: relative; z-index: 10;
-            box-shadow: 0 0 30px rgba(0, 242, 255, 0.2);
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
         }
 
         .impact-list { display: flex; flex-direction: column; gap: 15px; margin-bottom: 35px; }
         
         .card {
-            background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(0, 242, 255, 0.2);
+            background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1);
             padding: 20px; border-radius: 26px; cursor: pointer; 
             transition: all 0.3s ease;
             display: flex; justify-content: space-between; align-items: center; text-align: left;
         }
-        .card:hover { border-color: var(--cyan); transform: translateY(-3px); }
+        .card:hover { border-color: var(--cyan); transform: translateY(-3px); background: rgba(0, 242, 255, 0.05); }
         .card.active {
             border-color: var(--btc);
-            background: rgba(247, 147, 26, 0.15);
-            box-shadow: 0 0 20px rgba(247, 147, 26, 0.3);
+            background: rgba(247, 147, 26, 0.1);
+            box-shadow: 0 0 20px rgba(247, 147, 26, 0.2);
         }
 
-        /* Transparente Button-Animationen */
         .btn-grid-main { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 25px; }
+        
+        /* Die neuen transparenten Buttons mit Rand-Effekt */
         .btn {
-            background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.3);
+            background: rgba(0,0,0,0.2); 
+            border: 2px solid rgba(255,255,255,0.2);
             color: #fff; padding: 20px 10px; border-radius: 22px; font-weight: 900;
             cursor: pointer; text-decoration: none; text-align: center;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex; align-items: center; justify-content: center;
             text-transform: uppercase; gap: 10px; font-size: 0.8rem;
-            backdrop-filter: blur(10px);
-            animation: float 3s ease-in-out infinite;
+            backdrop-filter: blur(5px);
+            animation: float 4s ease-in-out infinite;
         }
 
-        /* Individuelle Floating Animationen für lebendiges Design */
         @keyframes float {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
+            50% { transform: translateY(-6px); }
         }
-        .btn:nth-child(2) { animation-delay: 0.5s; }
-        .btn:nth-child(3) { animation-delay: 1s; }
-        .btn:nth-child(4) { animation-delay: 1.5s; }
+        .btn:nth-child(2) { animation-delay: 0.7s; }
+        .btn:nth-child(3) { animation-delay: 1.4s; }
+        .btn:nth-child(4) { animation-delay: 2.1s; }
 
         .btn:hover { 
-            border-color: var(--cyan); 
-            background: rgba(0, 242, 255, 0.1); 
-            transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(0, 242, 255, 0.3);
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: 0 0 25px currentColor;
+            background: rgba(255, 255, 255, 0.05);
         }
 
+        /* Farbspezifische Ränder */
         .btn-copy { border-color: var(--btc); color: var(--btc); }
         .btn-paypal { border-color: var(--cyan); color: var(--cyan); }
+        .btn-wallet { border-color: #fff; color: #fff; }
+        .btn-tiktok { border-color: var(--tiktok); color: var(--tiktok); }
 
-        .btn-pulse { animation: pop-pulse 0.5s ease-out; border-color: #fff !important; }
+        .btn-pulse { animation: pop-pulse 0.5s ease-out; border-width: 3px; }
         @keyframes pop-pulse {
             0% { transform: scale(1); }
             50% { transform: scale(1.15); }
@@ -122,8 +123,8 @@
         }
 
         .amount-hint { font-size: 0.9rem; color: var(--cyan); margin-top: 22px; font-weight: bold; text-shadow: 0 0 10px var(--cyan); }
-        .qr-wrap img { background: #fff; padding: 12px; border-radius: 20px; margin-top: 45px; width: 145px; opacity: 0.9; }
-        .legal-footer { margin-top: 55px; padding: 20px; border-top: 1px solid rgba(0, 242, 255, 0.2); font-size: 0.7rem; opacity: 0.5; }
+        .qr-wrap img { background: #fff; padding: 10px; border-radius: 18px; margin-top: 45px; width: 135px; opacity: 0.85; border: 2px solid var(--cyan); }
+        .legal-footer { margin-top: 55px; padding: 20px; border-top: 1px solid rgba(255, 255, 255, 0.1); font-size: 0.7rem; opacity: 0.5; }
     </style>
 </head>
 <body>
@@ -143,7 +144,7 @@
 
 <main>
     <div class="content-wrap">
-        <p style="margin-bottom: 25px; font-weight: 900; color: #fff; font-size: 0.9rem; text-transform: uppercase;">Support the Mission:</p>
+        <p style="margin-bottom: 25px; font-weight: 900; color: rgba(255,255,255,0.8); font-size: 0.8rem; text-transform: uppercase;">Help us feed them:</p>
         <div class="impact-list">
             <div class="card" onclick="setPP(15, this)">
                 <div class="info"><b id="p1">... BTC</b><span>Food (1 Week)</span></div>
@@ -169,7 +170,7 @@
         </div>
         <div class="amount-hint" id="ppHint">Select a donation goal</div>
         <div class="qr-wrap"><img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed" alt="QR Code"></div>
-        <div class="legal-footer">Legal Disclaimer: Private initiative. © 2026 give-me.org</div>
+        <div class="legal-footer">Private initiative. © 2026 give-me.org</div>
     </div>
 </main>
 
@@ -191,7 +192,7 @@
         element.classList.add('active');
         btn.href = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=give-me.org@gmx.net&amount=${amt}&currency_code=EUR&item_name=Support%20Private%20Initiative`;
         display.innerText = `(${amt}€)`;
-        hint.innerHTML = `<i class="fa-solid fa-check"></i> Goal: ${amt}€ selected`;
+        hint.innerHTML = `<i class="fa-solid fa-check"></i> Goal: ${amt}€ set`;
         btn.classList.remove('btn-pulse');
         void btn.offsetWidth; 
         btn.classList.add('btn-pulse');
@@ -199,7 +200,7 @@
 
     function tM() {
         const b = document.getElementById("mB");
-        if (video.muted) { video.muted = false; b.innerHTML = '<i class="fa-solid fa-volume-high"></i> SOUND ON'; }
+        if (video.muted) { video.muted = false; video.volume = 0.5; b.innerHTML = '<i class="fa-solid fa-volume-high"></i> SOUND ON'; }
         else { video.muted = true; b.innerHTML = '<i class="fa-solid fa-volume-xmark"></i> SOUND OFF'; }
     }
 
@@ -210,7 +211,8 @@
             const p = d.bitcoin.eur;
             [15, 80, 300].forEach((eur, i) => {
                 const b = (eur / p).toFixed(6);
-                document.getElementById(`p${i+1}`).innerText = `~ ${b} BTC`;
+                const el = document.getElementById(`p${i+1}`);
+                if(el) el.innerText = `~ ${b} BTC`;
             });
         } catch (e) {}
     }
