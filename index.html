@@ -131,12 +131,11 @@
 <body>
 
 <video id="v" class="bg-video" autoplay muted loop playsinline>
-    <source src="leerer-hundenapf-regen.mp4" type="video/mp4">
+    <source src="video.mp4" type="video/mp4">
 </video>
 
 <div class="audio-control">
-    <button class="btn-audio" onclick="tM()" id="mB"><i class="fa-solid fa-music"></i> MUSIC ON</button>
-    <audio id="mG" loop preload="auto"><source src="sad-piano.mp3" type="audio/mpeg"></audio>
+    <button class="btn-audio" onclick="tM()" id="mB"><i class="fa-solid fa-volume-xmark"></i> SOUND ON</button>
 </div>
 
 <header id="mainHeader">
@@ -198,25 +197,19 @@
 </main>
 
 <script>
-    const audio = document.getElementById("mG");
+    const video = document.getElementById("v");
     const header = document.getElementById("mainHeader");
     let lastScrollTop = 0;
-    audio.volume = 0.5;
 
-    // Advanced Scroll Logic
+    // Scroll Logic
     window.onscroll = function() {
         let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-        // Hide only after 180px scroll down
         if (scrollTop > 180) {
             header.classList.add("header-hidden");
         } 
-        
-        // Show immediately when scrolling UP or when at the top
         if (scrollTop < lastScrollTop || scrollTop <= 10) {
             header.classList.remove("header-hidden");
         }
-
         lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
     };
 
@@ -224,24 +217,24 @@
         const btn = document.getElementById("ppBtn");
         const display = document.getElementById("ppAmt");
         const hint = document.getElementById("ppHint");
-        
         btn.href = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=give-me.org@gmx.net&amount=${amt}&currency_code=EUR&item_name=Support%20Private%20Initiative&no_note=0&cn=Message%20to%20the%20initiative`;
-        
         display.innerText = `(${amt}€)`;
         btn.style.transform = "scale(1.15)";
         setTimeout(() => btn.style.transform = "scale(1)", 200);
-        
         hint.innerHTML = `<i class="fa-solid fa-check"></i> Amount set to ${amt}€`;
         hint.style.color = "var(--btc)";
     }
 
+    // Toggle Mute Logic für das Video
     function tM() {
         const b = document.getElementById("mB");
-        if (audio.paused) {
-            audio.play().then(() => b.innerHTML = '<i class="fa-solid fa-pause"></i> PAUSE');
+        if (video.muted) {
+            video.muted = false;
+            video.volume = 0.7;
+            b.innerHTML = '<i class="fa-solid fa-volume-high"></i> SOUND ON';
         } else {
-            audio.pause();
-            b.innerHTML = '<i class="fa-solid fa-music"></i> MUSIC ON';
+            video.muted = true;
+            b.innerHTML = '<i class="fa-solid fa-volume-xmark"></i> SOUND OFF';
         }
     }
 
@@ -272,7 +265,7 @@
 
     uP();
     setInterval(uP, 300000);
-    document.getElementById("v").playbackRate = 0.8;
+    video.playbackRate = 0.8;
 </script>
 </body>
 </html>
