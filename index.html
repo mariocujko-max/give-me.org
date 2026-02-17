@@ -16,24 +16,24 @@
             --glass-border: rgba(255, 255, 255, 0.18);
         }
 
-        /* Verhindert jegliche Ränder und sorgt für Vollbild */
         html, body { 
             margin: 0; padding: 0; 
-            width: 100%; height: 100%;
+            width: 100%; min-height: 100%;
             font-family: 'Plus Jakarta Sans', sans-serif; 
             color: #fff; background: #000; overflow-x: hidden;
         }
 
-        /* Video fix: object-fit cover und absolute Positionierung */
+        /* Video FIX: Garantiert sichtbar und füllt alles aus */
         .bg-video {
             position: fixed; 
-            top: 50%; left: 50%;
-            min-width: 100%; min-height: 100%;
-            width: auto; height: auto;
-            transform: translate(-50%, -50%); /* Zentriert das Video perfekt */
-            object-fit: cover; 
+            top: 0; 
+            left: 0;
+            width: 100%; 
+            height: 100%;
+            object-fit: cover; /* Schneidet Ränder ab, um Balken zu verhindern */
             z-index: -2; 
             filter: brightness(0.85) contrast(1.05);
+            background-color: #000; /* Fallback */
         }
 
         header { 
