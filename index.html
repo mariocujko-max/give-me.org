@@ -60,11 +60,11 @@
         }
         .btn-audio.active-glow { border-color: var(--btc); box-shadow: 0 0 20px rgba(247, 147, 26, 0.4); }
 
-        /* Main Bereich - Positioniert auf Musik-Button Ebene */
+        /* Main Bereich */
         main { 
             position: relative; z-index: 10; max-width: 460px; margin: auto; 
             padding-left: 20px; padding-right: 20px;
-            padding-top: 100vh; padding-bottom: 150px; /* Mehr Platz unten */
+            padding-top: 100vh; padding-bottom: 150px;
         }
 
         .content-wrap {
@@ -76,14 +76,14 @@
             max-height: 80vh;
             overflow-y: auto;
             scrollbar-width: none;
-            /* Sanftes Einblenden passend zum Header */
+            /* 10% HÖHER GESETZT: von -5vh auf -15vh */
             animation: fadeInUpContent 3.5s cubic-bezier(0.23, 1, 0.32, 1) forwards;
         }
         
         @keyframes fadeInUpContent {
             0% { transform: translateY(50vh); opacity: 0; }
             50% { opacity: 1; }
-            100% { transform: translateY(-5vh); opacity: 1; } /* Zieht bis zur Musik-Button Ebene hoch */
+            100% { transform: translateY(-15vh); opacity: 1; }
         }
 
         .content-wrap::-webkit-scrollbar { display: none; }
@@ -209,12 +209,8 @@
 
     window.addEventListener('scroll', () => {
         let scrollTop = window.scrollY;
-
-        // Header Parallax
         header.style.opacity = 1 - (scrollTop / 600);
-        // Header wandert beim Scrollen weiter hoch (relativ zur neuen Endposition)
         header.style.transform = `translateY(calc(-35vh - ${scrollTop * 0.25}px))`;
-        
     }, { passive: true });
 
     function playClick() {
