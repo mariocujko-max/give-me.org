@@ -30,15 +30,18 @@
 
         header { 
             position: fixed; top: 0; left: 0; width: 100%;
-            text-align: center; padding: 60px 20px; z-index: 100;
+            text-align: center; padding: 80px 20px; 
+            z-index: 1;
             pointer-events: none;
             animation: fadeInDown 1.2s ease-out forwards;
+            /* Subtiler Schatten für bessere Trennung vom Video */
+            text-shadow: 0 10px 30px rgba(0,0,0,0.8);
         }
 
         h1 { 
             font-size: clamp(1.8rem, 7vw, 3rem); font-weight: 800; 
             text-transform: uppercase; margin: 0; letter-spacing: 6px;
-            background: linear-gradient(180deg, #fff 0%, rgba(255,255,255,0.6) 100%);
+            background: linear-gradient(180deg, #fff 0%, rgba(255,255,255,0.7) 100%);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
 
@@ -47,24 +50,32 @@
             background: rgba(255, 255, 255, 0.05); border: 1px solid var(--glass-border);
             color: #fff; padding: 10px 20px; border-radius: 100px;
             cursor: pointer; backdrop-filter: blur(20px); font-weight: 600;
-            font-size: 0.7rem; letter-spacing: 1px; transition: 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            font-size: 0.7rem; letter-spacing: 1px; transition: 0.4s;
         }
 
-        main { max-width: 480px; margin: auto; padding-top: 78vh; padding-bottom: 60px; padding-left: 20px; padding-right: 20px; }
+        main { 
+            position: relative; 
+            z-index: 10; 
+            max-width: 480px; 
+            margin: auto; 
+            padding-top: 85vh;
+            padding-bottom: 60px; 
+            padding-left: 20px; 
+            padding-right: 20px; 
+        }
 
         .content-wrap {
             position: relative; border-radius: 45px; padding: 40px 25px;
-            text-align: center; z-index: 10;
-            background: rgba(255, 255, 255, 0.02); 
+            text-align: center;
+            background: rgba(10, 10, 10, 0.35); 
             border: 1px solid var(--glass-border);
-            backdrop-filter: blur(12px); 
-            box-shadow: 0 40px 100px rgba(0,0,0,0.4);
+            backdrop-filter: blur(20px); 
+            box-shadow: 0 40px 100px rgba(0,0,0,0.7);
             animation: fadeInUp 1s cubic-bezier(0.23, 1, 0.32, 1) forwards;
         }
 
-        /* Animationen Keyframes */
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(40px); }
+            from { opacity: 0; transform: translateY(60px); }
             to { opacity: 1; transform: translateY(0); }
         }
         @keyframes fadeInDown {
@@ -75,7 +86,6 @@
 
         .impact-list { display: flex; flex-direction: column; gap: 15px; margin-bottom: 30px; }
         
-        /* Staggered Animation für Karten */
         .card {
             background: var(--glass-bg); border: 1px solid var(--glass-border);
             padding: 20px 24px; border-radius: 24px; cursor: pointer; 
@@ -86,21 +96,13 @@
         .card:nth-child(2) { animation-delay: 0.3s; }
         .card:nth-child(3) { animation-delay: 0.4s; }
 
-        .card:hover { 
-            background: rgba(255, 255, 255, 0.08); 
-            border-color: rgba(255, 255, 255, 0.3);
-            transform: translateY(-5px);
-        }
-        .card.active { 
-            border-color: var(--btc); 
-            background: rgba(247, 147, 26, 0.08);
-            box-shadow: 0 10px 30px rgba(247, 147, 26, 0.15);
-        }
+        .card:hover { background: rgba(255, 255, 255, 0.08); transform: translateY(-5px); border-color: rgba(255, 255, 255, 0.3); }
+        .card.active { border-color: var(--btc); background: rgba(247, 147, 26, 0.12); box-shadow: 0 0 20px rgba(247, 147, 26, 0.2); }
 
         .info { text-align: left; }
-        .info b { color: var(--btc); font-size: 1.1rem; font-weight: 800; display: block; margin-bottom: 2px; }
-        .info span { font-size: 0.7rem; opacity: 0.5; text-transform: uppercase; font-weight: 600; letter-spacing: 1.5px; }
-        .price { font-weight: 800; font-size: 1.3rem; color: #fff; }
+        .info b { color: var(--btc); font-size: 1.1rem; font-weight: 800; display: block; }
+        .info span { font-size: 0.7rem; opacity: 0.5; text-transform: uppercase; letter-spacing: 1.5px; }
+        .price { font-weight: 800; font-size: 1.3rem; }
 
         .btn-grid-main { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 30px; }
         .btn {
@@ -110,22 +112,18 @@
             gap: 12px; font-size: 0.7rem; letter-spacing: 1px; transition: 0.4s;
             opacity: 0; animation: fadeInUp 0.8s ease forwards;
         }
-        /* Delay für Buttons */
+        
         .btn:nth-child(1) { animation-delay: 0.5s; background: linear-gradient(135deg, var(--btc), #ffab45); color: #000; }
         .btn:nth-child(2) { animation-delay: 0.6s; background: linear-gradient(135deg, var(--paypal), #00a2ff); }
         .btn:nth-child(3) { animation-delay: 0.7s; background: #fff; color: #000; }
         .btn:nth-child(4) { animation-delay: 0.8s; background: rgba(255, 255, 255, 0.1); border: 1px solid var(--glass-border); }
 
-        .btn:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(0,0,0,0.3); }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(0,0,0,0.3); opacity: 1; }
 
-        .qr-wrap { position: relative; display: inline-block; margin-top: 40px; opacity: 0; animation: fadeIn 1s ease forwards; animation-delay: 1s; }
-        .qr-wrap img { 
-            background: #fff; padding: 12px; border-radius: 28px; 
-            width: 140px; border: 1px solid rgba(255,255,255,0.1); opacity: 0.95;
-            transition: 0.4s;
-        }
+        .qr-wrap { margin-top: 40px; opacity: 0; animation: fadeIn 1s ease forwards; animation-delay: 1s; }
+        .qr-wrap img { background: #fff; padding: 12px; border-radius: 28px; width: 130px; opacity: 0.95; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
 
-        .legal-footer { margin-top: 45px; padding-top: 25px; border-top: 1px solid rgba(255, 255, 255, 0.05); font-size: 0.65rem; opacity: 0.4; letter-spacing: 1px; }
+        .legal-footer { margin-top: 45px; padding-top: 25px; border-top: 1px solid rgba(255, 255, 255, 0.05); font-size: 0.65rem; opacity: 0.4; }
 
         #thankYouBox {
             display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
@@ -150,7 +148,7 @@
 
 <header id="mainHeader">
     <h1>You can help</h1>
-    <div style="height: 2px; width: 40px; background: var(--btc); margin: 15px auto; border-radius: 2px;"></div>
+    <div style="height: 2px; width: 40px; background: var(--btc); margin: 15px auto; border-radius: 2px; box-shadow: 0 0 10px var(--btc);"></div>
     <p style="color: #fff; letter-spacing: 8px; font-weight: 800; font-size: 0.7rem; opacity: 0.5;">GIVE-ME.ORG</p>
 </header>
 
@@ -206,7 +204,7 @@
     window.addEventListener('scroll', () => {
         let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         header.style.opacity = 1 - (scrollTop / 500);
-        header.style.transform = `translateY(-${scrollTop * 0.2}px)`;
+        header.style.transform = `translateY(-${scrollTop * 0.3}px)`;
     }, { passive: true });
 
     function playClick() {
