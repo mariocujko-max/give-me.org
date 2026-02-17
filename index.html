@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Support & Care | give-me.org</title>
     <link rel="icon" type="image/png" href="favicon.png">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
 
@@ -16,15 +16,24 @@
             --glass-border: rgba(255, 255, 255, 0.18);
         }
 
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        body { 
-            margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; 
-            color: #fff; background: #000; min-height: 200vh;
+        /* Verhindert jegliche Ränder und sorgt für Vollbild */
+        html, body { 
+            margin: 0; padding: 0; 
+            width: 100%; height: 100%;
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            color: #fff; background: #000; overflow-x: hidden;
         }
 
+        /* Video fix: object-fit cover und absolute Positionierung */
         .bg-video {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            object-fit: cover; z-index: -2; filter: brightness(0.85) contrast(1.05);
+            position: fixed; 
+            top: 50%; left: 50%;
+            min-width: 100%; min-height: 100%;
+            width: auto; height: auto;
+            transform: translate(-50%, -50%); /* Zentriert das Video perfekt */
+            object-fit: cover; 
+            z-index: -2; 
+            filter: brightness(0.85) contrast(1.05);
         }
 
         header { 
@@ -74,7 +83,6 @@
             max-height: 80vh;
             overflow-y: auto;
             scrollbar-width: none;
-            /* Endposition um weitere 10% erhöht auf -25vh */
             animation: fadeInUpContent 3.5s cubic-bezier(0.23, 1, 0.32, 1) forwards;
         }
         
