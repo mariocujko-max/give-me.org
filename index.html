@@ -13,18 +13,21 @@
             --btc: #f7931a; 
             --paypal: #0070ba;
             --cyan: #00f2ff;
-            --glass-border: rgba(255, 255, 255, 0.18);
+            --glass-border: rgba(255, 255, 255, 0.25);
         }
 
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         body { 
             margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; 
             color: #fff; background: #000; min-height: 200vh;
+            overflow-x: hidden;
         }
 
+        /* Video Styling mit Transition */
         .bg-video {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            object-fit: cover; z-index: -2; filter: brightness(0.85) contrast(1.05);
+            object-fit: cover; z-index: -2; filter: brightness(0.7) contrast(1.1);
+            transition: opacity 1.5s ease-in-out;
         }
 
         header { 
@@ -33,12 +36,10 @@
             z-index: 1; pointer-events: none;
             display: flex; flex-direction: column; justify-content: center; height: 100vh;
             animation: moveUpHeader 3.5s cubic-bezier(0.23, 1, 0.32, 1) forwards;
-            text-shadow: 0 5px 25px rgba(0,0,0,0.6);
         }
 
         @keyframes moveUpHeader {
             0% { transform: translateY(80vh); opacity: 0; }
-            40% { opacity: 1; }
             100% { transform: translateY(-35vh); opacity: 1; }
         }
 
@@ -49,86 +50,58 @@
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
 
-        .audio-control { position: fixed; bottom: 30px; right: 30px; z-index: 1000; }
-        .btn-audio {
-            width: 58px; height: 58px; border-radius: 50%;
-            background: rgba(255, 255, 255, 0.05); border: 2px solid var(--glass-border);
-            color: #fff; cursor: pointer; backdrop-filter: blur(20px);
-            display: flex; align-items: center; justify-content: center;
-            transition: 0.4s; font-size: 1.2rem;
-        }
-        .btn-audio.active-glow { border-color: var(--btc); box-shadow: 0 0 20px rgba(247, 147, 26, 0.4); }
-
         main { 
             position: relative; z-index: 10; max-width: 460px; margin: auto; 
-            padding-left: 20px; padding-right: 20px;
-            padding-top: 100vh; padding-bottom: 150px;
+            padding: 100vh 20px 150px 20px;
         }
 
+        /* Milchiges Glas-Design */
         .content-wrap {
             border-radius: 50px; padding: 35px 25px; text-align: center;
-            background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.03) 100%); 
+            background: rgba(255, 255, 255, 0.07); 
             border: 1px solid var(--glass-border);
-            backdrop-filter: blur(25px); 
-            box-shadow: 0 40px 80px rgba(0,0,0,0.5);
-            max-height: 80vh;
-            overflow-y: auto;
-            scrollbar-width: none;
-            /* Endposition um weitere 10% erhöht auf -25vh */
+            backdrop-filter: blur(35px); 
+            box-shadow: 0 40px 80px rgba(0,0,0,0.6);
             animation: fadeInUpContent 3.5s cubic-bezier(0.23, 1, 0.32, 1) forwards;
         }
         
         @keyframes fadeInUpContent {
             0% { transform: translateY(50vh); opacity: 0; }
-            50% { opacity: 1; }
             100% { transform: translateY(-25vh); opacity: 1; }
         }
 
-        .content-wrap::-webkit-scrollbar { display: none; }
-
-        @media (max-width: 600px) {
-            .content-wrap {
-                max-height: none !important;
-                overflow: visible !important;
-                padding: 30px 20px;
-            }
-            main { padding-top: 105vh; }
-        }
-
-        .impact-list { display: flex; flex-direction: column; gap: 14px; margin-bottom: 25px; }
         .card {
-            background: rgba(255,255,255,0.04); border: 1px solid var(--glass-border);
+            background: rgba(255,255,255,0.06); border: 1px solid var(--glass-border);
             padding: 18px 24px; border-radius: 25px; cursor: pointer; 
             display: flex; justify-content: space-between; align-items: center;
-            transition: 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+            transition: 0.4s;
+            backdrop-filter: blur(10px);
         }
-        .card:hover { transform: translateY(-3px); border-color: var(--btc); }
-        .card.active { border-color: var(--btc); background: rgba(247, 147, 26, 0.1); }
+        .card:hover { transform: scale(1.02); background: rgba(255,255,255,0.12); border-color: #fff; }
+        .card.active { border-color: var(--btc); background: rgba(247, 147, 26, 0.15); box-shadow: 0 0 20px rgba(247, 147, 26, 0.2); }
 
         .btn-grid-main { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 20px; }
         .btn {
             border-radius: 22px; padding: 18px 5px; font-weight: 800; text-decoration: none;
             display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 0.75rem;
-            color: #fff; border: 1px solid rgba(255,255,255,0.15);
-            transition: 0.3s;
+            color: #fff; border: 1px solid var(--glass-border);
+            transition: 0.3s; backdrop-filter: blur(15px);
         }
-        .btn-btc { background: rgba(247, 147, 26, 0.45); }
-        .btn-pp { background: rgba(0, 112, 186, 0.45); }
-        .btn-wall { background: rgba(255, 255, 255, 0.2); }
+        .btn-btc { background: rgba(247, 147, 26, 0.3); }
+        .btn-pp { background: rgba(0, 112, 186, 0.3); }
+        .btn-wall { background: rgba(255, 255, 255, 0.15); }
         .btn-tt { background: rgba(0, 0, 0, 0.4); }
+        .btn:hover { transform: translateY(-3px); background: rgba(255,255,255,0.25); border-color: #fff; }
 
-        .btn:hover { transform: translateY(-3px); border-color: #fff; }
-
-        .qr-wrap img { background: #fff; padding: 10px; border-radius: 25px; width: 110px; margin-top: 30px; opacity: 0.9; }
-
-        .legal-footer { margin-top: 40px; opacity: 0.4; font-size: 0.65rem; line-height: 1.5; }
-
-        #thankYouBox {
-            display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            background: rgba(10, 10, 10, 0.96); border: 1px solid var(--glass-border); padding: 40px; 
-            border-radius: 40px; z-index: 2000; text-align: center; backdrop-filter: blur(40px);
-            width: 88%; max-width: 400px;
+        .audio-control { position: fixed; bottom: 30px; right: 30px; z-index: 1000; }
+        .btn-audio {
+            width: 58px; height: 58px; border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1); border: 1px solid var(--glass-border);
+            color: #fff; cursor: pointer; backdrop-filter: blur(20px);
+            display: flex; align-items: center; justify-content: center; transition: 0.4s;
         }
+
+        .qr-wrap img { background: #fff; padding: 10px; border-radius: 25px; width: 110px; margin-top: 30px; opacity: 0.8; }
     </style>
 </head>
 <body>
@@ -152,16 +125,16 @@
 
 <main id="scrollContainer">
     <div class="content-wrap" id="mainCard">
-        <div class="impact-list">
-            <div class="card" onclick="setPP(15, this); playClick();">
+        <div class="impact-list" style="display: flex; flex-direction: column; gap: 14px; margin-bottom: 25px;">
+            <div class="card" onclick="setPP(15, this); playClick(); switchVideo('video2.mp4');">
                 <div style="text-align:left;"><b id="p1" style="color:var(--btc); font-size:1.1rem; display:block;">... BTC</b><span style="opacity:0.6; font-size:0.7rem; text-transform:uppercase;">Food (1 Week)</span></div>
                 <div style="font-weight:800; font-size:1.3rem;">15€</div>
             </div>
-            <div class="card" onclick="setPP(80, this); playClick();">
+            <div class="card" onclick="setPP(80, this); playClick(); switchVideo('video2.mp4');">
                 <div style="text-align:left;"><b id="p2" style="color:var(--btc); font-size:1.1rem; display:block;">... BTC</b><span style="opacity:0.6; font-size:0.7rem; text-transform:uppercase;">Vaccines & Care</span></div>
                 <div style="font-weight:800; font-size:1.3rem;">80€</div>
             </div>
-            <div class="card" onclick="setPP(300, this); playClick();">
+            <div class="card" onclick="setPP(300, this); playClick(); switchVideo('video2.mp4');">
                 <div style="text-align:left;"><b id="p3" style="color:var(--btc); font-size:1.1rem; display:block;">... BTC</b><span style="opacity:0.6; font-size:0.7rem; text-transform:uppercase;">Emergency Surgery</span></div>
                 <div style="font-weight:800; font-size:1.3rem;">300€</div>
             </div>
@@ -169,7 +142,7 @@
 
         <div class="btn-grid-main">
             <button class="btn btn-btc" id="cBn" onclick="cT(); playClick();"><i class="fa-regular fa-copy"></i> BTC</button>
-            <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=give-me.org@gmx.net" target="_blank" class="btn btn-pp" id="ppBtn" onclick="showThanks(); playClick();">
+            <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=give-me.org@gmx.net" target="_blank" class="btn btn-pp" id="ppBtn" onclick="playClick();">
                 <i class="fa-brands fa-paypal"></i> PAYPAL <span id="ppAmt" style="font-size:0.6rem;"></span>
             </a>
             <a href="bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed" class="btn btn-wall" onclick="playClick();"><i class="fa-brands fa-bitcoin"></i> WALLET</a>
@@ -180,21 +153,11 @@
             <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed" alt="QR">
         </div>
 
-        <div class="legal-footer">
-            <b>Legal Notice:</b> Private initiative. Not a registered NPO. 
-            Contributions are personal gifts.
-            <br><br>
-            © 2026 give-me.org
+        <div style="margin-top: 40px; opacity: 0.4; font-size: 0.65rem; line-height: 1.5;">
+            <b>Legal Notice:</b> Private initiative. Not a registered NPO. <br> © 2026 give-me.org
         </div>
     </div>
 </main>
-
-<div id="thankYouBox">
-    <div style="font-size: 3rem; margin-bottom: 15px;">🤍</div>
-    <h2 style="font-weight:800; text-transform:uppercase;">Thank You!</h2>
-    <p style="opacity:0.7; line-height:1.6;">Your support reaches those in need directly.</p>
-    <button style="background:#fff; color:#000; border:none; padding:14px 40px; border-radius:100px; font-weight:800; cursor:pointer; margin-top:20px;" onclick="document.getElementById('thankYouBox').style.display='none';">CLOSE</button>
-</div>
 
 <script>
     const video = document.getElementById("v");
@@ -204,6 +167,18 @@
     const musicBtn = document.getElementById("mB");
 
     video.playbackRate = 0.5;
+
+    // Sanfter Videowechsel Funktion
+    function switchVideo(newSrc) {
+        if (video.src.includes(newSrc)) return; // Schon aktiv
+        
+        video.style.opacity = 0; // Ausblenden
+        setTimeout(() => {
+            video.src = newSrc;
+            video.play();
+            video.style.opacity = 1; // Einblenden
+        }, 1500);
+    }
 
     window.addEventListener('scroll', () => {
         let scrollTop = window.scrollY;
@@ -219,22 +194,18 @@
         if (bgMusic.paused) {
             bgMusic.play(); bgMusic.volume = 0.45;
             musicBtn.innerHTML = '<i class="fa-solid fa-volume-high"></i>';
-            musicBtn.classList.add('active-glow');
         } else {
             bgMusic.pause();
             musicBtn.innerHTML = '<i class="fa-solid fa-music"></i>';
-            musicBtn.classList.remove('active-glow');
         }
     }
 
     function setPP(amt, element) {
         document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
         element.classList.add('active');
-        document.getElementById("ppBtn").href = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=give-me.org@gmx.net&amount=${amt}&currency_code=EUR&item_name=Donation%20give-me.org`;
+        document.getElementById("ppBtn").href = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=give-me.org@gmx.net&amount=${amt}&currency_code=EUR&item_name=Donation`;
         document.getElementById("ppAmt").innerText = `(${amt}€)`;
     }
-
-    function showThanks() { setTimeout(() => { document.getElementById('thankYouBox').style.display = 'block'; }, 800); }
 
     async function uP() {
         try {
@@ -243,8 +214,7 @@
             const p = d.bitcoin.eur;
             [15, 80, 300].forEach((eur, i) => {
                 const b = (eur / p).toFixed(6);
-                const el = document.getElementById(`p${i+1}`);
-                if(el) el.innerText = `${b} BTC`;
+                document.getElementById(`p${i+1}`).innerText = `${b} BTC`;
             });
         } catch (e) {}
     }
@@ -252,11 +222,10 @@
     function cT() {
         navigator.clipboard.writeText("bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed").then(() => {
             document.getElementById("cBn").innerHTML = '<i class="fa-solid fa-check"></i>';
-            showThanks();
             setTimeout(() => { document.getElementById("cBn").innerHTML = '<i class="fa-regular fa-copy"></i> BTC'; }, 2000);
         });
     }
-    uP(); setInterval(uP, 300000);
+    uP();
 </script>
 </body>
 </html>
