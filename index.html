@@ -10,17 +10,20 @@
     <style>
         :root {
             --btc: #f7931a; 
-            --pp: #0070ba;
             --glass-border: rgba(255, 255, 255, 0.2);
         }
 
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         body { margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; color: #fff; background: #000; min-height: 100vh; overflow-x: hidden; }
 
-        /* Video Setup */
+        /* Video Container & Ebenen */
         .video-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; background: #000; }
-        video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(0.65); transition: opacity 1.5s ease-in-out; }
+        video { 
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+            object-fit: cover; filter: brightness(0.65); transition: opacity 1.5s ease-in-out; 
+        }
 
+        /* Header Styling */
         header { 
             position: fixed; top: 0; left: 0; width: 100%; text-align: center; z-index: 1; pointer-events: none;
             display: flex; flex-direction: column; justify-content: center; height: 100vh;
@@ -34,6 +37,7 @@
         h1 { font-size: 2.2rem; font-weight: 800; text-transform: uppercase; letter-spacing: 12px; margin: 0; text-shadow: 0 0 20px rgba(255,255,255,0.3); }
         .sub-url { color: var(--btc); letter-spacing: 8px; font-weight: 800; font-size: 0.8rem; margin-top: 10px; }
 
+        /* Scroll-Bereich */
         main { position: relative; z-index: 10; max-width: 440px; margin: auto; padding-top: 100vh; padding-bottom: 80px; }
 
         .content-wrap {
@@ -47,7 +51,7 @@
             100% { transform: translateY(-18vh); opacity: 1; }
         }
 
-        /* Karten Layout Links/Rechts */
+        /* Karten Layout mit Links/Rechts Ausrichtung */
         .card {
             background: rgba(255,255,255,0.06); border: 1px solid var(--glass-border);
             padding: 16px 20px; border-radius: 20px; cursor: pointer; margin-bottom: 12px;
@@ -55,12 +59,13 @@
         }
         .card:hover { border-color: #fff; box-shadow: 0 0 15px rgba(255,255,255,0.2); }
         .card.active { border-color: var(--btc); box-shadow: 0 0 15px rgba(247, 147, 26, 0.4); background: rgba(247, 147, 26, 0.1); }
+        
         .card-left { text-align: left; }
         .card-left b { display: block; color: var(--btc); font-size: 1rem; font-weight: 800; }
         .card-left span { font-size: 0.7rem; text-transform: uppercase; font-weight: 800; color: #fff; opacity: 0.8; }
         .card-right { font-weight: 800; font-size: 1.2rem; }
 
-        /* Alte Button Farben */
+        /* Button Grid mit alten Farben */
         .btn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
         .btn { border-radius: 16px; padding: 16px 5px; font-weight: 800; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 0.75rem; color: #fff; transition: 0.4s; border: 1px solid var(--glass-border); }
         
@@ -70,16 +75,18 @@
         .btn-tt { background: rgba(0, 0, 0, 0.5); }
         .btn:hover { transform: translateY(-2px); border-color: #fff; box-shadow: 0 0 15px rgba(255,255,255,0.2); }
 
-        /* Herz Animation */
+        /* Aufwendigere Herz Animation */
         .heart {
-            position: fixed; color: #fff; font-size: 20px; pointer-events: none;
-            z-index: 9999; animation: rise 1.5s ease-out forwards;
+            position: fixed; color: #fff; pointer-events: none;
+            z-index: 9999; animation: rise linear forwards;
         }
         @keyframes rise {
-            0% { transform: translateY(0) scale(1); opacity: 1; }
-            100% { transform: translateY(-120px) scale(1.6); opacity: 0; }
+            0% { transform: translateY(0) scale(1) rotate(0deg); opacity: 0; }
+            20% { opacity: 0.8; }
+            100% { transform: translateY(-150px) scale(1.5) rotate(20deg); opacity: 0; }
         }
 
+        /* Musik Steuerung */
         .audio-control { position: fixed; bottom: 30px; right: 30px; z-index: 1000; }
         .btn-audio { width: 54px; height: 54px; border-radius: 50%; background: rgba(255, 255, 255, 0.1); border: 1px solid var(--glass-border); color: #fff; cursor: pointer; backdrop-filter: blur(20px); transition: 0.4s; }
         .btn-audio.playing { border-color: var(--btc); box-shadow: 0 0 15px rgba(247, 147, 26, 0.4); }
@@ -88,7 +95,7 @@
         .legal { margin-top: 25px; opacity: 0.3; font-size: 0.6rem; line-height: 1.5; }
     </style>
 </head>
-<body class="thanks-mode-disabled">
+<body>
 
 <div class="video-container">
     <video id="v1" autoplay muted playsinline style="opacity: 1;"><source src="video.mp4" type="video/mp4"></video>
@@ -137,11 +144,16 @@
     const v1 = document.getElementById("v1"), v2 = document.getElementById("v2");
     let c1 = 0, c2 = 0, isM = true;
 
-    // Video 2 Speed Setup
-    v2.playbackRate = 0.8;
-    v1.volume = v2.volume = 0.3;
+    // Video Speed Setup
+    function applySpeed() {
+        v1.playbackRate = 0.85; 
+        v2.playbackRate = 0.75; 
+        v1.defaultPlaybackRate = 0.85;
+        v2.defaultPlaybackRate = 0.75;
+    }
+    applySpeed();
 
-    // Automatischer Loop 2x V1, 2x V2
+    // Automatischer Loop (2x Video 1, dann 2x Video 2)
     v1.onended = () => { c1++; if(c1 < 2) v1.play(); else { c1 = 0; switchVid(v1, v2); } };
     v2.onended = () => { c2++; if(c2 < 2) v2.play(); else { c2 = 0; switchVid(v2, v1); } };
 
@@ -159,21 +171,34 @@
         const cur = v1.style.opacity == "1" ? v1 : v2;
         v1.muted = v2.muted = true;
         cur.muted = isM;
+        cur.volume = 0.3;
         document.getElementById("mB").innerHTML = isM ? '<i class="fa-solid fa-music"></i>' : '<i class="fa-solid fa-volume-high"></i>';
         document.getElementById("mB").classList.toggle('playing', !isM);
     }
 
+    // Herz-Effekt mit Variationen
     function hK(e) {
         const cs = document.getElementById("clickSound");
         if(cs) { cs.currentTime = 0; cs.volume = 0.2; cs.play().catch(e=>{}); }
-        // Herz Effekt
-        for(let i=0; i<3; i++) {
+        
+        for(let i=0; i<5; i++) {
             const h = document.createElement("div");
-            h.className = "heart"; h.innerHTML = "🤍";
-            h.style.left = (e.clientX - 10 + (Math.random()*30 - 15)) + "px";
+            h.className = "heart";
+            h.innerHTML = "🤍";
+            
+            // Zufällige Größe, Transparenz und Dauer
+            const size = Math.random() * 15 + 10;
+            const opacity = Math.random() * 0.5 + 0.5;
+            const duration = Math.random() * 1 + 1;
+            
+            h.style.fontSize = `${size}px`;
+            h.style.opacity = opacity;
+            h.style.animationDuration = `${duration}s`;
+            h.style.left = (e.clientX - 10 + (Math.random()*40 - 20)) + "px";
             h.style.top = (e.clientY - 10) + "px";
+            
             document.body.appendChild(h);
-            setTimeout(() => h.remove(), 1500);
+            setTimeout(() => h.remove(), duration * 1000);
         }
     }
 
