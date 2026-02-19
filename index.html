@@ -10,102 +10,74 @@
     <style>
         :root {
             --btc: #f7931a; 
-            --pp: #0070ba;
             --glass-border: rgba(255, 255, 255, 0.2);
-            --glow-strength: 0 0 15px;
+            --glow: 0 0 15px rgba(255, 255, 255, 0.2);
         }
 
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        body { margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; color: #fff; background: #000; min-height: 180vh; overflow-x: hidden; }
+        body { margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; color: #fff; background: #000; min-height: 100vh; overflow-x: hidden; }
 
         .video-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; background: #000; }
-        video { 
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
-            object-fit: cover; filter: brightness(0.65); transition: opacity 1s ease-in-out; 
-        }
+        video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(0.6); transition: opacity 1.5s ease-in-out; }
 
         header { 
-            position: fixed; top: 0; left: 0; width: 100%; text-align: center; z-index: 1; pointer-events: none;
-            display: flex; flex-direction: column; justify-content: center; height: 100vh;
-            animation: moveUpHeader 3.5s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+            position: fixed; top: 5vh; left: 0; width: 100%; text-align: center; z-index: 1;
+            animation: fadeIn 2s ease-out forwards;
         }
+        h1 { font-size: 1.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 8px; margin: 0; }
+        .sub-url { color: var(--btc); letter-spacing: 5px; font-weight: 800; font-size: 0.7rem; margin-top: 5px; }
 
-        @keyframes moveUpHeader {
-            0% { transform: translateY(80vh); opacity: 0; }
-            100% { transform: translateY(-38vh); opacity: 1; }
-        }
-
-        h1 { 
-            font-size: clamp(1.8rem, 8vw, 2.8rem); font-weight: 800; text-transform: uppercase; 
-            margin: 0; letter-spacing: 12px; line-height: 1.2;
-            text-shadow: 0 0 20px rgba(255,255,255,0.3);
-        }
-        .sub-url { color: var(--btc); letter-spacing: 8px; font-weight: 800; font-size: 0.8rem; margin-top: 10px; opacity: 0.9; }
-
-        main { position: relative; z-index: 10; max-width: 440px; margin: auto; padding-top: 100vh; padding-bottom: 80px; }
+        main { position: relative; z-index: 10; max-width: 420px; margin: auto; padding: 25vh 20px 10vh; }
 
         .content-wrap {
-            border-radius: 40px; padding: 25px 20px; text-align: center;
+            border-radius: 35px; padding: 25px;
             background: rgba(255, 255, 255, 0.03); border: 1px solid var(--glass-border);
-            backdrop-filter: blur(15px); box-shadow: 0 30px 60px rgba(0,0,0,0.6);
-            animation: fadeInUp 3.5s cubic-bezier(0.23, 1, 0.32, 1) forwards;
-        }
-        
-        @keyframes fadeInUp {
-            0% { transform: translateY(50vh); opacity: 0; }
-            100% { transform: translateY(-18vh); opacity: 1; }
+            backdrop-filter: blur(15px); box-shadow: 0 30px 60px rgba(0,0,0,0.5);
         }
 
-        /* Rand-Effekt für Karten */
+        /* Karten Layout Links/Rechts */
         .card {
             background: rgba(255,255,255,0.06); border: 1px solid var(--glass-border);
-            padding: 16px 20px; border-radius: 20px; cursor: pointer; margin-bottom: 12px;
-            display: flex; justify-content: space-between; align-items: center; 
-            transition: 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            padding: 15px 20px; border-radius: 20px; cursor: pointer; margin-bottom: 12px;
+            display: flex; justify-content: space-between; align-items: center; transition: 0.4s;
+            box-shadow: var(--glow);
         }
-        .card:hover { border-color: #fff; box-shadow: var(--glow-strength) rgba(255,255,255,0.2); transform: translateY(-2px); }
-        .card.active { border-color: var(--btc); box-shadow: var(--glow-strength) rgba(247, 147, 26, 0.4); background: rgba(247, 147, 26, 0.1); }
+        .card-left { text-align: left; }
+        .card-left b { display: block; color: var(--btc); font-size: 1rem; }
+        .card-left span { font-size: 0.65rem; text-transform: uppercase; font-weight: 800; opacity: 0.8; }
+        .card-right { font-weight: 800; font-size: 1.3rem; }
 
-        .card-info span { font-weight: 800; text-transform: uppercase; font-size: 0.7rem; letter-spacing: 1px; display: block; margin-bottom: 2px; }
-        .card-info b { font-weight: 800; color: var(--btc); font-size: 1rem; display: block; }
-
-        /* Rand-Effekt für Button-Grid */
-        .btn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px; }
+        .btn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
         .btn { 
-            border-radius: 16px; padding: 16px 5px; font-weight: 800; text-decoration: none; 
-            display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 0.75rem; 
-            color: #fff; transition: 0.4s; border: 1px solid var(--glass-border);
+            border-radius: 15px; padding: 15px 5px; font-weight: 800; text-decoration: none; 
+            display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 0.7rem; 
+            color: #fff; transition: 0.4s; border: 1px solid var(--glass-border); background: rgba(255,255,255,0.05);
         }
 
-        .btn-btc { background: rgba(247, 147, 26, 0.25); border-color: rgba(247, 147, 26, 0.5); }
-        .btn-btc:hover { border-color: var(--btc); box-shadow: var(--glow-strength) rgba(247, 147, 26, 0.5); }
-
-        .btn-pp { background: rgba(0, 112, 186, 0.25); border-color: rgba(0, 112, 186, 0.5); }
-        .btn-pp:hover { border-color: #0070ba; box-shadow: var(--glow-strength) rgba(0, 112, 186, 0.5); }
-
-        .btn-wall { background: rgba(255, 255, 255, 0.1); }
-        .btn-wall:hover { border-color: #fff; box-shadow: var(--glow-strength) rgba(255, 255, 255, 0.3); }
-
-        .btn-tt { background: rgba(0, 0, 0, 0.4); }
-        .btn-tt:hover { border-color: #fff; box-shadow: var(--glow-strength) rgba(255, 255, 255, 0.3); }
-
-        /* Rand-Effekt für Musik-Button */
-        .audio-control { position: fixed; bottom: 30px; right: 30px; z-index: 1000; }
-        .btn-audio { 
-            width: 58px; height: 58px; border-radius: 50%; background: rgba(255, 255, 255, 0.1); 
-            border: 1px solid var(--glass-border); color: #fff; cursor: pointer; backdrop-filter: blur(20px); 
-            transition: 0.4s; display: flex; align-items: center; justify-content: center;
+        /* Video 2 Modus Glow */
+        body.thanks-mode .card, body.thanks-mode .btn, body.thanks-mode .content-wrap {
+            border-color: rgba(255, 255, 255, 0.5);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
         }
-        .btn-audio.playing { border-color: var(--btc); box-shadow: var(--glow-strength) rgba(247, 147, 26, 0.4); color: var(--btc); }
 
-        .qr-wrap img { background: #fff; padding: 8px; border-radius: 18px; width: 100px; margin: 25px auto 10px; opacity: 0.7; }
-        .legal { margin-top: 25px; opacity: 0.3; font-size: 0.6rem; line-height: 1.5; }
+        /* Herz Animation */
+        .heart {
+            position: fixed; color: #fff; font-size: 20px; pointer-events: none;
+            z-index: 9999; animation: rise 1.5s ease-out forwards;
+        }
+        @keyframes rise {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            100% { transform: translateY(-100px) scale(1.5); opacity: 0; }
+        }
+
+        .audio-control { position: fixed; bottom: 20px; right: 20px; z-index: 1000; }
+        .btn-audio { width: 50px; height: 50px; border-radius: 50%; background: rgba(255,255,255,0.1); border: 1px solid var(--glass-border); color: #fff; cursor: pointer; backdrop-filter: blur(10px); }
     </style>
 </head>
 <body>
 
 <div class="video-container">
-    <video id="v1" autoplay muted loop playsinline style="opacity: 1;"><source src="video.mp4" type="video/mp4"></video>
+    <video id="v1" autoplay muted playsinline style="opacity: 1;"><source src="video.mp4" type="video/mp4"></video>
     <video id="v2" muted playsinline style="opacity: 0;"><source src="video2.mp4" type="video/mp4"></video>
 </div>
 
@@ -115,82 +87,88 @@
     <button class="btn-audio" onclick="tM();" id="mB"><i class="fa-solid fa-music"></i></button>
 </div>
 
-<header id="mainHeader">
+<header>
     <h1>You can help</h1>
     <div class="sub-url">GIVE-ME.ORG</div>
 </header>
 
 <main>
     <div class="content-wrap">
-        <div class="card" onclick="triggerAll(15, this)">
-            <div class="card-info"><span>Food (1 Week)</span><b id="p1">... BTC</b></div>
-            <div style="font-weight:800; font-size:1.2rem;">15€</div>
+        <div class="card" onclick="hK(event); setAmt(15);">
+            <div class="card-left"><b id="p1">... BTC</b><span>Food (1 Week)</span></div>
+            <div class="card-right">15€</div>
         </div>
-        <div class="card" onclick="triggerAll(80, this)">
-            <div class="card-info"><span>Vaccines & Care</span><b id="p2">... BTC</b></div>
-            <div style="font-weight:800; font-size:1.2rem;">80€</div>
+        <div class="card" onclick="hK(event); setAmt(80);">
+            <div class="card-left"><b id="p2">... BTC</b><span>Vaccines & Care</span></div>
+            <div class="card-right">80€</div>
         </div>
-        <div class="card" onclick="triggerAll(300, this)">
-            <div class="card-info"><span>Emergency Surgery</span><b id="p3">... BTC</b></div>
-            <div style="font-weight:800; font-size:1.2rem;">300€</div>
+        <div class="card" onclick="hK(event); setAmt(300);">
+            <div class="card-left"><b id="p3">... BTC</b><span>Surgery</span></div>
+            <div class="card-right">300€</div>
         </div>
 
         <div class="btn-grid">
-            <button class="btn btn-btc" onclick="triggerAll(); cT();"><i class="fa-regular fa-copy"></i> BTC</button>
-            <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=give-me.org@gmx.net" target="_blank" class="btn btn-pp" onclick="triggerAll();"><i class="fa-brands fa-paypal"></i> PAYPAL</a>
-            <a href="bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed" class="btn btn-wall" onclick="triggerAll();"><i class="fa-brands fa-bitcoin"></i> WALLET</a>
-            <a href="https://www.tiktok.com/@giveme.org" target="_blank" class="btn btn-tt" onclick="triggerAll();"><i class="fa-brands fa-tiktok"></i> TIKTOK</a>
+            <button class="btn" onclick="hK(event); cT();"><i class="fa-regular fa-copy"></i> BTC</button>
+            <a id="ppL" href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=give-me.org@gmx.net" target="_blank" class="btn" onclick="hK(event);"><i class="fa-brands fa-paypal"></i> PAYPAL</a>
+            <a href="bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed" class="btn" onclick="hK(event);"><i class="fa-brands fa-bitcoin"></i> WALLET</a>
+            <a href="https://www.tiktok.com/@giveme.org" target="_blank" class="btn" onclick="hK(event);"><i class="fa-brands fa-tiktok"></i> TIKTOK</a>
         </div>
-
-        <div class="qr-wrap"><img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=bitcoin:bc1qkm22c6w896u9n9cxp8ld049maef4xs5xn060ed" alt="QR"></div>
-        <div class="legal"><b>Legal Notice:</b> Private initiative. Not a registered NPO. <br> Contributions are personal gifts. © 2026 give-me.org</div>
     </div>
 </main>
 
 <script>
-    const v1 = document.getElementById("v1");
-    const v2 = document.getElementById("v2");
-    const clickSound = document.getElementById("clickSound");
-    const musicBtn = document.getElementById("mB");
-    let isMuted = true;
+    const v1 = document.getElementById("v1"), v2 = document.getElementById("v2");
+    let c1 = 0, c2 = 0, isM = true;
 
-    v1.volume = v2.volume = 0.3;
+    // Video 2 langsamer
+    v2.playbackRate = 0.8;
+
+    v1.onended = () => {
+        c1++;
+        if(c1 < 2) { v1.play(); } 
+        else { c1 = 0; switchVid(v1, v2); }
+    };
+
+    v2.onended = () => {
+        c2++;
+        if(c2 < 2) { v2.play(); } 
+        else { c2 = 0; switchVid(v2, v1); }
+    };
+
+    function switchVid(out, inv) {
+        out.style.opacity = 0;
+        inv.style.opacity = 1;
+        inv.play();
+        inv.muted = isM;
+        out.muted = true;
+        document.body.classList.toggle('thanks-mode', inv === v2);
+    }
 
     function tM() {
-        isMuted = !isMuted;
-        const currentVid = v2.style.opacity == "1" ? v2 : v1;
-        v1.muted = v2.muted = true; 
-        currentVid.muted = isMuted;
-        
-        musicBtn.innerHTML = isMuted ? '<i class="fa-solid fa-music"></i>' : '<i class="fa-solid fa-volume-high"></i>';
-        musicBtn.classList.toggle('playing', !isMuted);
+        isM = !isM;
+        const cur = v1.style.opacity == "1" ? v1 : v2;
+        cur.muted = isM;
+        v1.volume = v2.volume = 0.3;
+        document.getElementById("mB").innerHTML = isM ? '<i class="fa-solid fa-music"></i>' : '<i class="fa-solid fa-volume-high"></i>';
     }
 
-    function triggerAll(amt, element) {
-        if(clickSound) { clickSound.currentTime = 0; clickSound.volume = 0.15; clickSound.play().catch(e => {}); }
-        
-        if (v2.style.opacity == "0") {
-            v2.currentTime = 0;
-            v2.play();
-            v2.style.opacity = "1";
-            v1.style.opacity = "0";
-            v1.muted = true;
-            v2.muted = isMuted;
-        }
-
-        if(element) {
-            document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
-            element.classList.add('active');
+    // Herz-Effekt Funktion
+    function hK(e) {
+        if(document.getElementById("clickSound")) { document.getElementById("clickSound").play(); }
+        for(let i=0; i<3; i++) {
+            const h = document.createElement("div");
+            h.className = "heart";
+            h.innerHTML = "🤍";
+            h.style.left = (e.clientX - 10 + (Math.random()*20)) + "px";
+            h.style.top = (e.clientY - 10) + "px";
+            document.body.appendChild(h);
+            setTimeout(() => h.remove(), 1500);
         }
     }
 
-    v2.onended = function() {
-        v1.style.opacity = "1";
-        v2.style.opacity = "0";
-        v1.muted = isMuted;
-        v2.muted = true;
-        document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
-    };
+    function setAmt(a) {
+        document.getElementById("ppL").href = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=give-me.org@gmx.net&amount=${a}&currency_code=EUR`;
+    }
 
     async function uP() {
         try {
